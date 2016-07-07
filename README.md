@@ -4,6 +4,8 @@
 
 # `Copper`
 
+[![Join the chat at https://gitter.im/japaric/copper](https://badges.gitter.im/japaric/copper.svg)](https://gitter.im/japaric/copper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > Nothing to see here! (yet)
 
 ## License
