@@ -38,5 +38,5 @@ mod lang_items {
     extern fn panic_fmt() {}
 
     #[lang = "eh_personality"]
-    pub extern fn rust_eh_personality() {}
+    extern fn rust_eh_personality() {}
 }
