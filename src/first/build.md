@@ -65,12 +65,15 @@ mod vector_table {
     static RESET: fn() -> ! = ::start;
 }
 
-// Finally, we need to define the panic_fmt "lang item", which is just a function. This specifies
-// what the program should do when a `panic!` occurs. Our program won't panic, so we can leave the
-// function body empty for now.
+// Finally, we need to define the panic_fmt and eh_personality "lang item"s, which are just
+// functions. This specifies what the program should do when a `panic!` occurs. Our program won't
+// panic, so we can leave the function bodies empty for now.
 mod lang_items {
     #[lang = "panic_fmt"]
     extern fn panic_fmt() {}
+
+    #[lang = "eh_personality"]
+    extern fn rust_eh_personality() {}
 }
 ```
 
@@ -257,7 +260,7 @@ $ arm-none-eabi-readelf -h target/cortex-m3/debug/app
 
 ```
 ELF Header:
-  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00
   Class:                             ELF32
   Data:                              2's complement, little endian
   Version:                           1 (current)
