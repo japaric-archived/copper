@@ -1,10 +1,22 @@
+# Status
+
+This document is currently **OUTDATED**, and I don't have to update in the short
+term. In the meantime, you can check out [this blog post] which covers the easy,
+high level way of writing Rust application for any ARM Cortex-M microcontroller.
+
+[this blog post]: http://blog.japaric.io/quickstart
+
+-- @japaric, 2017/05/15
+
+---
+
 [![Build Status][travis]](https://travis-ci.org/japaric/copper)
 
 [travis]: https://travis-ci.org/japaric/copper.svg?branch=master
 
 # `Copper`
 
-> [WIP] Your guide to programming ARM Cortex-M microcontrollers with Rust
+> Your guide to programming ARM Cortex-M microcontrollers with Rust
 
 This is the [mdbook] source of the book. You can find the rendered book at
 https://japaric.github.io/copper/
