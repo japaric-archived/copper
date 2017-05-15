@@ -1,10 +1,17 @@
-# FAQ
+Thanks for your interest! This book is currently outdated so I'm taking it down
+until I get time to update it; that way it won't cause more confusion. In the
+meantime, you can read [this blog post] that covers the *easy*, high level way
+of writing Rust applications for any ARM Cortex-M microcontroller.
 
-## Can I use my Arduino to follow this material?
+[this blog post]: http://blog.japaric.io/quickstart/
 
-If you have an Arduino Due then the answer is yes.
+<!-- # FAQ -->
 
-The other Arduinos have AVR processors and `rustc` can't compile programs for that architecture yet.
-See [Why ARM Cortex-M micros?] for more details.
+<!-- ## Can I use my Arduino to follow this material? -->
 
-[Why ARM Cortex-M micros?]: ./why-arm.html
+<!-- If you have an Arduino Due then the answer is yes. -->
+
+<!-- The other Arduinos have AVR processors and `rustc` can't compile programs for that architecture yet. -->
+<!-- See [Why ARM Cortex-M micros?] for more details. -->
+
+<!-- [Why ARM Cortex-M micros?]: ./why-arm.html -->

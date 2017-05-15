@@ -1,221 +1,228 @@
-# Linux
+Thanks for your interest! This book is currently outdated so I'm taking it down
+until I get time to update it; that way it won't cause more confusion. In the
+meantime, you can read [this blog post] that covers the *easy*, high level way
+of writing Rust applications for any ARM Cortex-M microcontroller.
 
-## Shortcut: Just use this docker image
+[this blog post]: http://blog.japaric.io/quickstart/
 
-It's based on Ubuntu 16.04 and comes with all the required dependencies:
+<!-- # Linux -->
 
-```
-$ docker run --privileged -it japaric/copper:2016-05-10
-# Or use a newer tag. See https://hub.docker.com/r/japaric/copper/tags
-```
+<!-- ## Shortcut: Just use this docker image -->
 
-Alternatively, instead of using this docker image, you can ...
+<!-- It's based on Ubuntu 16.04 and comes with all the required dependencies: -->
 
-## Install the tools on your system
+<!-- ``` -->
+<!-- $ docker run --privileged -it japaric/copper:2016-05-10 -->
+<!-- # Or use a newer tag. See https://hub.docker.com/r/japaric/copper/tags -->
+<!-- ``` -->
 
-On most Linux distributions, most of the required tools can be installed via the
-package manager. The actual command that you need to call will depend on your
-Linux distribution. But, here's the one for Ubuntu:
+<!-- Alternatively, instead of using this docker image, you can ... -->
 
-```
-$ sudo apt-get install gcc-arm-none-eabi gdb-arm-none-eabi openocd qemu-system-arm
-```
+<!-- ## Install the tools on your system -->
 
-To install Rust and Cargo, I recommend using [rustup]:
+<!-- On most Linux distributions, most of the required tools can be installed via the -->
+<!-- package manager. The actual command that you need to call will depend on your -->
+<!-- Linux distribution. But, here's the one for Ubuntu: -->
 
-[rustup]: https://www.rustup.rs/
+<!-- ``` -->
+<!-- $ sudo apt-get install gcc-arm-none-eabi gdb-arm-none-eabi openocd qemu-system-arm -->
+<!-- ``` -->
 
-```
-$ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly
-```
+<!-- To install Rust and Cargo, I recommend using [rustup]: -->
 
-Or if you already have rustup installed, switch to the nightly channel with:
+<!-- [rustup]: https://www.rustup.rs/ -->
 
-```
-$ rustup default nightly
-```
+<!-- ``` -->
+<!-- $ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly -->
+<!-- ``` -->
 
-To install Xargo simply use:
+<!-- Or if you already have rustup installed, switch to the nightly channel with: -->
 
-```
-$ cargo install xargo
-```
+<!-- ``` -->
+<!-- $ rustup default nightly -->
+<!-- ``` -->
 
-Note that Xargo 0.2.0+ depends on the `rust-src` component, so install that as
-well:
+<!-- To install Xargo simply use: -->
 
-```
-$ rustup component add rust-src
-```
+<!-- ``` -->
+<!-- $ cargo install xargo -->
+<!-- ``` -->
 
-## First OpenOCD connection
+<!-- Note that Xargo 0.2.0+ depends on the `rust-src` component, so install that as -->
+<!-- well: -->
 
-[first connection]: linux.html#First%20connection
+<!-- ``` -->
+<!-- $ rustup component add rust-src -->
+<!-- ``` -->
 
-> **TODO** document STM32VLDISCOVERY quirk
+<!-- ## First OpenOCD connection -->
 
-Even if using the Docker image, it's a good idea to test that OpenOCD works by
-establishing a connection between your host system (PC, laptop, etc.) and your
-dev board. First, you'll have to physically connect your dev board and your host
-system via an USB cable. Then, you'll have to use a command that looks like
-this:
+<!-- [first connection]: linux.html#First%20connection -->
 
-```
-$ sudo openocd -f board/$BOARD
-```
+<!-- > **TODO** document STM32VLDISCOVERY quirk -->
 
-if you are using a dev board that has a built-in debugger. Or one like this:
+<!-- Even if using the Docker image, it's a good idea to test that OpenOCD works by -->
+<!-- establishing a connection between your host system (PC, laptop, etc.) and your -->
+<!-- dev board. First, you'll have to physically connect your dev board and your host -->
+<!-- system via an USB cable. Then, you'll have to use a command that looks like -->
+<!-- this: -->
 
-```
-$ sudo openocd -f interface/$INTERFACE -f target/$TARGET
-```
+<!-- ``` -->
+<!-- $ sudo openocd -f board/$BOARD -->
+<!-- ``` -->
 
-if you are using an external programmer/debugger. Then, you should get an output
-like this:
+<!-- if you are using a dev board that has a built-in debugger. Or one like this: -->
 
-```
-Open On-Chip Debugger 0.9.0 (2015-09-02-10:42)
-Licensed under GNU GPL v2
-For bug reports, read
-http://openocd.org/doc/doxygen/bugs.html
-Info : The selected transport took over low-level target control. The results might differ
-compared to plain JTAG/SWD
-adapter speed: 1000 kHz
-adapter_nsrst_delay: 100
-none separate
-srst_only separate srst_nogate srst_open_drain connect_deassert_srst
-Info : Unable to match requested speed 1000 kHz, using 950 kHz
-Info : Unable to match requested speed 1000 kHz, using 950 kHz
-Info : clock speed 950 kHz
-Info : STLINK v1 JTAG v11 API v2 SWIM v0 VID 0x0483 PID 0x3744
-Info : using stlink api v2
-Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints
-```
+<!-- ``` -->
+<!-- $ sudo openocd -f interface/$INTERFACE -f target/$TARGET -->
+<!-- ``` -->
 
-> **TODO** add troubleshooting instructions for when the `openocd` command
-> fails.
+<!-- if you are using an external programmer/debugger. Then, you should get an output -->
+<!-- like this: -->
 
-The program will block with that output, but it's okay to exit it with `Ctrl-C`
-at this time.
+<!-- ``` -->
+<!-- Open On-Chip Debugger 0.9.0 (2015-09-02-10:42) -->
+<!-- Licensed under GNU GPL v2 -->
+<!-- For bug reports, read -->
+<!-- http://openocd.org/doc/doxygen/bugs.html -->
+<!-- Info : The selected transport took over low-level target control. The results might differ -->
+<!-- compared to plain JTAG/SWD -->
+<!-- adapter speed: 1000 kHz -->
+<!-- adapter_nsrst_delay: 100 -->
+<!-- none separate -->
+<!-- srst_only separate srst_nogate srst_open_drain connect_deassert_srst -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : clock speed 950 kHz -->
+<!-- Info : STLINK v1 JTAG v11 API v2 SWIM v0 VID 0x0483 PID 0x3744 -->
+<!-- Info : using stlink api v2 -->
+<!-- Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- ``` -->
 
-As for the actual values of `$BOARD`/`$INTERFACE`/`$TARGET` that you must use,
-the possible values are in `/usr/share/openocd/scripts` (might be a different
-directory in your Linux distribution):
+<!-- > **TODO** add troubleshooting instructions for when the `openocd` command -->
+<!-- > fails. -->
 
-```
-$ tree /usr/share/openocd/scripts
-/usr/share/openocd/scripts
-├── (...)
-├── board
-│   ├── actux3.cfg
-│   ├── adapteva_parallella1.cfg
-│   └── (...)
-├── interface
-│   ├── altera-usb-blaster2.cfg
-│   ├── altera-usb-blaster.cfg
-│   └── (...)
-├── target
-│   ├── aduc702x.cfg
-│   ├── aducm360.cfg
-│   └── (...)
-└── (...)
-```
+<!-- The program will block with that output, but it's okay to exit it with `Ctrl-C` -->
+<!-- at this time. -->
 
-Try something that resembles the name of your hardware. For example, for the
-STM32VLDISCOVERY I use:
+<!-- As for the actual values of `$BOARD`/`$INTERFACE`/`$TARGET` that you must use, -->
+<!-- the possible values are in `/usr/share/openocd/scripts` (might be a different -->
+<!-- directory in your Linux distribution): -->
 
-```
-$ sudo openocd -f board/stm32vldiscovery.cfg
-```
+<!-- ``` -->
+<!-- $ tree /usr/share/openocd/scripts -->
+<!-- /usr/share/openocd/scripts -->
+<!-- ├── (...) -->
+<!-- ├── board -->
+<!-- │   ├── actux3.cfg -->
+<!-- │   ├── adapteva_parallella1.cfg -->
+<!-- │   └── (...) -->
+<!-- ├── interface -->
+<!-- │   ├── altera-usb-blaster2.cfg -->
+<!-- │   ├── altera-usb-blaster.cfg -->
+<!-- │   └── (...) -->
+<!-- ├── target -->
+<!-- │   ├── aduc702x.cfg -->
+<!-- │   ├── aducm360.cfg -->
+<!-- │   └── (...) -->
+<!-- └── (...) -->
+<!-- ``` -->
 
-And for the STM32F3DISCOVERY, I use:
+<!-- Try something that resembles the name of your hardware. For example, for the -->
+<!-- STM32VLDISCOVERY I use: -->
 
-```
-$ sudo openocd -f interface/stlink-v2-1.cfg -f target/stm32f3x.cfg
-```
+<!-- ``` -->
+<!-- $ sudo openocd -f board/stm32vldiscovery.cfg -->
+<!-- ``` -->
 
-### (Optional) OpenOCD without `sudo`
+<!-- And for the STM32F3DISCOVERY, I use: -->
 
-> **NOTE** For those using the Docker image. You have to run these commands on
-> the host system, *not* from within the container.
+<!-- ``` -->
+<!-- $ sudo openocd -f interface/stlink-v2-1.cfg -f target/stm32f3x.cfg -->
+<!-- ``` -->
 
-The reason we have to use `sudo` in the `openocd` invocations is that we don't
-have sufficient permissions to use the USB device. This can be fixed using
-`udev` rules.
+<!-- ### (Optional) OpenOCD without `sudo` -->
 
-First let's identify the USB device OpenOCD is using from the output of `sudo
-openocd`:
+<!-- > **NOTE** For those using the Docker image. You have to run these commands on -->
+<!-- > the host system, *not* from within the container. -->
 
-```
-$ sudo openocd
-```
+<!-- The reason we have to use `sudo` in the `openocd` invocations is that we don't -->
+<!-- have sufficient permissions to use the USB device. This can be fixed using -->
+<!-- `udev` rules. -->
 
-```
-$ lsusb
-(...)
-Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk
-(...)
-```
+<!-- First let's identify the USB device OpenOCD is using from the output of `sudo -->
+<!-- openocd`: -->
 
-Device number 116 on the bus 3, let's check its permissions:
+<!-- ``` -->
+<!-- $ sudo openocd -->
+<!-- ``` -->
 
-```
-$ ls -l /dev/bus/usb/003/116
-crw-rw-r-- 1 root root 189, 371 May  9 15:39 /dev/bus/usb/003/116
-```
+<!-- ``` -->
+<!-- $ lsusb -->
+<!-- (...) -->
+<!-- Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!-- (...) -->
+<!-- ``` -->
 
-Only `root` can read/write from/to it. We'll write an udev rule to change the
-permissions of this particular USB device. udev rules are stored in
-`/etc/udev/rules.d` as files, let's add a new one:
+<!-- Device number 116 on the bus 3, let's check its permissions: -->
 
-```
-$ cat /etc/udev/rules.d/99-openocd.rules
-# STLINKv1
-ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3744", GROUP="users"
-```
+<!-- ``` -->
+<!-- $ ls -l /dev/bus/usb/003/116 -->
+<!-- crw-rw-r-- 1 root root 189, 371 May  9 15:39 /dev/bus/usb/003/116 -->
+<!-- ``` -->
 
-This udev rule changes the group of the USB device to `users`.
+<!-- Only `root` can read/write from/to it. We'll write an udev rule to change the -->
+<!-- permissions of this particular USB device. udev rules are stored in -->
+<!-- `/etc/udev/rules.d` as files, let's add a new one: -->
 
-> **NOTE** You *can* use a group different than `users`. **But**, if you are
-> using a Docker container, it's very likely that the id of a different group
-> won't match between the host system and the container -- in that case you
-> still won't have enough permissions to use the USB device!.
+<!-- ``` -->
+<!-- $ cat /etc/udev/rules.d/99-openocd.rules -->
+<!-- # STLINKv1 -->
+<!-- ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3744", GROUP="users" -->
+<!-- ``` -->
 
-> **NOTE** For more details about the udev rules see [man 7 udev]
+<!-- This udev rule changes the group of the USB device to `users`. -->
 
-[man 7 udev]: http://linux.die.net/man/7/udev
+<!-- > **NOTE** You *can* use a group different than `users`. **But**, if you are -->
+<!-- > using a Docker container, it's very likely that the id of a different group -->
+<!-- > won't match between the host system and the container -- in that case you -->
+<!-- > still won't have enough permissions to use the USB device!. -->
 
-You'll have to change 0483 and 3744 for the vendor and product id of **your**
-device respectively. You can get those values from `lsusb`:
+<!-- > **NOTE** For more details about the udev rules see [man 7 udev] -->
 
-```
-$ lsusb | grep STLINK
-Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk
-                       ^^^^ ^^^^
-```
+<!-- [man 7 udev]: http://linux.die.net/man/7/udev -->
 
-This new rule won't come into effect until you reload all the rules with:
+<!-- You'll have to change 0483 and 3744 for the vendor and product id of **your** -->
+<!-- device respectively. You can get those values from `lsusb`: -->
 
-```
-$ sudo udevadm control --reload-rules
-```
+<!-- ``` -->
+<!-- $ lsusb | grep STLINK -->
+<!-- Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!--                        ^^^^ ^^^^ -->
+<!-- ``` -->
 
-Now, unplug and re-plug the device and you should see the updated permissions:
+<!-- This new rule won't come into effect until you reload all the rules with: -->
 
-```
-$ lsusb | grep STLINK
-Bus 003 Device 118: ID 0483:3744 STMicroelectronics STLINK Pseudo disk
+<!-- ``` -->
+<!-- $ sudo udevadm control --reload-rules -->
+<!-- ``` -->
 
-$ ls -l /dev/bus/usb/003/118
-crw-rw-r-- 1 root users 189, 373 May  9 16:00 /dev/bus/usb/003/118
-```
+<!-- Now, unplug and re-plug the device and you should see the updated permissions: -->
 
-You should now be able to use your `openocd` command without `sudo` **if** your
-user was already part of the `users` group. If your user wasn't in that group,
-you can add yourself to this group with this command:
+<!-- ``` -->
+<!-- $ lsusb | grep STLINK -->
+<!-- Bus 003 Device 118: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
 
-```
-$ sudo usermod -a -G users $(whoami)
-```
+<!-- $ ls -l /dev/bus/usb/003/118 -->
+<!-- crw-rw-r-- 1 root users 189, 373 May  9 16:00 /dev/bus/usb/003/118 -->
+<!-- ``` -->
 
-You'll have to re-log for this last command to take effect.
+<!-- You should now be able to use your `openocd` command without `sudo` **if** your -->
+<!-- user was already part of the `users` group. If your user wasn't in that group, -->
+<!-- you can add yourself to this group with this command: -->
+
+<!-- ``` -->
+<!-- $ sudo usermod -a -G users $(whoami) -->
+<!-- ``` -->
+
+<!-- You'll have to re-log for this last command to take effect. -->

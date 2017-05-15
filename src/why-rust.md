@@ -1,54 +1,61 @@
-# Why Rust?
+Thanks for your interest! This book is currently outdated so I'm taking it down
+until I get time to update it; that way it won't cause more confusion. In the
+meantime, you can read [this blog post] that covers the *easy*, high level way
+of writing Rust applications for any ARM Cortex-M microcontroller.
 
-> Why program in Rust and not in C?
+[this blog post]: http://blog.japaric.io/quickstart/
 
-C is (probably) the most used programming language for development of embedded systems (citation
-needed). However I've decided to use Rust in this material for the following reasons:
+<!-- # Why Rust? -->
 
-- Rust gives you C-like low level control over aspects like memory management and struct layout /
-  memory representation while not imposing a runtime and still providing high level features like
-  closures, traits/generics, tagged unions, pattern matching and someday, I hope, (state-machine)
-  [generators][0] (this [blog post][1] fleshes out the idea a bit more).
+<!-- > Why program in Rust and not in C? -->
 
-[0]: https://github.com/rust-lang/rfcs/issues/1081#issuecomment-221396554
-[1]: https://dwrensha.github.io/capnproto-rust/2016/05/28/async-generators.html
+<!-- C is (probably) the most used programming language for development of embedded systems (citation -->
+<!-- needed). However I've decided to use Rust in this material for the following reasons: -->
 
-- The Rust distribution ships with a package manager, Cargo, that encourages splitting your
-  programs in reusable crates (libraries) by greatly simplifying dependency management. Cargo also
-  encourages not reinventing the wheel by providing access to a central repository where the Rust
-  community publishes and shares their crates.
+<!-- - Rust gives you C-like low level control over aspects like memory management and struct layout / -->
+<!--   memory representation while not imposing a runtime and still providing high level features like -->
+<!--   closures, traits/generics, tagged unions, pattern matching and someday, I hope, (state-machine) -->
+<!--   [generators][0] (this [blog post][1] fleshes out the idea a bit more). -->
 
-- Testing and documentation infrastructure are provided for, in part, by Cargo meaning you don't
-  need to choose from many competing options, or reinvent the wheel
+<!-- [0]: https://github.com/rust-lang/rfcs/issues/1081#issuecomment-221396554 -->
+<!-- [1]: https://dwrensha.github.io/capnproto-rust/2016/05/28/async-generators.html -->
 
-- One can use pretty much all of the existing C tooling on Rust programs. For example:
-  - You can use binary inspection tools like `objdump`, `nm`, `readelf`, `size`, etc.
-  - You can use `gdb`/`lldb` to debug your program. Things like step-by-step execution, breakpoints,
-    watchpoints, printing variables, etc. Just Work.
-  - You can run your program under an emulator like QEMU.
+<!-- - The Rust distribution ships with a package manager, Cargo, that encourages splitting your -->
+<!--   programs in reusable crates (libraries) by greatly simplifying dependency management. Cargo also -->
+<!--   encourages not reinventing the wheel by providing access to a central repository where the Rust -->
+<!--   community publishes and shares their crates. -->
 
-- Some people find Rust more approachable and/or less scary than C. This means that they are more
-  likely to explore this area of programming using Rust than using C.
+<!-- - Testing and documentation infrastructure are provided for, in part, by Cargo meaning you don't -->
+<!--   need to choose from many competing options, or reinvent the wheel -->
 
-- And, most importantly, I like Rust and its awesome community.
+<!-- - One can use pretty much all of the existing C tooling on Rust programs. For example: -->
+<!--   - You can use binary inspection tools like `objdump`, `nm`, `readelf`, `size`, etc. -->
+<!--   - You can use `gdb`/`lldb` to debug your program. Things like step-by-step execution, breakpoints, -->
+<!--     watchpoints, printing variables, etc. Just Work. -->
+<!--   - You can run your program under an emulator like QEMU. -->
 
-> **TODO** Rust & C++ comparison
+<!-- - Some people find Rust more approachable and/or less scary than C. This means that they are more -->
+<!--   likely to explore this area of programming using Rust than using C. -->
 
-## Disadvantages of not using C
+<!-- - And, most importantly, I like Rust and its awesome community. -->
 
-Or advantages of using C instead of Rust:
+<!-- > **TODO** Rust & C++ comparison -->
 
-- Device support. Some less known architectures, like the Xtensa, but with huge communities behind
-  them, like the ESP8266 (google it!), are not supported by LLVM and therefore you can't build Rust
-  programs for microcontrollers of that architecture.
+<!-- ## Disadvantages of not using C -->
 
-- Commercial/IDE support. There are lots (compared to Rust) of commercial IDEs, SDKs, RTOSes for
-  developing firmware in C.
+<!-- Or advantages of using C instead of Rust: -->
 
-- Toolchain Stability. The C toolchain is pretty stable and well vetted at this point for embedded
-  development while Rust is still growing its embedded ecosystem.
+<!-- - Device support. Some less known architectures, like the Xtensa, but with huge communities behind -->
+<!--   them, like the ESP8266 (google it!), are not supported by LLVM and therefore you can't build Rust -->
+<!--   programs for microcontrollers of that architecture. -->
 
-- MISRA C and other standards for producing "high-reliability" code have not been created yet for
-  Rust (but the opportunity is there)
+<!-- - Commercial/IDE support. There are lots (compared to Rust) of commercial IDEs, SDKs, RTOSes for -->
+<!--   developing firmware in C. -->
 
-> **TODO** More advantages of using C. I haven't thought this through thoroughly.
+<!-- - Toolchain Stability. The C toolchain is pretty stable and well vetted at this point for embedded -->
+<!--   development while Rust is still growing its embedded ecosystem. -->
+
+<!-- - MISRA C and other standards for producing "high-reliability" code have not been created yet for -->
+<!--   Rust (but the opportunity is there) -->
+
+<!-- > **TODO** More advantages of using C. I haven't thought this through thoroughly. -->

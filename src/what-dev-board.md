@@ -1,160 +1,167 @@
-# What is a dev board?
+Thanks for your interest! This book is currently outdated so I'm taking it down
+until I get time to update it; that way it won't cause more confusion. In the
+meantime, you can read [this blog post] that covers the *easy*, high level way
+of writing Rust applications for any ARM Cortex-M microcontroller.
 
-Dev board is the short term for "development board". When dealing with embedded
-systems it is typical to have an application specific PCB board which carries
-the processor you are going to write software for. However, sometimes you don't
-know what your hardware looks like at the start of a project, or maybe you want
-to be able to rapidly prototype by connecting different sensors and actuators to
-your processor without having to make a new PCB board every time. This is where
-dev boards come in, they are essentially the bare minimum you need (sometimes
-with some additional sensors for evaluation) to turn on the processor, program
-it, and connect things to it. If you are familiar with the [Arduino] platform,
-that is a dev board.
+[this blog post]: http://blog.japaric.io/quickstart/
 
-While you can use an emulator to follow along it is more fun, and more
-rewarding, to make command real hardware to do your bidding. So lets choose one!
+<!-- # What is a dev board? -->
 
-[Arduino]: https://www.arduino.cc/
+<!-- Dev board is the short term for "development board". When dealing with embedded -->
+<!-- systems it is typical to have an application specific PCB board which carries -->
+<!-- the processor you are going to write software for. However, sometimes you don't -->
+<!-- know what your hardware looks like at the start of a project, or maybe you want -->
+<!-- to be able to rapidly prototype by connecting different sensors and actuators to -->
+<!-- your processor without having to make a new PCB board every time. This is where -->
+<!-- dev boards come in, they are essentially the bare minimum you need (sometimes -->
+<!-- with some additional sensors for evaluation) to turn on the processor, program -->
+<!-- it, and connect things to it. If you are familiar with the [Arduino] platform, -->
+<!-- that is a dev board. -->
 
-> **TODO** A picture would be useful here.
+<!-- While you can use an emulator to follow along it is more fun, and more -->
+<!-- rewarding, to make command real hardware to do your bidding. So lets choose one! -->
 
-# What dev board should I use/get?
+<!-- [Arduino]: https://www.arduino.cc/ -->
 
-I won't force you to use a specific dev board. This document has been written in
-a device-agnostic way so you can follow it with pretty much any dev board you
-want. Where a specific dev board is targeted it will be stated explicitly.
+<!-- > **TODO** A picture would be useful here. -->
 
-Nonetheless, some dev boards are easier to work with than others. This section
-will provide you some advice on how to pick a dev board that will make your life
-easier.
+<!-- # What dev board should I use/get? -->
 
-When we are choosing a dev board we are looking at the following parameters,
-which are outlined in more detail below:
+<!-- I won't force you to use a specific dev board. This document has been written in -->
+<!-- a device-agnostic way so you can follow it with pretty much any dev board you -->
+<!-- want. Where a specific dev board is targeted it will be stated explicitly. -->
 
-- Supports OpenOCD. Which is what we will use to load and debug compiled
-  binaries of our Rust code.
+<!-- Nonetheless, some dev boards are easier to work with than others. This section -->
+<!-- will provide you some advice on how to pick a dev board that will make your life -->
+<!-- easier. -->
 
-- Has good documentation. You always will have the datasheet from the
-  manufacturer, but good and easy to follow documentation on the boards pinout,
-  how it relates to the processor and what other goodies you have is key.
+<!-- When we are choosing a dev board we are looking at the following parameters, -->
+<!-- which are outlined in more detail below: -->
 
-- Community! Some dev boards have more of a following than others, while others
-  will be using C/C++ the community can help with hardware related issues, or
-  maybe even by providing example C code which can be helpful for getting
-  started.
+<!-- - Supports OpenOCD. Which is what we will use to load and debug compiled -->
+<!--   binaries of our Rust code. -->
 
-## OpenOCD support
+<!-- - Has good documentation. You always will have the datasheet from the -->
+<!--   manufacturer, but good and easy to follow documentation on the boards pinout, -->
+<!--   how it relates to the processor and what other goodies you have is key. -->
 
-We'll use OpenOCD to "flash" and debug the programs we'll develop. It's best if
-you can get a dev board with a built-in debugger that's supported by OpenOCD.
-You can see a list of such boards [here].
+<!-- - Community! Some dev boards have more of a following than others, while others -->
+<!--   will be using C/C++ the community can help with hardware related issues, or -->
+<!--   maybe even by providing example C code which can be helpful for getting -->
+<!--   started. -->
 
-[here]: https://github.com/ntfreak/openocd/tree/master/tcl/board
+<!-- ## OpenOCD support -->
 
-> **NOTE** Not all the dev boards listed in that link have an ARM Cortex-M
-> microcontroller, some of them have Cortex-A processors, some have
-> microcontrollers with a different architecture (e.g. AVR).
+<!-- We'll use OpenOCD to "flash" and debug the programs we'll develop. It's best if -->
+<!-- you can get a dev board with a built-in debugger that's supported by OpenOCD. -->
+<!-- You can see a list of such boards [here]. -->
 
-One example of such dev board is the [STM32F3DISCOVERY] which I'm going to
-use throughout the examples of this document. It seems that most of
-the [other evaluation boards][discoveries] by STM32 also have a built-in
-debugger and are supported by OpenOCD. I'm not familiar with other vendors like
-Atmel and NXP but they probably have similar offerings.
+<!-- [here]: https://github.com/ntfreak/openocd/tree/master/tcl/board -->
 
-[STM32F3DISCOVERY]: http://www.st.com/en/evaluation-tools/stm32f3discovery.html
-[discoveries]: http://www.st.com/en/evaluation-tools/stm32-mcu-discovery-kits.html
+<!-- > **NOTE** Not all the dev boards listed in that link have an ARM Cortex-M -->
+<!-- > microcontroller, some of them have Cortex-A processors, some have -->
+<!-- > microcontrollers with a different architecture (e.g. AVR). -->
 
-Alternatively, you can use a board that doesn't have a built-in debugger if the
-microcontroller in it is supported by OpenOCD (check [this list][target]) and
-the board exposes a JTAG/SWD connector, but you'll also need an external
-debugger supported by OpenOCD (check [this list][interface]). This is more
-complicated as you'll have to read about the JTAG/SWD interface to make an
-informed decision and you'll also have to figure out how to wire up everything
-together.
+<!-- One example of such dev board is the [STM32F3DISCOVERY] which I'm going to -->
+<!-- use throughout the examples of this document. It seems that most of -->
+<!-- the [other evaluation boards][discoveries] by STM32 also have a built-in -->
+<!-- debugger and are supported by OpenOCD. I'm not familiar with other vendors like -->
+<!-- Atmel and NXP but they probably have similar offerings. -->
 
-[target]: https://github.com/ntfreak/openocd/tree/master/tcl/target
-[interface]: https://github.com/ntfreak/openocd/tree/master/tcl/interface
+<!-- [STM32F3DISCOVERY]: http://www.st.com/en/evaluation-tools/stm32f3discovery.html -->
+<!-- [discoveries]: http://www.st.com/en/evaluation-tools/stm32-mcu-discovery-kits.html -->
 
-> **NOTE** The "target list" linked above not only contains Cortex-M
-> microcontrollers but also devices with different architectures. Likewise, the
-> "interface list" linked above not only lists JTAG/SWD interfaces.
+<!-- Alternatively, you can use a board that doesn't have a built-in debugger if the -->
+<!-- microcontroller in it is supported by OpenOCD (check [this list][target]) and -->
+<!-- the board exposes a JTAG/SWD connector, but you'll also need an external -->
+<!-- debugger supported by OpenOCD (check [this list][interface]). This is more -->
+<!-- complicated as you'll have to read about the JTAG/SWD interface to make an -->
+<!-- informed decision and you'll also have to figure out how to wire up everything -->
+<!-- together. -->
 
-> **TODO** Add picture of what the connection looks like
+<!-- [target]: https://github.com/ntfreak/openocd/tree/master/tcl/target -->
+<!-- [interface]: https://github.com/ntfreak/openocd/tree/master/tcl/interface -->
 
-## Good documentation
+<!-- > **NOTE** The "target list" linked above not only contains Cortex-M -->
+<!-- > microcontrollers but also devices with different architectures. Likewise, the -->
+<!-- > "interface list" linked above not only lists JTAG/SWD interfaces. -->
 
-The microcontroller in it should have documentation about:
+<!-- > **TODO** Add picture of what the connection looks like -->
 
-- The peripherals it provides: How they work and the registers associated with
-  them. This document is known as the *Reference Manual* ([example][rm]),
-  although sometimes this information is contained in the *Data Sheet*
-  ([example][ds]).
+<!-- ## Good documentation -->
 
-- Hardware bugs (yes, hardware can have bugs too!) or device limitations that
-  may be present in the revision of the hardware that you own and how to work
-  around them. This document is known as *Silicon Errata* or just *Errata Sheet*
-  ([example][se]).
+<!-- The microcontroller in it should have documentation about: -->
 
-[rm]: http://www.st.com/resource/en/reference_manual/cd00246267.pdf
-[ds]: http://www.ti.com/lit/ds/symlink/lm3s6965.pdf
-[se]: http://www.st.com/resource/en/errata_sheet/cd00260217.pdf
+<!-- - The peripherals it provides: How they work and the registers associated with -->
+<!--   them. This document is known as the *Reference Manual* ([example][rm]), -->
+<!--   although sometimes this information is contained in the *Data Sheet* -->
+<!--   ([example][ds]). -->
 
-# Dev boards that Rustaceans have used before
+<!-- - Hardware bugs (yes, hardware can have bugs too!) or device limitations that -->
+<!--   may be present in the revision of the hardware that you own and how to work -->
+<!--   around them. This document is known as *Silicon Errata* or just *Errata Sheet* -->
+<!--   ([example][se]). -->
 
-Or that we are sure work just fine.
+<!-- [rm]: http://www.st.com/resource/en/reference_manual/cd00246267.pdf -->
+<!-- [ds]: http://www.ti.com/lit/ds/symlink/lm3s6965.pdf -->
+<!-- [se]: http://www.st.com/resource/en/errata_sheet/cd00260217.pdf -->
 
-- [STM32F3DISCOVERY]
-  - Recommended if you are a beginner as we have beginner friendly documentation
-    tailored for this specific board. Check the [Discovery] book.
+<!-- # Dev boards that Rustaceans have used before -->
 
-  - There's a crate, [f3], that targets this board and provides a high
-    level, easy to use API.
+<!-- Or that we are sure work just fine. -->
 
-  - Has an on-board programmer/debugger
+<!-- - [STM32F3DISCOVERY] -->
+<!--   - Recommended if you are a beginner as we have beginner friendly documentation -->
+<!--     tailored for this specific board. Check the [Discovery] book. -->
 
-  - Has OpenOCD and GDB support
+<!--   - There's a crate, [f3], that targets this board and provides a high -->
+<!--     level, easy to use API. -->
 
-[f3]: https://crates.io/crates/f3
+<!--   - Has an on-board programmer/debugger -->
 
-[Discovery]: https://japaric.github.io/discovery
+<!--   - Has OpenOCD and GDB support -->
 
-- [Other DISCOVERY boards][discoveries]
-  - Have an on-board programmer/debugger
+<!-- [f3]: https://crates.io/crates/f3 -->
 
-  - Have OpenOCD and GDB support
+<!-- [Discovery]: https://japaric.github.io/discovery -->
 
-- [Nucleo boards](http://www.st.com/en/evaluation-tools/stm32-mcu-nucleo.html)
-  - Pretty much like the DISCOVERYs but in an Arduino-compatible form factor
+<!-- - [Other DISCOVERY boards][discoveries] -->
+<!--   - Have an on-board programmer/debugger -->
 
-  - You can use Arduino shields with these boards
+<!--   - Have OpenOCD and GDB support -->
 
-  - Have an on-board programmer/debbuger
+<!-- - [Nucleo boards](http://www.st.com/en/evaluation-tools/stm32-mcu-nucleo.html) -->
+<!--   - Pretty much like the DISCOVERYs but in an Arduino-compatible form factor -->
 
-  - Have OpenOCD and GDB support
+<!--   - You can use Arduino shields with these boards -->
 
-- [Teensy 3.x](https://www.pjrc.com/teensy/)
-  - High level crate, like f3, that targets this board: [teensy3]
+<!--   - Have an on-board programmer/debbuger -->
 
-  - Can flash programs with just a USB cable (has a USB bootloader)
+<!--   - Have OpenOCD and GDB support -->
 
-  - No debug support (GDB) AFAIK because the SWD pins are not exposed
+<!-- - [Teensy 3.x](https://www.pjrc.com/teensy/) -->
+<!--   - High level crate, like f3, that targets this board: [teensy3] -->
 
-[teensy3]: https://crates.io/crates/teensy3
+<!--   - Can flash programs with just a USB cable (has a USB bootloader) -->
 
-- [Tiva-C Launchpad](http://www.ti.com/tool/ek-tm4c123gxl)
-  - Has an on-board programmer/debugger
+<!--   - No debug support (GDB) AFAIK because the SWD pins are not exposed -->
 
-  - Has OpenOCD and GDB support
+<!-- [teensy3]: https://crates.io/crates/teensy3 -->
 
-- [Stellaris Launchpad](http://www.ti.com/tool/ek-lm4f120xl)
-  - Has an on-board programmer/debugger
+<!-- - [Tiva-C Launchpad](http://www.ti.com/tool/ek-tm4c123gxl) -->
+<!--   - Has an on-board programmer/debugger -->
 
-  - Has OpenOCD and GDB support
+<!--   - Has OpenOCD and GDB support -->
 
-- Arduino [Due] & [Zero]
-  - Can flash programs with just a USB cable (has a USB bootloader)
+<!-- - [Stellaris Launchpad](http://www.ti.com/tool/ek-lm4f120xl) -->
+<!--   - Has an on-board programmer/debugger -->
 
-  - Debugging requires an external debugger (more hardware)
+<!--   - Has OpenOCD and GDB support -->
 
-[Due]: https://www.arduino.cc/en/Main/ArduinoBoardDue
-[Zero]: https://www.arduino.cc/en/Main/ArduinoBoardZero
+<!-- - Arduino [Due] & [Zero] -->
+<!--   - Can flash programs with just a USB cable (has a USB bootloader) -->
+
+<!--   - Debugging requires an external debugger (more hardware) -->
+
+<!-- [Due]: https://www.arduino.cc/en/Main/ArduinoBoardDue -->
+<!-- [Zero]: https://www.arduino.cc/en/Main/ArduinoBoardZero -->

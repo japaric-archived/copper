@@ -1,44 +1,51 @@
-# macOS
+Thanks for your interest! This book is currently outdated so I'm taking it down
+until I get time to update it; that way it won't cause more confusion. In the
+meantime, you can read [this blog post] that covers the *easy*, high level way
+of writing Rust applications for any ARM Cortex-M microcontroller.
 
-You can install most of the required tools using `brew`:
+[this blog post]: http://blog.japaric.io/quickstart/
 
-```
-# NOTE if you get "Error: Unknown command: cask", then run this command: `brew tap Caskroom/cask`
-# and try again
-$ brew cask install gcc-arm-embedded
-$ brew install openocd qemu
-```
+<!-- # macOS -->
 
-To install Rust and Cargo, I recommend using [rustup]:
+<!-- You can install most of the required tools using `brew`: -->
 
-[rustup]: https://www.rustup.rs/
+<!-- ``` -->
+<!-- # NOTE if you get "Error: Unknown command: cask", then run this command: `brew tap Caskroom/cask` -->
+<!-- # and try again -->
+<!-- $ brew cask install gcc-arm-embedded -->
+<!-- $ brew install openocd qemu -->
+<!-- ``` -->
 
-```
-$ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly
-```
+<!-- To install Rust and Cargo, I recommend using [rustup]: -->
 
-Or if you already have rustup installed, switch to the nightly channel with:
+<!-- [rustup]: https://www.rustup.rs/ -->
 
-```
-$ rustup default nightly
-```
+<!-- ``` -->
+<!-- $ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly -->
+<!-- ``` -->
 
-To install Xargo simply use:
+<!-- Or if you already have rustup installed, switch to the nightly channel with: -->
 
-```
-$ cargo install xargo
-```
+<!-- ``` -->
+<!-- $ rustup default nightly -->
+<!-- ``` -->
 
-Note that Xargo 0.2.0+ depends on the `rust-src` component so install that as
-well:
+<!-- To install Xargo simply use: -->
 
-```
-$ rustup component add rust-src
-```
+<!-- ``` -->
+<!-- $ cargo install xargo -->
+<!-- ``` -->
 
-## Testing OpenOCD
+<!-- Note that Xargo 0.2.0+ depends on the `rust-src` component so install that as -->
+<!-- well: -->
 
-Follow [these instructions] to test connecting to your programmer/debugger using
-OpenOCD.
+<!-- ``` -->
+<!-- $ rustup component add rust-src -->
+<!-- ``` -->
 
-[these instructions]: linux.html#First%20OpenOCD%20connection
+<!-- ## Testing OpenOCD -->
+
+<!-- Follow [these instructions] to test connecting to your programmer/debugger using -->
+<!-- OpenOCD. -->
+
+<!-- [these instructions]: linux.html#First%20OpenOCD%20connection -->

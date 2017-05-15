@@ -1,160 +1,167 @@
-# Run the program under QEMU
+Thanks for your interest! This book is currently outdated so I'm taking it down
+until I get time to update it; that way it won't cause more confusion. In the
+meantime, you can read [this blog post] that covers the *easy*, high level way
+of writing Rust applications for any ARM Cortex-M microcontroller.
 
-Now that we have an executable in our hands, it's time to test it under an
-emulator! You may be wondering "how are we going to do that?" since the program
-doesn't do any I/O. Well, instead of expecting the program to output something
-to the terminal (which won't happen), we are going to "hook" a debugger to the
-emulator, execute the program "statement by statement" and verify that the
-emulated memory changes as the program executes. Sounds fun? You bet it is.
+[this blog post]: http://blog.japaric.io/quickstart/
 
-Let's start! The first thing we have to do is load our binary in the emulator
-with this command:
+<!-- # Run the program under QEMU -->
 
-```
-$ qemu-system-arm \
-    -cpu cortex-m3 \
-    -machine lm3s6965evb \
-    -gdb tcp::3333 \
-    -S \
-    -nographic -monitor null \
-    -serial null \
-    -kernel target/thumbv7m-none-eabi/debug/app
-```
+<!-- Now that we have an executable in our hands, it's time to test it under an -->
+<!-- emulator! You may be wondering "how are we going to do that?" since the program -->
+<!-- doesn't do any I/O. Well, instead of expecting the program to output something -->
+<!-- to the terminal (which won't happen), we are going to "hook" a debugger to the -->
+<!-- emulator, execute the program "statement by statement" and verify that the -->
+<!-- emulated memory changes as the program executes. Sounds fun? You bet it is. -->
 
-So many arguments! Let's explain why all those are there for:
+<!-- Let's start! The first thing we have to do is load our binary in the emulator -->
+<!-- with this command: -->
 
-- `qemu-system-arm` this is a QEMU variant that can emulate an ARM processor in
-  system mode emulation.
+<!-- ``` -->
+<!-- $ qemu-system-arm \ -->
+<!--     -cpu cortex-m3 \ -->
+<!--     -machine lm3s6965evb \ -->
+<!--     -gdb tcp::3333 \ -->
+<!--     -S \ -->
+<!--     -nographic -monitor null \ -->
+<!--     -serial null \ -->
+<!--     -kernel target/thumbv7m-none-eabi/debug/app -->
+<!-- ``` -->
 
-- `-machine lm3s6965evb` this is the dev board we are going to emulate: the
-  [LM3S6965EVB].
+<!-- So many arguments! Let's explain why all those are there for: -->
 
-- `-cpu cortex-m3` this is the CPU to emulate, it must match the CPU of the
-  emulated `machine`.
+<!-- - `qemu-system-arm` this is a QEMU variant that can emulate an ARM processor in -->
+<!--   system mode emulation. -->
 
-- `-gdb tcp::3333` tells the emulator to expect a gdb connection on port `3333`,
-  we need this to control the execution of the emulated program under gdb.
+<!-- - `-machine lm3s6965evb` this is the dev board we are going to emulate: the -->
+<!--   [LM3S6965EVB]. -->
 
-- `-S` "do not immediately start the CPU". This tells the emulator to load the
-  program but don't immediately execute it, otherwise by the time you attach
-  `gdb` your program may have already terminated!
+<!-- - `-cpu cortex-m3` this is the CPU to emulate, it must match the CPU of the -->
+<!--   emulated `machine`. -->
 
-- `-nographic`, `-monitor null` we don't need anything graphic related
+<!-- - `-gdb tcp::3333` tells the emulator to expect a gdb connection on port `3333`, -->
+<!--   we need this to control the execution of the emulated program under gdb. -->
 
-- `-serial null` we are not going to use the serial console this time
+<!-- - `-S` "do not immediately start the CPU". This tells the emulator to load the -->
+<!--   program but don't immediately execute it, otherwise by the time you attach -->
+<!--   `gdb` your program may have already terminated! -->
 
-- `-kernel target/thumbv7m-none-eabi/debug/app` use our binary directly as the
-  "kernel" which is the first thing the emulator executes.
+<!-- - `-nographic`, `-monitor null` we don't need anything graphic related -->
 
-[LM3S6965EVB]: http://www.ti.com/lit/ug/spmu029a/spmu029a.pdf
+<!-- - `-serial null` we are not going to use the serial console this time -->
 
-This command will block; just leave it running for now.
+<!-- - `-kernel target/thumbv7m-none-eabi/debug/app` use our binary directly as the -->
+<!--   "kernel" which is the first thing the emulator executes. -->
 
-Next we hook a debugger to the emulator we just started. In another terminal,
-type:
+<!-- [LM3S6965EVB]: http://www.ti.com/lit/ug/spmu029a/spmu029a.pdf -->
 
-```
-$ arm-none-eabi-gdb -q target/thumbv7m-none-eabi/debug/app
-```
+<!-- This command will block; just leave it running for now. -->
 
-> **NOTE** You can use `lldb` instead of `gdb` but you won't be able to use the
-> same commands I have used here, because `lldb` uses different commands to
-> expose the same functionality as `gdb`. [This page] will help you map `gdb`
-> commands to `lldb`'s and vice versa.
+<!-- Next we hook a debugger to the emulator we just started. In another terminal, -->
+<!-- type: -->
 
-[This page]: http://lldb.llvm.org/lldb-gdb.html
+<!-- ``` -->
+<!-- $ arm-none-eabi-gdb -q target/thumbv7m-none-eabi/debug/app -->
+<!-- ``` -->
 
-Under this `gdb` session, enter the following command to connect to the
-emulator:
+<!-- > **NOTE** You can use `lldb` instead of `gdb` but you won't be able to use the -->
+<!-- > same commands I have used here, because `lldb` uses different commands to -->
+<!-- > expose the same functionality as `gdb`. [This page] will help you map `gdb` -->
+<!-- > commands to `lldb`'s and vice versa. -->
 
-```
-(gdb) target remote :3333
-```
+<!-- [This page]: http://lldb.llvm.org/lldb-gdb.html -->
 
-You should see an output like this:
+<!-- Under this `gdb` session, enter the following command to connect to the -->
+<!-- emulator: -->
 
-```
-Remote debugging using :3333
-app::main () at $PWD/src/main.rs:6
-6       pub extern "C" fn main() -> ! {
-```
+<!-- ``` -->
+<!-- (gdb) target remote :3333 -->
+<!-- ``` -->
 
-The emulator is *halted* and currently at the program entry point: `main`. You
-can now execute the program statement by statement using the `step` command:
+<!-- You should see an output like this: -->
 
-```
-(gdb) step
-8           let x = 42
-(gdb) step
-9           y = x
-```
+<!-- ``` -->
+<!-- Remote debugging using :3333 -->
+<!-- app::main () at $PWD/src/main.rs:6 -->
+<!-- 6       pub extern "C" fn main() -> ! { -->
+<!-- ``` -->
 
-At this point the statement `let x = 42` has been executed but the statement
-`y = x` has not, so `x` is initialized but `y` is not. Let's inspect both
-variables by `print`ing their addresses and values.
+<!-- The emulator is *halted* and currently at the program entry point: `main`. You -->
+<!-- can now execute the program statement by statement using the `step` command: -->
 
-```
-(gdb) print x
-$1 = 42
-(gdb) print &x
-$2 = (i32 *) 0x2000fff8
-(gdb) print y
-$3 = 0
-(gdb) print &y
-$4 = (i32 *) 0x2000fffc
-```
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 8           let x = 42 -->
+<!-- (gdb) step -->
+<!-- 9           y = x -->
+<!-- ``` -->
 
-A few things to note:
+<!-- At this point the statement `let x = 42` has been executed but the statement -->
+<!-- `y = x` has not, so `x` is initialized but `y` is not. Let's inspect both -->
+<!-- variables by `print`ing their addresses and values. -->
 
-- Both `x` and `y` live in the "stack". That's why they have contiguous
-  addresses.
+<!-- ``` -->
+<!-- (gdb) print x -->
+<!-- $1 = 42 -->
+<!-- (gdb) print &x -->
+<!-- $2 = (i32 *) 0x2000fff8 -->
+<!-- (gdb) print y -->
+<!-- $3 = 0 -->
+<!-- (gdb) print &y -->
+<!-- $4 = (i32 *) 0x2000fffc -->
+<!-- ``` -->
 
-- `y`, which was declared before `x`, has a larger address than `x`. The reason
-  is that the stack grows downwards (toward smaller addresses). If you keep
-  creating stack variables, you'll see their addresses get smaller and smaller.
+<!-- A few things to note: -->
 
-- `y` which is currently uninitialized holds the value `0` -- this is a QEMU
-  simplification. On real hardware you will observe that uninitialized variables
-  hold random values. Of course, (safe) Rust won't actually let you *use*
-  uninitialized variables but you can peek at them using `gdb`.
+<!-- - Both `x` and `y` live in the "stack". That's why they have contiguous -->
+<!--   addresses. -->
 
-Back to the debugger. If you step again, you should see that `y` is now
-initialized:
+<!-- - `y`, which was declared before `x`, has a larger address than `x`. The reason -->
+<!--   is that the stack grows downwards (toward smaller addresses). If you keep -->
+<!--   creating stack variables, you'll see their addresses get smaller and smaller. -->
 
-```
-(gdb) step
-11          loop {}
-(gdb) print y
-$5 = 42
-```
+<!-- - `y` which is currently uninitialized holds the value `0` -- this is a QEMU -->
+<!--   simplification. On real hardware you will observe that uninitialized variables -->
+<!--   hold random values. Of course, (safe) Rust won't actually let you *use* -->
+<!--   uninitialized variables but you can peek at them using `gdb`. -->
 
-The emulator is about to execute an endless loop. If you call `step` again,
-`gdb` will get stuck in the loop and hang. Instead, call `stepi` to advance *one
-instruction* rather than one statement.
+<!-- Back to the debugger. If you step again, you should see that `y` is now -->
+<!-- initialized: -->
 
-```
-(gdb) stepi
-0x00000014      10          loop {}
-(gdb) stepi
-0x00000014      10          loop {}
-```
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 11          loop {} -->
+<!-- (gdb) print y -->
+<!-- $5 = 42 -->
+<!-- ``` -->
 
-Congrats, you are now stuck in an endless loop!
+<!-- The emulator is about to execute an endless loop. If you call `step` again, -->
+<!-- `gdb` will get stuck in the loop and hang. Instead, call `stepi` to advance *one -->
+<!-- instruction* rather than one statement. -->
 
-There is not much left to do in this emulation. But, before you terminate the
-`gdb` session and exit the emulator ...
+<!-- ``` -->
+<!-- (gdb) stepi -->
+<!-- 0x00000014      10          loop {} -->
+<!-- (gdb) stepi -->
+<!-- 0x00000014      10          loop {} -->
+<!-- ``` -->
 
-## Homework
+<!-- Congrats, you are now stuck in an endless loop! -->
 
-`gdb` has an ["examine"] command that let's you inspect the contents of memory
-at a certain address. Try the following command:
+<!-- There is not much left to do in this emulation. But, before you terminate the -->
+<!-- `gdb` session and exit the emulator ... -->
 
-["examine"]: http://www.delorie.com/gnu/docs/gdb/gdb_56.html
+<!-- ## Homework -->
 
-```
-(gdb) x/4x main
-```
+<!-- `gdb` has an ["examine"] command that let's you inspect the contents of memory -->
+<!-- at a certain address. Try the following command: -->
 
-Compare the output of that command with the output of the command:
-`arm-none-eabi-objdump -Cd target/thumbv7m-none-eabi/debug/app`. Are the outputs
-related somehow? Elaborate.
+<!-- ["examine"]: http://www.delorie.com/gnu/docs/gdb/gdb_56.html -->
+
+<!-- ``` -->
+<!-- (gdb) x/4x main -->
+<!-- ``` -->
+
+<!-- Compare the output of that command with the output of the command: -->
+<!-- `arm-none-eabi-objdump -Cd target/thumbv7m-none-eabi/debug/app`. Are the outputs -->
+<!-- related somehow? Elaborate. -->
