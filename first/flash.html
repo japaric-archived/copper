@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Run it on real hardware - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "../";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li><a href="../audience.html"><strong aria-hidden="true">1.1.</strong> Audience</a></li><li><a href="../why-rust.html"><strong aria-hidden="true">1.2.</strong> Why Rust?</a></li><li><a href="../why-arm.html"><strong aria-hidden="true">1.3.</strong> Why ARM Cortex-M micros?</a></li><li><a href="../what-dev-board.html"><strong aria-hidden="true">1.4.</strong> What dev board should I use/get?</a></li></ol></li><li><a href="../tools.html"><strong aria-hidden="true">2.</strong> Setting up a development environment</a></li><li><ol class="section"><li><a href="../linux.html"><strong aria-hidden="true">2.1.</strong> Linux</a></li><li><a href="../macos.html"><strong aria-hidden="true">2.2.</strong> macOS</a></li><li><a href="../windows.html"><strong aria-hidden="true">2.3.</strong> Windows</a></li></ol></li><li><a href="../first/prog.html"><strong aria-hidden="true">3.</strong> First program</a></li><li><ol class="section"><li><a href="../first/build.html"><strong aria-hidden="true">3.1.</strong> Build &amp; inspect</a></li><li><a href="../first/qemu.html"><strong aria-hidden="true">3.2.</strong> Run it under QEMU</a></li><li><a href="../details.html"><strong aria-hidden="true">3.3.</strong> Nitty-gritty details</a></li><li><ol class="section"><li><a href="../details/target.html"><strong aria-hidden="true">3.3.1.</strong> Target specification</a></li><li><a href="../details/boot.html"><strong aria-hidden="true">3.3.2.</strong> Boot process</a></li><li><a href="../details/ld.html"><strong aria-hidden="true">3.3.3.</strong> Linker script</a></li></ol></li><li><a href="../first/flash.html" class="active"><strong aria-hidden="true">3.4.</strong> Run it on real hardware</a></li></ol></li><li><a href="../exceptions.html"><strong aria-hidden="true">4.</strong> Exceptions: Crashing your micro</a></li><li><a href="../blink.html"><strong aria-hidden="true">5.</strong> Blinking an LED</a></li><li class="spacer"></li><li class="affix"><a href="../optimize.html">(Mis)Optimization</a></li><li class="affix"><a href="../registers.html">Zero-cost type-safe register manipulation</a></li><li class="affix"><a href="../hal.html">Abstracting Hardware</a></li><li class="affix"><a href="../peripherals.html">Peripherals</a></li><li class="spacer"></li><li class="affix"><a href="../unwritten.html">Unwritten topics</a></li><li class="affix"><a href="../resources.html">Resources</a></li><li class="affix"><a href="../faq.html">FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title"></h1> 
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Run it on real hardware -->
+<!-- > **TODO** Document gotchas. Some dev boards may need to plug/unplug jumpers to -->
+<!-- > enable the built-in > programmer/debugger. -->
+<!-- It's time to test our program on real hardware! We'll use OpenOCD  to *flash* -->
+<!-- our program into the microcontroller and then hook `gdb` and OpenOCD to debug -->
+<!-- our program just like we did before. -->
+<!-- > Wait, what's flashing? -->
+<!-- *Flashing* means we are going to transfer our program from the host machine (PC, -->
+<!-- laptop, etc.) to the target device (the microcontroller). Once flashed, the -->
+<!-- micro will execute the flashed program every time it boots or resets. -->
+<!-- > **ATTENTION!** The flashing instructions here will overwrite the program -->
+<!-- > that's currently stored in your microcontroller. Make sure that it's either -->
+<!-- > something you are not gonna miss or that's something you can easily get a copy of. -->
+<!-- ## Compile for a different target device -->
+<!-- Unless you happen to have a real LM3S6965EVB board right next to you, the binary -->
+<!-- we produced in the previous section won't work for your device. To produce a -->
+<!-- valid binary for your device, you'll have to change the cross compilation target -->
+<!-- from the LM3S6965 to *your* device and then rebuild the program. -->
+<!-- For the rest of this section, I'll be using the [STM32F3DISCOVERY] as the target -->
+<!-- device. -->
+<!-- [STM32F3DISCOVERY]: http://www.st.com/en/evaluation-tools/stm32f3discovery.html -->
+<!-- ### Update the linker script -->
+<!-- One of the things that you'll always have to do when changing the cross -->
+<!-- compilation target is to update the device-specific parts of the linker script. -->
+<!-- The STM32F3DISCOVERY contains a [STM32F303VCT6] micro with 256 KiB of flash and -->
+<!-- 40+8 (\*) KiB of RAM. A peculiarity of STM32 devices is that their flash memory starts -->
+<!-- at address `0x0800_0000`. -->
+<!-- (\*) RAM is split in two memory regions located at different addresses. -->
+<!-- [STM32F303VCT6]: http://www.st.com/resource/en/datasheet/stm32f303vc.pdf -->
+<!-- *My* linker script adjustments look like this (yours will probably look -->
+<!-- different): -->
+<!-- ``` diff -->
+<!--  MEMORY -->
+<!--  { -->
+<!-- -  FLASH : ORIGIN = 0x00000000, LENGTH = 256K -->
+<!-- -  RAM : ORIGIN = 0x20000000, LENGTH = 64K -->
+<!-- +  CCRAM : ORIGIN = 0x10000000, LENGTH = 8K -->
+<!-- +  FLASH : ORIGIN = 0x08000000, LENGTH = 256K -->
+<!-- +  RAM : ORIGIN = 0x20000000, LENGTH = 40K -->
+<!--  } -->
+<!-- ``` -->
+<!-- ### Change the target specification -->
+<!-- Depending on the micro in your dev board, you may also have to change the -->
+<!-- `rustc` target from `thumbv7m-none-eabi` to something else. In my case, the -->
+<!-- STM32F303VCT6 contains a Cortex-M4F processor with FPU so I need to switch to the -->
+<!-- `thumbv7em-none-eabihf` target. -->
+<!-- If you change the target, you'll also need to update the `.cargo/config` file to -->
+<!-- port the configuration to the new target: -->
+<!-- ``` diff -->
+<!-- -[target.thumbv7m-none-eabi] -->
+<!-- +[target.thumbv7em-none-eabihf] -->
+<!--  rustflags = [ -->
+<!--      "-C", "link-arg=-Tlayout.ld", -->
+<!--      "-C", "link-arg=-nostartfiles", -->
+<!--  ] -->
+<!-- ``` -->
+<!-- ## Build & inspect -->
+<!-- Now that the changes have been committed, we can rebuild the program: -->
+<!-- ``` -->
+<!-- $ xargo build --target $TARGET -->
+<!-- ``` -->
+<!-- > **NOTE** From now on, I'm going to use `$TARGET`, instead of e.g. -->
+<!-- >  `thumbv7em-none-eabihf`, as a placeholder for the cross compilation target to -->
+<!-- >  make sure you don't use the wrong target triple. -->
+<!-- <\!-- FIXME use build.rs to force a rebuild when the linker script has been -\-> -->
+<!-- <\!-- modified -\-> -->
+<!-- > **HEADS UP** Make sure that Cargo actually rebuilds the binary! Cargo doesn't -->
+<!-- > trigger a rebuild when the linker script changes. So, if the only thing you -->
+<!-- > changed was the linker script and not the `rustc` target, then you'll have to -->
+<!-- > `cargo clean` first and then call `build`. -->
+<!-- As usual, it's a good idea to inspect the binary with `objdump` to verify that -->
+<!-- the vector table is where expected. -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-objdump -Cd ./target/$TARGET/debug/app -->
+<!-- ./target/$TARGET/debug/app:     file format elf32-littlearm -->
+<!-- Disassembly of section .text: -->
+<!-- 08000000 <_reset-0x8>: -->
+<!--  8000000:       2000a000        .word   0x2000a000 -->
+<!--  8000004:       08000009        .word   0x08000009 -->
+<!-- 08000008 <_reset>: -->
+<!--  8000008:       b083            sub     sp, #12 -->
+<!--  800000a:       e7ff            b.n     800000c <_reset+0x4> -->
+<!--  800000c:       202a            movs    r0, #42 ; 0x2a -->
+<!--  800000e:       9001            str     r0, [sp, #4] -->
+<!--  8000010:       9002            str     r0, [sp, #8] -->
+<!--  8000012:       e7ff            b.n     8000014 <_reset+0xc> -->
+<!--  8000014:       e7fe            b.n     8000014 <_reset+0xc> -->
+<!-- ``` -->
+<!-- Looks good! The vector table is at `0x0800_0000` as expected for my device. -->
+<!-- ## Establishing an OpenOCD connection -->
+<!-- Before we flash the program we have to "open" an OpenOCD connection between the -->
+<!-- device and the host machine. You should be already familiar with these steps -->
+<!-- from the [development environment][de] chapter: -->
+<!-- [de]: linux.html#First%20OpenOCD%20connection -->
+<!-- ``` -->
+<!-- # Physically connect the dev board to the host machine (probably your laptop), then -->
+<!-- $ [sudo] openocd -f board/$BOARD -->
+<!-- (...) -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : clock speed 950 kHz -->
+<!-- Info : STLINK v2 JTAG v27 API v2 SWIM v15 VID 0x0483 PID 0x374B -->
+<!-- Info : using stlink api v2 -->
+<!-- Info : Target voltage: 2.919073 -->
+<!-- Info : stm32f3x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- ``` -->
+<!-- ## Flash and debug -->
+<!-- We'll use the `gdb` shell to both flash and debug the program. So, fire up -->
+<!-- `gdb`: -->
+<!-- > **NOTE** You can't use `lldb` this time `:-(`. AFAICT, there's no `lldb` -->
+<!-- > equivalent to the `monitor` and `load` commands provided by `gdb`. And those -->
+<!-- > commands are required in this section. -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-gdb target/$TARGET/debug/app -->
+<!-- ``` -->
+<!-- Next, we need to connect `gdb` and OpenOCD. The command is the same as the one -->
+<!-- we used with QEMU: -->
+<!-- ``` -->
+<!-- (gdb) target remote :3333 -->
+<!-- Remote debugging using :3333 -->
+<!-- 0x00000000 in ?? () -->
+<!-- ``` -->
+<!-- You should also see extra output on the OpenOCD terminal but maybe not the exact -->
+<!-- same output shown here: -->
+<!-- ``` diff -->
+<!--  Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- +Info : accepting 'gdb' connection on tcp/3333 -->
+<!-- +Info : device id = 0x10036422 -->
+<!-- +Info : flash size = 256kbytes -->
+<!-- ``` -->
+<!-- Now that we are connected to the device via `gdb`. Let's flash the program using -->
+<!-- the `load` command: -->
+<!-- ``` -->
+<!-- (gdb) load -->
+<!-- Loading section .text, size 0x16 lma 0x8000000 -->
+<!-- Start address 0x8000008, load size 20 -->
+<!-- Transfer rate: 246 bytes/sec, 10 bytes/write. -->
+<!-- ``` -->
+<!-- You should also see new output on the OpenOCD terminal: -->
+<!-- ``` diff -->
+<!--  Info : accepting 'gdb' connection on tcp/3333 -->
+<!--  Info : device id = 0x10036422 -->
+<!--  Info : flash size = 256kbytes -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +adapter speed: 950 kHz -->
+<!-- +target state: halted -->
+<!-- +target halted due to debug-request, current mode: Thread -->
+<!-- +xPSR: 0x01000000 pc: 0x08000194 msp: 0x2000a000 -->
+<!-- +Info : Unable to match requested speed 8000 kHz, using 4000 kHz -->
+<!-- +Info : Unable to match requested speed 8000 kHz, using 4000 kHz -->
+<!-- +adapter speed: 4000 kHz -->
+<!-- +target state: halted -->
+<!-- +target halted due to breakpoint, current mode: Thread -->
+<!-- +xPSR: 0x61000000 pc: 0x2000003a msp: 0x2000a000 -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +adapter speed: 950 kHz -->
+<!-- +target state: halted -->
+<!-- +target halted due to debug-request, current mode: Thread -->
+<!-- +xPSR: 0x01000000 pc: 0x08000194 msp: 0x2000a000 -->
+<!-- ``` -->
+<!-- The program is now flashed and the device is halted at the program's entry -->
+<!-- point, i.e. the `main` function. Let's repeat the debug session we used for the -->
+<!-- previous QEMU run: -->
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 8           let x = 42 -->
+<!-- (gdb) step -->
+<!-- 9           y = x -->
+<!-- (gdb) print x -->
+<!-- $1 = 42 -->
+<!-- (gdb) print &x -->
+<!-- $2 = (i32 *) 0x20001ffc -->
+<!-- (gdb) print y -->
+<!-- $3 = -2052926870 -->
+<!-- (gdb) print/x y -->
+<!-- $4 = 0x85a2d26a -->
+<!-- (gdb) print &y -->
+<!-- $5 = (i32 *) 0x20001ff8 -->
+<!-- (gdb) step -->
+<!-- 11          loop {} -->
+<!-- (gdb) print y -->
+<!-- $5 = 42 -->
+<!-- ``` -->
+<!-- Yay! This time the uninitialized value of `y` looks more random; I got -->
+<!-- `-2052926870` on this run. -->
+<!-- While you executed the above commands, you should have seen more output on the -->
+<!-- OpenOCD terminal. Each time you stepped over the program, OpenOCD printed the -->
+<!-- *program counter* which is the address of the instruction the processor will -->
+<!-- execute next. -->
+<!-- ``` diff -->
+<!--  xPSR: 0x01000000 pc: 0x08000008 msp: 0x20002000 -->
+<!-- +Info : halted: PC: 0x0800000a -->
+<!-- +Info : halted: PC: 0x0800000c -->
+<!-- +Info : halted: PC: 0x0800000e -->
+<!-- +Info : halted: PC: 0x08000010 -->
+<!-- ``` -->
+<!-- Here's one more trick for you to try: -->
+<!-- ``` -->
+<!-- (gdb) monitor reset halt -->
+<!-- ``` -->
+<!-- This will generate the following OpenOCD output: -->
+<!-- ``` -->
+<!--  Info : halted: PC: 0x08000010 -->
+<!-- +target state: halted -->
+<!-- +target halted due to debug-request, current mode: Thread -->
+<!-- +xPSR: 0x01000000 pc: 0x08000008 msp: 0x20002000 -->
+<!-- ``` -->
+<!-- This will reset your microcontroller (!) and halt your program at the reset -->
+<!-- handler, i.e. the `main` function. -->
+<!-- For fun, let's inspect the `y` variable **before** it's initialized: -->
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 8           let x = 42 -->
+<!-- (gdb) step -->
+<!-- 9           y = x -->
+<!-- (gdb) print x -->
+<!-- $6 = 42 -->
+<!-- (gdb) print &x -->
+<!-- $7 = (i32 *) 0x20001ffc -->
+<!-- (gdb) print y -->
+<!-- $8 = 42 -->
+<!-- (gdb) print &y -->
+<!-- $9 = (i32 *) 0x20001ff8 -->
+<!-- ``` -->
+<!-- Surprise! `y` appears to have been already initialized! Except, that's not the -->
+<!-- case. What actually happened is that resetting the microcontroller doesn't touch -->
+<!-- RAM (i.e. it doesn't power it off). Therefore, the RAM still holds the data from -->
+<!-- the previous run and that's why `y` hold the value `42` it was assigned during -->
+<!-- the *previous* run of the program. -->
+<!-- That's all for this section! You can now close both OpenOCD and `gdb`. Let's -->
+<!-- move onto more complex programs! -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../details/ld.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../exceptions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../details/ld.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../exceptions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

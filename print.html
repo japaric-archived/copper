@@ -1,0 +1,2499 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li><a href="audience.html"><strong aria-hidden="true">1.1.</strong> Audience</a></li><li><a href="why-rust.html"><strong aria-hidden="true">1.2.</strong> Why Rust?</a></li><li><a href="why-arm.html"><strong aria-hidden="true">1.3.</strong> Why ARM Cortex-M micros?</a></li><li><a href="what-dev-board.html"><strong aria-hidden="true">1.4.</strong> What dev board should I use/get?</a></li></ol></li><li><a href="tools.html"><strong aria-hidden="true">2.</strong> Setting up a development environment</a></li><li><ol class="section"><li><a href="linux.html"><strong aria-hidden="true">2.1.</strong> Linux</a></li><li><a href="macos.html"><strong aria-hidden="true">2.2.</strong> macOS</a></li><li><a href="windows.html"><strong aria-hidden="true">2.3.</strong> Windows</a></li></ol></li><li><a href="first/prog.html"><strong aria-hidden="true">3.</strong> First program</a></li><li><ol class="section"><li><a href="first/build.html"><strong aria-hidden="true">3.1.</strong> Build &amp; inspect</a></li><li><a href="first/qemu.html"><strong aria-hidden="true">3.2.</strong> Run it under QEMU</a></li><li><a href="details.html"><strong aria-hidden="true">3.3.</strong> Nitty-gritty details</a></li><li><ol class="section"><li><a href="details/target.html"><strong aria-hidden="true">3.3.1.</strong> Target specification</a></li><li><a href="details/boot.html"><strong aria-hidden="true">3.3.2.</strong> Boot process</a></li><li><a href="details/ld.html"><strong aria-hidden="true">3.3.3.</strong> Linker script</a></li></ol></li><li><a href="first/flash.html"><strong aria-hidden="true">3.4.</strong> Run it on real hardware</a></li></ol></li><li><a href="exceptions.html"><strong aria-hidden="true">4.</strong> Exceptions: Crashing your micro</a></li><li><a href="blink.html"><strong aria-hidden="true">5.</strong> Blinking an LED</a></li><li class="spacer"></li><li class="affix"><a href="optimize.html">(Mis)Optimization</a></li><li class="affix"><a href="registers.html">Zero-cost type-safe register manipulation</a></li><li class="affix"><a href="hal.html">Abstracting Hardware</a></li><li class="affix"><a href="peripherals.html">Peripherals</a></li><li class="spacer"></li><li class="affix"><a href="unwritten.html">Unwritten topics</a></li><li class="affix"><a href="resources.html">Resources</a></li><li class="affix"><a href="faq.html">FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title"></h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Introduction -->
+<!-- > **UPDATE (2016-11-15)** I'm currently re-purposing this book to be more like a -->
+<!-- > reference about low level details of Rust programs for Cortex-M micros. Thus -->
+<!-- > it's in a state of flux right now. If you are looking for a more beginner -->
+<!-- > friendly text, check out the [Discovery] book. -->
+<!-- [Discovery]: https://japaric.github.io/discovery -->
+<!-- > **WARNING** This is a work in progress! It's incomplete and some -->
+<!-- > chapters/sections are still in draft phase. -->
+<!-- The goal of this book is to get you started in *microcontroller software -->
+<!-- development*. We'll mainly cover *bare metal programming* (programming directly -->
+<!-- *on* hardware, without OS abstractions/services) but I hope we'll tread into OS -->
+<!-- development territory (e.g. schedulers) in the latter chapters. We'll use the -->
+<!-- [Rust programming language] and ARM [Cortex-M] microcontrollers as a means to -->
+<!-- that end. -->
+<!-- [Cortex-M]: http://www.arm.com/products/processors/cortex-m/index.php?tab=Why+Cortex-M? -->
+<!-- [Rust programming language]: https://www.rust-lang.org/ -->
+<!-- > **TODO** What are microcontrollers? micros vs general purpose computers. What -->
+<!-- > are the differences between programming a micro and programming a general -->
+<!-- > purpose computer? etc. -- In other words, I'm going to assume you already know -->
+<!-- > *why* you want to learn to program microcontrollers in the first place. :-) -->
+<!-- (Hopefully) At the end of this book the reader will: -->
+<!-- - Be able to program any (ARM Cortex-M) microcontroller that's supported by the -->
+<!--   Rust compiler and is minimally/properly documented. -->
+<!-- - Become familiar with the *peripherals* (functionality) commonly provided by -->
+<!--   microcontrollers: analog/digital I/O, communication protocols, timers, etc. -->
+<!-- - Be able to write drivers for these peripherals and be able to compose them -->
+<!--   into applications. -->
+<!-- - Know how to use existing (C) tooling to inspect, profile and debug the program -->
+<!--   they wrote. -->
+<!-- > **DISCLAIMER** I don't claim to be an authority on embedded software -->
+<!-- > development and much less an authority on embedded software development *with -->
+<!-- > Rust*. The abstractions, programming patterns and development methods I -->
+<!-- > present here are probably *not* the best practices because we don't know yet -->
+<!-- > what those look like in Rust! I hope this book will trigger more interest and -->
+<!-- > discussion on this topic and *that* will hopefully lead to the development of -->
+<!-- > best practices. -->
+<!-- ## Contact -->
+<!-- If you: -->
+<!-- - Would like to report any issue with this text: a typo, wrong/unclear information or -->
+<!--   missing/insufficient background information. -->
+<!-- - Would like to see a chapter on some specific topic (but check [this list] first) -->
+<!-- - Have any question about the topics covered here -->
+<!-- - Would like to share an idea, suggestion or critic -->
+<!-- - Just want to say hi, thanks or whatever is on your mind -->
+<!-- [this list]: unwritten.html -->
+<!-- Feel free to contact [me] via e-mail, the [issue tracker] or the #rust-embedded -->
+<!-- channel on Mozilla's IRC network. -->
+<!-- [issue tracker]: https://github.com/japaric/copper/issues -->
+<!-- [me]: https://github.com/japaric -->
+<!-- ## Source -->
+<!-- The source of this document is available in [this repository]. Pull requests -->
+<!-- fixing typos or improving the wording are welcome! -->
+<!-- [this repository]: https://github.com/japaric/copper -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Audience -->
+<!-- > Who is this documentation aimed towards? -->
+<!-- This site is aimed at people that: -->
+<!-- - Have a basic knowledge of Rust. If you haven't been introduced to Rust yet, you should check out -->
+<!--   the (Rust) ["book"] and [these other great learning resources][0]. -->
+<!-- ["book"]: https://doc.rust-lang.org/book/ -->
+<!-- [0]: https://github.com/ctjhoa/rust-learning -->
+<!-- - Have access, own, or are willing to buy an ARM Cortex-M development board. -->
+<!-- > **NOTE** You *can* follow this material *without* a dev board by using an emulator. But your -->
+<!-- > learning experience (and enjoyment!) will likely suffer as you will only be able to execute a few -->
+<!-- > of the programs that we'll develop here due to limitations in emulators (not all the -->
+<!-- > microcontroller functionality is implemented). -->
+<!-- On the other hand, you **don't** need to know about any of these topics to follow this material:  -->
+<!-- - Assembly. -->
+<!-- - Electronics. -->
+<!-- - Microcontrollers. -->
+<!-- - The ARM (Cortex-M) architecture. -->
+<!-- - The C programming language. -->
+<!-- If you are already familiar with embedded development using C/C++, please tag along! I'm sure you'll -->
+<!-- find the information about tooling (Cargo instead of Make) and Rust abstractions (traits as -->
+<!-- interfaces) interesting. Plus, I'd love to hear your opinion about how non-Rust concepts (like the -->
+<!-- ARM boot process, linker scripts, etc) are explained. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Why Rust? -->
+<!-- > Why program in Rust and not in C? -->
+<!-- C is (probably) the most used programming language for development of embedded systems (citation -->
+<!-- needed). However I've decided to use Rust in this material for the following reasons: -->
+<!-- - Rust gives you C-like low level control over aspects like memory management and struct layout / -->
+<!--   memory representation while not imposing a runtime and still providing high level features like -->
+<!--   closures, traits/generics, tagged unions, pattern matching and someday, I hope, (state-machine) -->
+<!--   [generators][0] (this [blog post][1] fleshes out the idea a bit more). -->
+<!-- [0]: https://github.com/rust-lang/rfcs/issues/1081#issuecomment-221396554 -->
+<!-- [1]: https://dwrensha.github.io/capnproto-rust/2016/05/28/async-generators.html -->
+<!-- - The Rust distribution ships with a package manager, Cargo, that encourages splitting your -->
+<!--   programs in reusable crates (libraries) by greatly simplifying dependency management. Cargo also -->
+<!--   encourages not reinventing the wheel by providing access to a central repository where the Rust -->
+<!--   community publishes and shares their crates. -->
+<!-- - Testing and documentation infrastructure are provided for, in part, by Cargo meaning you don't -->
+<!--   need to choose from many competing options, or reinvent the wheel -->
+<!-- - One can use pretty much all of the existing C tooling on Rust programs. For example: -->
+<!--   - You can use binary inspection tools like `objdump`, `nm`, `readelf`, `size`, etc. -->
+<!--   - You can use `gdb`/`lldb` to debug your program. Things like step-by-step execution, breakpoints, -->
+<!--     watchpoints, printing variables, etc. Just Work. -->
+<!--   - You can run your program under an emulator like QEMU. -->
+<!-- - Some people find Rust more approachable and/or less scary than C. This means that they are more -->
+<!--   likely to explore this area of programming using Rust than using C. -->
+<!-- - And, most importantly, I like Rust and its awesome community. -->
+<!-- > **TODO** Rust & C++ comparison -->
+<!-- ## Disadvantages of not using C -->
+<!-- Or advantages of using C instead of Rust: -->
+<!-- - Device support. Some less known architectures, like the Xtensa, but with huge communities behind -->
+<!--   them, like the ESP8266 (google it!), are not supported by LLVM and therefore you can't build Rust -->
+<!--   programs for microcontrollers of that architecture. -->
+<!-- - Commercial/IDE support. There are lots (compared to Rust) of commercial IDEs, SDKs, RTOSes for -->
+<!--   developing firmware in C. -->
+<!-- - Toolchain Stability. The C toolchain is pretty stable and well vetted at this point for embedded -->
+<!--   development while Rust is still growing its embedded ecosystem. -->
+<!-- - MISRA C and other standards for producing "high-reliability" code have not been created yet for -->
+<!--   Rust (but the opportunity is there) -->
+<!-- > **TODO** More advantages of using C. I haven't thought this through thoroughly. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Why the ARM Cortex-M? -->
+<!-- > Why not AVR or PIC or ...? -->
+<!-- ARM Cortex-M processors are very popular and are used across many industries. In a way they provide -->
+<!-- unprecedented performance in a variety of cores from the low power Cortex-M0 to the floating-point -->
+<!-- enabled Cortex-M4F. They are used in everything from your [Fitbit][0], to your [Quadcopter][1], and -->
+<!-- beyond to medical equipment, robotic arms, and automobiles. Also, ARM Cortex-M processors are -->
+<!-- developed by many companies, all using the standard core specified by ARM. This gives embedded -->
+<!-- systems developers a wide range of choice of manufacturer, and feature set. Also, going forward the -->
+<!-- relatively low cost of these 32-bit processors may make 8-bit processors less competitive in both an -->
+<!-- industrial and hobbyist perspective. Even Arduino is moving away from the AVR platform with the -->
+<!-- [Arduino Zero][2]. -->
+<!-- Also not many microcontroller families are currently supported by Rust, which uses LLVM as its -->
+<!-- backend. Popular microcontrollers like AVR, and PIC are not (officially) supported by LLVM -->
+<!-- and as the Rust compiler relies on LLVM for code generation it doesn't support them either. However, -->
+<!-- an [unofficial AVR backend][3] for LLVM is currently undergoing the process of being merged back -->
+<!-- into upstream LLVM, so this situation will likely improve in the near future. -->
+<!-- __TODO__: might be interesting to address the new Intel Quark platforms. -->
+<!-- [0]: https://www.arm.com/markets/embedded/fitbit-one.php -->
+<!-- [1]: http://diydrones.com/profiles/blogs/vr-multipilot32f4-arm-cortex-m4-the-most-powerful-auto-pilot-in -->
+<!-- [2]: https://www.arduino.cc/en/Main/ArduinoBoardZero -->
+<!-- [3]: https://github.com/avr-llvm/llvm -->
+<!-- Do note that some of the concepts covered here like the tooling and how to use common peripherals -->
+<!-- are transferable to other microcontroller families. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # What is a dev board? -->
+<!-- Dev board is the short term for "development board". When dealing with embedded -->
+<!-- systems it is typical to have an application specific PCB board which carries -->
+<!-- the processor you are going to write software for. However, sometimes you don't -->
+<!-- know what your hardware looks like at the start of a project, or maybe you want -->
+<!-- to be able to rapidly prototype by connecting different sensors and actuators to -->
+<!-- your processor without having to make a new PCB board every time. This is where -->
+<!-- dev boards come in, they are essentially the bare minimum you need (sometimes -->
+<!-- with some additional sensors for evaluation) to turn on the processor, program -->
+<!-- it, and connect things to it. If you are familiar with the [Arduino] platform, -->
+<!-- that is a dev board. -->
+<!-- While you can use an emulator to follow along it is more fun, and more -->
+<!-- rewarding, to make command real hardware to do your bidding. So lets choose one! -->
+<!-- [Arduino]: https://www.arduino.cc/ -->
+<!-- > **TODO** A picture would be useful here. -->
+<!-- # What dev board should I use/get? -->
+<!-- I won't force you to use a specific dev board. This document has been written in -->
+<!-- a device-agnostic way so you can follow it with pretty much any dev board you -->
+<!-- want. Where a specific dev board is targeted it will be stated explicitly. -->
+<!-- Nonetheless, some dev boards are easier to work with than others. This section -->
+<!-- will provide you some advice on how to pick a dev board that will make your life -->
+<!-- easier. -->
+<!-- When we are choosing a dev board we are looking at the following parameters, -->
+<!-- which are outlined in more detail below: -->
+<!-- - Supports OpenOCD. Which is what we will use to load and debug compiled -->
+<!--   binaries of our Rust code. -->
+<!-- - Has good documentation. You always will have the datasheet from the -->
+<!--   manufacturer, but good and easy to follow documentation on the boards pinout, -->
+<!--   how it relates to the processor and what other goodies you have is key. -->
+<!-- - Community! Some dev boards have more of a following than others, while others -->
+<!--   will be using C/C++ the community can help with hardware related issues, or -->
+<!--   maybe even by providing example C code which can be helpful for getting -->
+<!--   started. -->
+<!-- ## OpenOCD support -->
+<!-- We'll use OpenOCD to "flash" and debug the programs we'll develop. It's best if -->
+<!-- you can get a dev board with a built-in debugger that's supported by OpenOCD. -->
+<!-- You can see a list of such boards [here]. -->
+<!-- [here]: https://github.com/ntfreak/openocd/tree/master/tcl/board -->
+<!-- > **NOTE** Not all the dev boards listed in that link have an ARM Cortex-M -->
+<!-- > microcontroller, some of them have Cortex-A processors, some have -->
+<!-- > microcontrollers with a different architecture (e.g. AVR). -->
+<!-- One example of such dev board is the [STM32F3DISCOVERY] which I'm going to -->
+<!-- use throughout the examples of this document. It seems that most of -->
+<!-- the [other evaluation boards][discoveries] by STM32 also have a built-in -->
+<!-- debugger and are supported by OpenOCD. I'm not familiar with other vendors like -->
+<!-- Atmel and NXP but they probably have similar offerings. -->
+<!-- [STM32F3DISCOVERY]: http://www.st.com/en/evaluation-tools/stm32f3discovery.html -->
+<!-- [discoveries]: http://www.st.com/en/evaluation-tools/stm32-mcu-discovery-kits.html -->
+<!-- Alternatively, you can use a board that doesn't have a built-in debugger if the -->
+<!-- microcontroller in it is supported by OpenOCD (check [this list][target]) and -->
+<!-- the board exposes a JTAG/SWD connector, but you'll also need an external -->
+<!-- debugger supported by OpenOCD (check [this list][interface]). This is more -->
+<!-- complicated as you'll have to read about the JTAG/SWD interface to make an -->
+<!-- informed decision and you'll also have to figure out how to wire up everything -->
+<!-- together. -->
+<!-- [target]: https://github.com/ntfreak/openocd/tree/master/tcl/target -->
+<!-- [interface]: https://github.com/ntfreak/openocd/tree/master/tcl/interface -->
+<!-- > **NOTE** The "target list" linked above not only contains Cortex-M -->
+<!-- > microcontrollers but also devices with different architectures. Likewise, the -->
+<!-- > "interface list" linked above not only lists JTAG/SWD interfaces. -->
+<!-- > **TODO** Add picture of what the connection looks like -->
+<!-- ## Good documentation -->
+<!-- The microcontroller in it should have documentation about: -->
+<!-- - The peripherals it provides: How they work and the registers associated with -->
+<!--   them. This document is known as the *Reference Manual* ([example][rm]), -->
+<!--   although sometimes this information is contained in the *Data Sheet* -->
+<!--   ([example][ds]). -->
+<!-- - Hardware bugs (yes, hardware can have bugs too!) or device limitations that -->
+<!--   may be present in the revision of the hardware that you own and how to work -->
+<!--   around them. This document is known as *Silicon Errata* or just *Errata Sheet* -->
+<!--   ([example][se]). -->
+<!-- [rm]: http://www.st.com/resource/en/reference_manual/cd00246267.pdf -->
+<!-- [ds]: http://www.ti.com/lit/ds/symlink/lm3s6965.pdf -->
+<!-- [se]: http://www.st.com/resource/en/errata_sheet/cd00260217.pdf -->
+<!-- # Dev boards that Rustaceans have used before -->
+<!-- Or that we are sure work just fine. -->
+<!-- - [STM32F3DISCOVERY] -->
+<!--   - Recommended if you are a beginner as we have beginner friendly documentation -->
+<!--     tailored for this specific board. Check the [Discovery] book. -->
+<!--   - There's a crate, [f3], that targets this board and provides a high -->
+<!--     level, easy to use API. -->
+<!--   - Has an on-board programmer/debugger -->
+<!--   - Has OpenOCD and GDB support -->
+<!-- [f3]: https://crates.io/crates/f3 -->
+<!-- [Discovery]: https://japaric.github.io/discovery -->
+<!-- - [Other DISCOVERY boards][discoveries] -->
+<!--   - Have an on-board programmer/debugger -->
+<!--   - Have OpenOCD and GDB support -->
+<!-- - [Nucleo boards](http://www.st.com/en/evaluation-tools/stm32-mcu-nucleo.html) -->
+<!--   - Pretty much like the DISCOVERYs but in an Arduino-compatible form factor -->
+<!--   - You can use Arduino shields with these boards -->
+<!--   - Have an on-board programmer/debbuger -->
+<!--   - Have OpenOCD and GDB support -->
+<!-- - [Teensy 3.x](https://www.pjrc.com/teensy/) -->
+<!--   - High level crate, like f3, that targets this board: [teensy3] -->
+<!--   - Can flash programs with just a USB cable (has a USB bootloader) -->
+<!--   - No debug support (GDB) AFAIK because the SWD pins are not exposed -->
+<!-- [teensy3]: https://crates.io/crates/teensy3 -->
+<!-- - [Tiva-C Launchpad](http://www.ti.com/tool/ek-tm4c123gxl) -->
+<!--   - Has an on-board programmer/debugger -->
+<!--   - Has OpenOCD and GDB support -->
+<!-- - [Stellaris Launchpad](http://www.ti.com/tool/ek-lm4f120xl) -->
+<!--   - Has an on-board programmer/debugger -->
+<!--   - Has OpenOCD and GDB support -->
+<!-- - Arduino [Due] & [Zero] -->
+<!--   - Can flash programs with just a USB cable (has a USB bootloader) -->
+<!--   - Debugging requires an external debugger (more hardware) -->
+<!-- [Due]: https://www.arduino.cc/en/Main/ArduinoBoardDue -->
+<!-- [Zero]: https://www.arduino.cc/en/Main/ArduinoBoardZero -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Setting up a development environment -->
+<!-- Working with embedded systems requires extra tooling as cross compilation is at -->
+<!-- the heart of the development process. This chapter will introduce the tools -->
+<!-- we'll use, why we need them and how to install them on the 3 major OSes. -->
+<!-- Without further ado, these are the tools we'll use: -->
+<!-- - [Rust & Cargo: nightly edition][rust] -->
+<!-- - [A cross C linker: arm-none-eabi-gcc][gcc] -->
+<!-- - [Binary inspection tools][binutils] -->
+<!--   - [arm-none-eabi-objdump][objdump] -->
+<!--   - [arm-none-eabi-size][size] -->
+<!-- - [A debugger][*db] -->
+<!-- - [An emulator: QEMU][qemu] -->
+<!-- - [Xargo][xargo] -->
+<!-- - [OpenOCD][openocd] -->
+<!-- The rest of this page will justify each of these tools. For installation -->
+<!-- instructions check the subsections of this chapter: [Linux], [Mac] and [Windows] -->
+<!-- [Linux]: linux.html -->
+<!-- [Mac]: macos.html -->
+<!-- [Windows]: windows.html -->
+<!-- ## Rust & Cargo: nightly edition -->
+<!-- [rust]: tools.html#Rust%20%26%20Cargo%3A%20nightly%20edition -->
+<!-- Rust & Cargo don't need  much explanation. To build Rust programs we'll need the -->
+<!-- Rust compiler, `rustc`, and the Rust package manager, Cargo. -->
+<!-- What does need justification is the use of the nightly channel. We need to use -->
+<!-- the nightly channel because we'll make use of the following unstable features: -->
+<!-- - `asm`: We'll use some inline assembly via the `asm!` syntax extension. But -->
+<!--   that syntax extension hasn't been stabilized. -->
+<!-- - `lang_items`: The need for this feature gate is sometimes artificial. The -->
+<!--   compiler demands some lang times, like `panic_fmt`, to be defined even if the -->
+<!--   functionality they provide (unwinding/panicking) is never used in our program. -->
+<!-- - To cross compile programs we need a cross compiled `core` crate. The Rust -->
+<!--   project doesn't distribute a binary release of that crate for Cortex-M -->
+<!--   microcontrollers so we have to cross compile that crate ourselves. As the -->
+<!--   `core` crate relies on lots of unstable features, we have to use the nightly -->
+<!--   channel to cross compile it. -->
+<!-- ## A cross C linker: `arm-none-eabi-gcc` -->
+<!-- [gcc]: tools.html#A%20cross%20C%20linker%3A%20arm-none-eabi-gcc -->
+<!-- (`arm-none-eabi-gcc` is not a linker per se but `rustc` uses it as a proxy for -->
+<!-- `arm-none-eabi-ld`.) -->
+<!-- > Wait, aren't we going to write Rust? Why do we need a *C compiler*? -->
+<!-- `rustc` uses `gcc` to link intermediate object files so we pretty much have no -->
+<!-- choice. -->
+<!-- ## Binary inspection tools -->
+<!-- [binutils]: tools.html#Binary%20inspection%20tools -->
+<!-- When working this close to the hardware and with devices that have constrained -->
+<!-- resources and mandatory memory layouts, it's pretty important to inspect the -->
+<!-- produced binaries to keep track of their sizes and to check that the produced -->
+<!-- binaries follow a specific memory layout. -->
+<!-- We'll mainly use the following two tools: -->
+<!-- ### `arm-none-eabi-size` -->
+<!-- [size]: tools.html#arm-none-eabi-size -->
+<!-- To keep an eye on the binary size of our applications. -->
+<!-- ### `arm-none-eabi-objdump` -->
+<!-- [objdump]: tools.html#arm-none-eabi-objdump -->
+<!-- To confirm the memory layout of our program matches the memory layout -->
+<!-- constraints of the target device. -->
+<!-- ## A debugger -->
+<!-- [*db]: tools.html#A%20debugger -->
+<!-- A debugger is vital when working with microcontrollers as other debugging -->
+<!-- methods like logging or *cough* `println` may not be available. This is -->
+<!-- specially true when you are just starting out and haven't yet written drivers -->
+<!-- for peripherals that allow microcontroller <-> PC communication. -->
+<!-- We'll mainly use `arm-none-eabi-gdb` in this document as `lldb` doesn't provide -->
+<!-- all the functionality we need. -->
+<!-- ## An emulator: QEMU -->
+<!-- [qemu]: tools.html#An%20emulator%3A%20QEMU -->
+<!-- Before trying out our first program on real hardware, we'll run it under an -->
+<!-- emulator to verify that the program works as expected. -->
+<!-- ## Xargo -->
+<!-- [xargo]: tools.html#Xargo -->
+<!-- In general, cross compiling requires cross compiled "standard" crates like the -->
+<!-- `core` or the `std` crate. Binary releases of these crates for Cortex-M -->
+<!-- microcontrollers are not provided by the Rust project so we'll have to cross -->
+<!-- compile these ourselves. Just cross compiling is not enough though, as one must -->
+<!-- place the produced binaries in a specific directory layout called a "sysroot". -->
+<!-- Because this process is cumbersome and error prone, I have [created Xargo]. -->
+<!-- Xargo is a *transparent* Cargo wrapper that automatically builds and manages -->
+<!-- sysroots without user intervention. -->
+<!-- [created Xargo]: https://github.com/japaric/xargo -->
+<!-- Usage looks like this: -->
+<!-- ``` -->
+<!-- $ cargo build --target cortex-m3 && echo OK -->
+<!--    Compiling app v0.1.0 -->
+<!-- error: can't find crate for `core` [E0463] -->
+<!-- error: aborting due to previous error -->
+<!-- error: Could not compile `app`. -->
+<!-- To learn more, run the command again with --verbose. -->
+<!-- ``` -->
+<!-- ``` -->
+<!-- $ xargo build --target thumbv6m-none-eabi && echo OK -->
+<!--    Compiling core v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/libcore) -->
+<!--    Compiling alloc v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/liballoc) -->
+<!--     Finished release [optimized] target(s) in 19.56 secs -->
+<!--    Compiling rustc_unicode v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/librustc_unicode) -->
+<!--    Compiling collections v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/libcollections) -->
+<!--     Finished release [optimized] target(s) in 5.67 secs -->
+<!--     Finished release [optimized] target(s) in 0.0 secs -->
+<!--    Compiling rand v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/librand) -->
+<!--     Finished release [optimized] target(s) in 1.78 secs -->
+<!--     Finished release [optimized] target(s) in 0.0 secs -->
+<!--    Compiling app v0.1.0 (file://$PWD) -->
+<!-- OK -->
+<!-- ``` -->
+<!-- ## OpenOCD -->
+<!-- [openocd]: tools.html#OpenOCD -->
+<!-- [OpenOCD] is a tool that lets your computer communicate with devices that -->
+<!-- support the JTAG/SWD communication protocol. We'll use OpenOCD to *flash* -->
+<!-- (write) our programs into the microcontroller and to debug them (with the help -->
+<!-- of `gdb`). -->
+<!-- [OpenOCD]: http://openocd.org/ -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Linux -->
+<!-- ## Shortcut: Just use this docker image -->
+<!-- It's based on Ubuntu 16.04 and comes with all the required dependencies: -->
+<!-- ``` -->
+<!-- $ docker run --privileged -it japaric/copper:2016-05-10 -->
+<!-- # Or use a newer tag. See https://hub.docker.com/r/japaric/copper/tags -->
+<!-- ``` -->
+<!-- Alternatively, instead of using this docker image, you can ... -->
+<!-- ## Install the tools on your system -->
+<!-- On most Linux distributions, most of the required tools can be installed via the -->
+<!-- package manager. The actual command that you need to call will depend on your -->
+<!-- Linux distribution. But, here's the one for Ubuntu: -->
+<!-- ``` -->
+<!-- $ sudo apt-get install gcc-arm-none-eabi gdb-arm-none-eabi openocd qemu-system-arm -->
+<!-- ``` -->
+<!-- To install Rust and Cargo, I recommend using [rustup]: -->
+<!-- [rustup]: https://www.rustup.rs/ -->
+<!-- ``` -->
+<!-- $ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly -->
+<!-- ``` -->
+<!-- Or if you already have rustup installed, switch to the nightly channel with: -->
+<!-- ``` -->
+<!-- $ rustup default nightly -->
+<!-- ``` -->
+<!-- To install Xargo simply use: -->
+<!-- ``` -->
+<!-- $ cargo install xargo -->
+<!-- ``` -->
+<!-- Note that Xargo 0.2.0+ depends on the `rust-src` component, so install that as -->
+<!-- well: -->
+<!-- ``` -->
+<!-- $ rustup component add rust-src -->
+<!-- ``` -->
+<!-- ## First OpenOCD connection -->
+<!-- [first connection]: linux.html#First%20connection -->
+<!-- > **TODO** document STM32VLDISCOVERY quirk -->
+<!-- Even if using the Docker image, it's a good idea to test that OpenOCD works by -->
+<!-- establishing a connection between your host system (PC, laptop, etc.) and your -->
+<!-- dev board. First, you'll have to physically connect your dev board and your host -->
+<!-- system via an USB cable. Then, you'll have to use a command that looks like -->
+<!-- this: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f board/$BOARD -->
+<!-- ``` -->
+<!-- if you are using a dev board that has a built-in debugger. Or one like this: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f interface/$INTERFACE -f target/$TARGET -->
+<!-- ``` -->
+<!-- if you are using an external programmer/debugger. Then, you should get an output -->
+<!-- like this: -->
+<!-- ``` -->
+<!-- Open On-Chip Debugger 0.9.0 (2015-09-02-10:42) -->
+<!-- Licensed under GNU GPL v2 -->
+<!-- For bug reports, read -->
+<!-- http://openocd.org/doc/doxygen/bugs.html -->
+<!-- Info : The selected transport took over low-level target control. The results might differ -->
+<!-- compared to plain JTAG/SWD -->
+<!-- adapter speed: 1000 kHz -->
+<!-- adapter_nsrst_delay: 100 -->
+<!-- none separate -->
+<!-- srst_only separate srst_nogate srst_open_drain connect_deassert_srst -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : clock speed 950 kHz -->
+<!-- Info : STLINK v1 JTAG v11 API v2 SWIM v0 VID 0x0483 PID 0x3744 -->
+<!-- Info : using stlink api v2 -->
+<!-- Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- ``` -->
+<!-- > **TODO** add troubleshooting instructions for when the `openocd` command -->
+<!-- > fails. -->
+<!-- The program will block with that output, but it's okay to exit it with `Ctrl-C` -->
+<!-- at this time. -->
+<!-- As for the actual values of `$BOARD`/`$INTERFACE`/`$TARGET` that you must use, -->
+<!-- the possible values are in `/usr/share/openocd/scripts` (might be a different -->
+<!-- directory in your Linux distribution): -->
+<!-- ``` -->
+<!-- $ tree /usr/share/openocd/scripts -->
+<!-- /usr/share/openocd/scripts -->
+<!-- ├── (...) -->
+<!-- ├── board -->
+<!-- │   ├── actux3.cfg -->
+<!-- │   ├── adapteva_parallella1.cfg -->
+<!-- │   └── (...) -->
+<!-- ├── interface -->
+<!-- │   ├── altera-usb-blaster2.cfg -->
+<!-- │   ├── altera-usb-blaster.cfg -->
+<!-- │   └── (...) -->
+<!-- ├── target -->
+<!-- │   ├── aduc702x.cfg -->
+<!-- │   ├── aducm360.cfg -->
+<!-- │   └── (...) -->
+<!-- └── (...) -->
+<!-- ``` -->
+<!-- Try something that resembles the name of your hardware. For example, for the -->
+<!-- STM32VLDISCOVERY I use: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f board/stm32vldiscovery.cfg -->
+<!-- ``` -->
+<!-- And for the STM32F3DISCOVERY, I use: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f interface/stlink-v2-1.cfg -f target/stm32f3x.cfg -->
+<!-- ``` -->
+<!-- ### (Optional) OpenOCD without `sudo` -->
+<!-- > **NOTE** For those using the Docker image. You have to run these commands on -->
+<!-- > the host system, *not* from within the container. -->
+<!-- The reason we have to use `sudo` in the `openocd` invocations is that we don't -->
+<!-- have sufficient permissions to use the USB device. This can be fixed using -->
+<!-- `udev` rules. -->
+<!-- First let's identify the USB device OpenOCD is using from the output of `sudo -->
+<!-- openocd`: -->
+<!-- ``` -->
+<!-- $ sudo openocd -->
+<!-- ``` -->
+<!-- ``` -->
+<!-- $ lsusb -->
+<!-- (...) -->
+<!-- Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!-- (...) -->
+<!-- ``` -->
+<!-- Device number 116 on the bus 3, let's check its permissions: -->
+<!-- ``` -->
+<!-- $ ls -l /dev/bus/usb/003/116 -->
+<!-- crw-rw-r-- 1 root root 189, 371 May  9 15:39 /dev/bus/usb/003/116 -->
+<!-- ``` -->
+<!-- Only `root` can read/write from/to it. We'll write an udev rule to change the -->
+<!-- permissions of this particular USB device. udev rules are stored in -->
+<!-- `/etc/udev/rules.d` as files, let's add a new one: -->
+<!-- ``` -->
+<!-- $ cat /etc/udev/rules.d/99-openocd.rules -->
+<!-- # STLINKv1 -->
+<!-- ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3744", GROUP="users" -->
+<!-- ``` -->
+<!-- This udev rule changes the group of the USB device to `users`. -->
+<!-- > **NOTE** You *can* use a group different than `users`. **But**, if you are -->
+<!-- > using a Docker container, it's very likely that the id of a different group -->
+<!-- > won't match between the host system and the container -- in that case you -->
+<!-- > still won't have enough permissions to use the USB device!. -->
+<!-- > **NOTE** For more details about the udev rules see [man 7 udev] -->
+<!-- [man 7 udev]: http://linux.die.net/man/7/udev -->
+<!-- You'll have to change 0483 and 3744 for the vendor and product id of **your** -->
+<!-- device respectively. You can get those values from `lsusb`: -->
+<!-- ``` -->
+<!-- $ lsusb | grep STLINK -->
+<!-- Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!--                        ^^^^ ^^^^ -->
+<!-- ``` -->
+<!-- This new rule won't come into effect until you reload all the rules with: -->
+<!-- ``` -->
+<!-- $ sudo udevadm control --reload-rules -->
+<!-- ``` -->
+<!-- Now, unplug and re-plug the device and you should see the updated permissions: -->
+<!-- ``` -->
+<!-- $ lsusb | grep STLINK -->
+<!-- Bus 003 Device 118: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!-- $ ls -l /dev/bus/usb/003/118 -->
+<!-- crw-rw-r-- 1 root users 189, 373 May  9 16:00 /dev/bus/usb/003/118 -->
+<!-- ``` -->
+<!-- You should now be able to use your `openocd` command without `sudo` **if** your -->
+<!-- user was already part of the `users` group. If your user wasn't in that group, -->
+<!-- you can add yourself to this group with this command: -->
+<!-- ``` -->
+<!-- $ sudo usermod -a -G users $(whoami) -->
+<!-- ``` -->
+<!-- You'll have to re-log for this last command to take effect. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # macOS -->
+<!-- You can install most of the required tools using `brew`: -->
+<!-- ``` -->
+<!-- # NOTE if you get "Error: Unknown command: cask", then run this command: `brew tap Caskroom/cask` -->
+<!-- # and try again -->
+<!-- $ brew cask install gcc-arm-embedded -->
+<!-- $ brew install openocd qemu -->
+<!-- ``` -->
+<!-- To install Rust and Cargo, I recommend using [rustup]: -->
+<!-- [rustup]: https://www.rustup.rs/ -->
+<!-- ``` -->
+<!-- $ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly -->
+<!-- ``` -->
+<!-- Or if you already have rustup installed, switch to the nightly channel with: -->
+<!-- ``` -->
+<!-- $ rustup default nightly -->
+<!-- ``` -->
+<!-- To install Xargo simply use: -->
+<!-- ``` -->
+<!-- $ cargo install xargo -->
+<!-- ``` -->
+<!-- Note that Xargo 0.2.0+ depends on the `rust-src` component so install that as -->
+<!-- well: -->
+<!-- ``` -->
+<!-- $ rustup component add rust-src -->
+<!-- ``` -->
+<!-- ## Testing OpenOCD -->
+<!-- Follow [these instructions] to test connecting to your programmer/debugger using -->
+<!-- OpenOCD. -->
+<!-- [these instructions]: linux.html#First%20OpenOCD%20connection -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Windows -->
+<!-- There's no default package manager in Windows so you'll have to scavenge the -->
+<!-- tools from different locations: -->
+<!-- ## Cross toolchain and Co. -->
+<!-- The C cross compiler, the binary inspection tools and the debugger can all be -->
+<!-- installed from a [single place]. Simply grab the latest `.exe` installer, run it -->
+<!-- and follow the instructions. Before finishing the installation process, make -->
+<!-- sure to check the "Add path to environment variable" option. -->
+<!-- [single place]: https://launchpad.net/gcc-arm-embedded/+download -->
+<!-- Check that the tools are really in your `PATH` -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-gcc -v -->
+<!-- (..) -->
+<!-- gcc version 5.4.1 20160609 (..) -->
+<!-- $ arm-none-eabi-size -v -->
+<!-- GNU size <GNU Tools for ARM Embedded Processors> 2.26.0.20160616 -->
+<!-- (..) -->
+<!-- $ arm-none-eabi-gdb -v -->
+<!-- GNU gdb <GNU Tools for ARM Embedded Processors> 7.10.1.20160616-cvs -->
+<!-- (..) -->
+<!-- ``` -->
+<!-- ## OpenOCD -->
+<!-- There are no official binary releases of OpenOCD for Windows, but [this page] -->
+<!-- has unofficial releases. There is not installer so grab the latest zipfile and -->
+<!-- unpack somewhere in your main drive. Then update your `PATH` variable by -->
+<!-- appending `;Z:\directory\where\you\extracted\the\zipfile\bin` to it. This should -->
+<!-- make the `openocd` command available anywhere: -->
+<!-- [this page]: http://gnutoolchains.com/arm-eabi/openocd/ -->
+<!-- ``` -->
+<!-- $ echo %path% -->
+<!-- (..);C:\OpenOCD-0.9.0-Win32\bin -->
+<!-- $ openocd -v -->
+<!-- Open On-Chip Debugger 0.9.0 <2015-08-15-12:41> -->
+<!-- (..) -->
+<!-- ``` -->
+<!-- After installing OpenOCD, be sure to test it using [these instructions]. The -->
+<!-- instructions are for Linux but they pretty much hold for Windows: just ignore -->
+<!-- the `sudo` part of the commands used there. -->
+<!-- [these instructions]: linux.html#First%20OpenOCD%20connection -->
+<!-- There are some caveats with using OpenOCD on Windows: -->
+<!-- - OpenOCD script search path will be empty. Commands like `openocd -f -->
+<!--   board/stm32vldiscovery.cfg` will fail to find the `.cfg` file. This can be -->
+<!--   remedied by passing an extra argument to the command: `openocd -s -->
+<!--   Z:\path\to\openocd\share\openocd\scripts -f board/stm32vldiscovery.cfg`. -->
+<!-- > **TODO** There must be a better solution to the script search path problem -->
+<!-- - Some (hardware) programmers/debuggers (like the ST-LINK/V1) will try to use -->
+<!--   the "wrong" driver by default and the `openocd` command will always fail with -->
+<!--   `LIBUSB_ERROR_NOT_SUPPORTED`. You'll have to switch their driver to the WinUSB -->
+<!--   driver using Zadig (see the following section for more information). -->
+<!-- ## (Optional) Zadig -->
+<!-- If you are getting the `LIBUSB_ERROR_NOT_SUPPORTED` error when trying to connect -->
+<!-- to your programmer/debugger using OpenOCD, use Zadig to override the USB driver -->
+<!-- that Windows picked: -->
+<!-- - First, install Zadig from [its website]. -->
+<!-- - Make sure your device is connected to the host machine! -->
+<!-- - Then launch Zadig and choose the menu item: Options > List all devices. -->
+<!-- - The drop-down list should now be populated; from it, pick your device (e.g. -->
+<!--   STM32 STlink). -->
+<!-- - Pick WinUSB as the target driver, click the "Replace Driver" button and follow -->
+<!--   the instructions that pop up. -->
+<!-- [its website]: http://zadig.akeo.ie/ -->
+<!-- Try the `openocd` command again; it should succeed this time. -->
+<!-- ## QEMU -->
+<!-- You can find unofficial binaries [here]. Install a recent version and add -->
+<!-- `;Z:\Program Files\qemu` to your `PATH`. -->
+<!-- [here]: https://qemu.weilnetz.de/ -->
+<!-- Test it with: -->
+<!-- ``` -->
+<!-- $ qemu-system-arm -version -->
+<!-- ``` -->
+<!-- The command won't print to the console but instead redirect its output to the -->
+<!-- file `Z:\Program Files\qemu\stdout`. It should contain something like this: -->
+<!-- ``` -->
+<!-- $ type Z:\Program Files\qemu\stdout.txt -->
+<!-- ``` -->
+<!-- ## Rust and Cargo -->
+<!-- Head to the [rustup] website and follow the instructions. -->
+<!-- [rustup]: https://www.rustup.rs/ -->
+<!-- ## Xargo -->
+<!-- Simply call this command: -->
+<!-- ``` -->
+<!-- $ cargo install xargo -->
+<!-- ``` -->
+<!-- Note that Xargo 0.2.0+ depends on the `rust-src` component, so install that as -->
+<!-- well: -->
+<!-- ``` -->
+<!-- $ rustup component add rust-src -->
+<!-- ``` -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # First program -->
+<!-- In this chapter we'll write our first program! Although the program is going to be relatively -->
+<!-- uninteresting -- it just allocates some variables on the stack. It will help us: -->
+<!-- - Verify that the development environment is correctly set up. -->
+<!-- - Get familiar with the several tools that make up the development environment. -->
+<!-- - Learn about the device-specific pieces required for cross compilation. -->
+<!-- We'll first cross compile this program for the [LM3S6965][0] microcontroller and then run it under -->
+<!-- QEMU. After we verify that it works correctly, we'll run the program on real hardware. -->
+<!-- [0]: http://www.ti.com/product/LM3S6965 -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Build & inspect -->
+<!-- Let's start by creating a new Cargo project: -->
+<!-- ``` -->
+<!-- $ cargo new --bin app && cd $_ -->
+<!-- ``` -->
+<!-- And then add these files to the project: -->
+<!-- - [layout.ld](./first/layout.ld) - a "linker script" -->
+<!-- - [.cargo/config](./first/config) - a project local Cargo configuration -->
+<!--   file -->
+<!-- - [src/main.rs](./first/main.rs) -->
+<!-- I'll explain what the linker script and the Cargo configuration file are for in -->
+<!-- a later section. It's not important to know what it does *right now*. -->
+<!-- Your project directory should look like this: -->
+<!-- ``` -->
+<!-- $ tree . -->
+<!-- . -->
+<!-- ├── .cargo -->
+<!-- │   └── config -->
+<!-- ├── Cargo.toml -->
+<!-- ├── layout.ld -->
+<!-- └── src -->
+<!--     └── main.rs -->
+<!-- ``` -->
+<!-- For convenience, `src/main.rs` is replicated here: -->
+<!-- ``` rust -->
+<!-- #![feature(lang_items)] -->
+<!-- // We won't use the usual `main` function. We are going to use a different -->
+<!-- // "entry point". -->
+<!-- #![no_main] -->
+<!-- // We won't use the standard library because it requires OS abstractions like -->
+<!-- // threads and files and those are not available on this platform. -->
+<!-- #![no_std] -->
+<!-- // Conceptually, this is our program "entry point". It's the first thing the -->
+<!-- // microcontroller will execute when it (re)boots. This entry point must be a -->
+<!-- // `pub`lic function named `_reset` to be recognized as such because that's what -->
+<!-- // our linker script (`layout.ld`) states. Later, we'll say more about these -->
+<!-- // requirements. -->
+<!-- // -->
+<!-- // Also, returning from this function is undefined because there is nothing to -->
+<!-- // return to! To statically forbid returning from this function, we mark it as -->
+<!-- // "divergent", hence the `fn() -> !` signature. -->
+<!-- #[export_name = "_reset"] -->
+<!-- pub extern "C" fn main() -> ! { -->
+<!--     // Our first program initializes some variables on the stack and does -->
+<!--     // nothing more. Yay! -->
+<!--     let y; -->
+<!--     let x = 42; -->
+<!--     y = x; -->
+<!--     // We can't return from this function so we just spin endlessly here. -->
+<!--     loop {} -->
+<!-- } -->
+<!-- // Finally, we need to define the panic_fmt "lang item", which is just a -->
+<!-- // function. This specifies what the program should do when a `panic!` occurs. -->
+<!-- // Our program won't panic, so we can leave the function body empty for now. -->
+<!-- mod lang_items { -->
+<!--     #[lang = "panic_fmt"] -->
+<!--     extern "C" fn panic_fmt() {} -->
+<!-- } -->
+<!-- ``` -->
+<!-- If you have written a native Rust program before, this shouldn't look that -->
+<!-- different except that `main` has a different signature. -->
+<!-- Now you can build the Cargo project: -->
+<!-- ``` -->
+<!-- $ xargo build --target thumbv7m-none-eabi -->
+<!--    Compiling core v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/libcore) -->
+<!--    Compiling alloc v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/liballoc) -->
+<!--     Finished release [optimized] target(s) in 19.56 secs -->
+<!--    Compiling rustc_unicode v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/librustc_unicode) -->
+<!--    Compiling collections v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/libcollections) -->
+<!--     Finished release [optimized] target(s) in 5.67 secs -->
+<!--     Finished release [optimized] target(s) in 0.0 secs -->
+<!--    Compiling rand v0.0.0 (file://$sysroot/lib/rustlib/src/rust/src/librand) -->
+<!--     Finished release [optimized] target(s) in 1.78 secs -->
+<!--     Finished release [optimized] target(s) in 0.0 secs -->
+<!--    Compiling app v0.1.0 (file://$PWD) -->
+<!-- ``` -->
+<!-- > **NOTE** Do **not** build the project in release mode! -->
+<!-- > **NOTE** You may not see Xargo compile `core` and the other "standard" crates -->
+<!-- > if the sysroot was already compiled. -->
+<!-- ## Trust, but verify -->
+<!-- The project appeared to build fine, but it's always a good idea to inspect the -->
+<!-- executable. We are going to look at three things: -->
+<!-- ### Memory layout -->
+<!-- First, you have to appreciate the fact that, during its execution, everything in -->
+<!-- a program resides in (physical) memory and has an associated memory address. -->
+<!-- Now, everything that's *statically allocated*, like functions and static -->
+<!-- variables, gets assigned an address at compile time. Whereas, everything else, -->
+<!-- like local/stack variables and "heap" allocated variables, gets assigned an -->
+<!-- address at runtime. -->
+<!-- We can observe the addresses of statically allocated stuff using `objdump`. -->
+<!-- Let's check our executable: -->
+<!-- ``` -->
+<!-- # with -->
+<!-- $ arm-none-eabi-objdump --demangle --disassemble target/thumbv7m-none-eabi/debug/app -->
+<!-- # or its shorter form -->
+<!-- $ arm-none-eabi-objdump -Cd target/thumbv7m-none-eabi/debug/app -->
+<!-- target/thumbv7m-none-eabi/debug/app:     file format elf32-littlearm -->
+<!-- Disassembly of section .text: -->
+<!-- 00000000 <_reset-0x8>: -->
+<!--    0:   20010000        .word   0x20010000 -->
+<!--    4:   00000009        .word   0x00000009 -->
+<!-- 00000008 <_reset>: -->
+<!--    8:   b083            sub     sp, #12 -->
+<!--    a:   e7ff            b.n     c <_reset+0x4> -->
+<!--    c:   202a            movs    r0, #42 ; 0x2a -->
+<!--    e:   9002            str     r0, [sp, #8] -->
+<!--   10:   9001            str     r0, [sp, #4] -->
+<!--   12:   e7ff            b.n     14 <_reset+0xc> -->
+<!--   14:   e7fe            b.n     14 <_reset+0xc> -->
+<!-- ``` -->
+<!-- > **NOTE** If you get an output that significantly different from what's shown -->
+<!-- > above. For example, if the `<_reset>` part is missing, then likely your linker -->
+<!-- > has some sort of bug. We have had quite a few reports about that. The solution -->
+<!-- > is to try a different linker. -->
+<!-- Let me highlight the important bits of the output: -->
+<!-- ``` -->
+<!-- 00000000 -->
+<!--    0:	20010000 -->
+<!-- 00000004 -->
+<!--    4:	00000009 -->
+<!-- 00000008 <_reset>: -->
+<!--    8:                   sub     sp, #12 -->
+<!--    a:                   b.n     c <_reset+0x4> -->
+<!--    c:                   movs    r0, #42 ; 0x2a -->
+<!--    e:                   str     r0, [sp, #8] -->
+<!--   10:                   str     r0, [sp, #4] -->
+<!--   12:                   b.n     14 <_reset+0xc> -->
+<!--   14:                   b.n     14 <_reset+0xc> -->
+<!-- ``` -->
+<!-- Now let's read the output section by section: -->
+<!-- ``` -->
+<!-- 00000000 -->
+<!--    0:	20010000 -->
+<!-- ``` -->
+<!-- "The memory at address `0x0` holds the (`u32`) value `0x2001_0000`". When the -->
+<!-- program starts its execution, that part of the memory will be already -->
+<!-- initialized to that value. -->
+<!-- ``` -->
+<!-- 00000004 -->
+<!--    4:	00000009 -->
+<!-- ``` -->
+<!-- Likewise, "the memory at `0x4` holds the  (`u32`) value `0x9`". -->
+<!-- ``` -->
+<!-- 00000008 <start>: -->
+<!--    8:              sub	sp, #8 -->
+<!--    a:              movs	r0, #42	; 0x2a -->
+<!--    c:              str	r0, [sp, #4] -->
+<!--    e:              str	r0, [sp, #0] -->
+<!--   10:              b.n	12 <start+0xa> -->
+<!--   12:              b.n	12 <start+0xa> -->
+<!-- ``` -->
+<!-- Finally, "the `start` function resides at address `0x8`". The lines, like -->
+<!-- `sub sp, #8`, below `<start>` are the instructions that make up the function. -->
+<!-- When the processor executes this function, it will execute each one of these -->
+<!-- instructions. -->
+<!-- But, why are these addresses/values important? During boot, the microcontroller -->
+<!-- reads the memory section at `0x0..0x8` and uses those  values to complete the -->
+<!-- boot process. In other words, the values in that memory section have an special -->
+<!-- meaning to the boot process. In a [later section], we'll explain what those -->
+<!-- values mean and how they are used in the boot process. For now, it's okay to -->
+<!-- just confirm that the memory at `0x0..0x8` is initialized. -->
+<!-- [later section]: details/boot.html -->
+<!-- ### Program size -->
+<!-- Microcontrollers are memory constrained devices. It's important to keep an eye -->
+<!-- on the size of our programs to make sure they don't exceed the memory capacity -->
+<!-- of our device. We'll use the `size` command to do that: -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-size target/thumbv7m-none-eabi/debug/app -->
+<!--    text    data     bss     dec     hex filename -->
+<!--      22       0       0      22      16 target/thumbv7m-none-eabi/debug/app -->
+<!-- ``` -->
+<!-- The output mentions three different memory *sections*: -->
+<!-- - The `text` section contains the "program code", i.e. all the instructions that -->
+<!--   the processor will execute when the program is executed. Functions go in this -->
+<!--   section. This section also stores   constants like strings. `static CONSTANT: -->
+<!--   &'static str = "Hello, world!"`is an example of a constant. -->
+<!-- - `data` holds static variables that have an initial value, for example `static -->
+<!--   mut X: i32 = 42`. -->
+<!-- - On the contrary, `bss` holds "uninitialized" static variables. Because of C -->
+<!--   heritage, here "uninitialized" actually means *zeroed*. For example, `static -->
+<!--   mut ZEROS: [u8; 4] = [0; 4]` would go in this section. -->
+<!-- `dec` is just the sum of these three sections and `hex` is the hexadecimal -->
+<!-- representation of `dec`. -->
+<!-- Our program size is just 22 bytes big! Microcontrollers usually have memory -->
+<!-- capacities in the order of a few KiB up to hundreds of KiB. In particular, the -->
+<!-- LM3S6965 microcontroller, which we are going to emulate, has 256KiB of (Flash) -->
+<!-- memory. So, no problem here; this program will fit in the device memory. -->
+<!-- > **NOTE** KiB = [Kibibyte] = 1024 bytes -->
+<!-- [Kibibyte]: https://en.wikipedia.org/wiki/Kibibyte -->
+<!-- ### Entry point -->
+<!-- To work properly, tools like `gdb` and `qemu` need to be informed about the -->
+<!-- program entry point, which is where the program starts its execution. -->
+<!-- We can check our program entry point using the `readelf` command: -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-readelf -h target/thumbv7m-none-eabi/debug/app -->
+<!-- ELF Header: -->
+<!--   Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 -->
+<!--   Class:                             ELF32 -->
+<!--   Data:                              2's complement, little endian -->
+<!--   Version:                           1 (current) -->
+<!--   OS/ABI:                            UNIX - System V -->
+<!--   ABI Version:                       0 -->
+<!--   Type:                              EXEC (Executable file) -->
+<!--   Machine:                           ARM -->
+<!--   Version:                           0x1 -->
+<!--   Entry point address:               0x9 <-- -->
+<!--   Start of program headers:          52 (bytes into file) -->
+<!--   Start of section headers:          67236 (bytes into file) -->
+<!--   Flags:                             0x5000200, Version5 EABI, soft-float ABI -->
+<!--   Size of this header:               52 (bytes) -->
+<!--   Size of program headers:           32 (bytes) -->
+<!--   Number of program headers:         2 -->
+<!--   Size of section headers:           40 (bytes) -->
+<!--   Number of section headers:         15 -->
+<!--   Section header string table index: 12 -->
+<!-- ``` -->
+<!-- There you can see that `0x9` is the entry point address. From the previous -->
+<!-- `objdump` output, you know that `0x8` is the address of the `main` function -->
+<!-- which we want to be the entry point. At first, this looks wrong because the -->
+<!-- address is off by 1, but this is actually correct. -->
+<!-- Cortex M microcontrollers always operate in "thumb" mode (i.e. they use "thumb" -->
+<!-- instructions). To indicate this thumb state all function address have their -->
+<!-- first bit (position 0) set to 1. Because `0x8 | 0b1` is `0x9`, `0x9` is the -->
+<!-- address of `main` when called in thumb mode. -->
+<!-- This means that `main` have been correctly declared as the entry point. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Run the program under QEMU -->
+<!-- Now that we have an executable in our hands, it's time to test it under an -->
+<!-- emulator! You may be wondering "how are we going to do that?" since the program -->
+<!-- doesn't do any I/O. Well, instead of expecting the program to output something -->
+<!-- to the terminal (which won't happen), we are going to "hook" a debugger to the -->
+<!-- emulator, execute the program "statement by statement" and verify that the -->
+<!-- emulated memory changes as the program executes. Sounds fun? You bet it is. -->
+<!-- Let's start! The first thing we have to do is load our binary in the emulator -->
+<!-- with this command: -->
+<!-- ``` -->
+<!-- $ qemu-system-arm \ -->
+<!--     -cpu cortex-m3 \ -->
+<!--     -machine lm3s6965evb \ -->
+<!--     -gdb tcp::3333 \ -->
+<!--     -S \ -->
+<!--     -nographic -monitor null \ -->
+<!--     -serial null \ -->
+<!--     -kernel target/thumbv7m-none-eabi/debug/app -->
+<!-- ``` -->
+<!-- So many arguments! Let's explain why all those are there for: -->
+<!-- - `qemu-system-arm` this is a QEMU variant that can emulate an ARM processor in -->
+<!--   system mode emulation. -->
+<!-- - `-machine lm3s6965evb` this is the dev board we are going to emulate: the -->
+<!--   [LM3S6965EVB]. -->
+<!-- - `-cpu cortex-m3` this is the CPU to emulate, it must match the CPU of the -->
+<!--   emulated `machine`. -->
+<!-- - `-gdb tcp::3333` tells the emulator to expect a gdb connection on port `3333`, -->
+<!--   we need this to control the execution of the emulated program under gdb. -->
+<!-- - `-S` "do not immediately start the CPU". This tells the emulator to load the -->
+<!--   program but don't immediately execute it, otherwise by the time you attach -->
+<!--   `gdb` your program may have already terminated! -->
+<!-- - `-nographic`, `-monitor null` we don't need anything graphic related -->
+<!-- - `-serial null` we are not going to use the serial console this time -->
+<!-- - `-kernel target/thumbv7m-none-eabi/debug/app` use our binary directly as the -->
+<!--   "kernel" which is the first thing the emulator executes. -->
+<!-- [LM3S6965EVB]: http://www.ti.com/lit/ug/spmu029a/spmu029a.pdf -->
+<!-- This command will block; just leave it running for now. -->
+<!-- Next we hook a debugger to the emulator we just started. In another terminal, -->
+<!-- type: -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-gdb -q target/thumbv7m-none-eabi/debug/app -->
+<!-- ``` -->
+<!-- > **NOTE** You can use `lldb` instead of `gdb` but you won't be able to use the -->
+<!-- > same commands I have used here, because `lldb` uses different commands to -->
+<!-- > expose the same functionality as `gdb`. [This page] will help you map `gdb` -->
+<!-- > commands to `lldb`'s and vice versa. -->
+<!-- [This page]: http://lldb.llvm.org/lldb-gdb.html -->
+<!-- Under this `gdb` session, enter the following command to connect to the -->
+<!-- emulator: -->
+<!-- ``` -->
+<!-- (gdb) target remote :3333 -->
+<!-- ``` -->
+<!-- You should see an output like this: -->
+<!-- ``` -->
+<!-- Remote debugging using :3333 -->
+<!-- app::main () at $PWD/src/main.rs:6 -->
+<!-- 6       pub extern "C" fn main() -> ! { -->
+<!-- ``` -->
+<!-- The emulator is *halted* and currently at the program entry point: `main`. You -->
+<!-- can now execute the program statement by statement using the `step` command: -->
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 8           let x = 42 -->
+<!-- (gdb) step -->
+<!-- 9           y = x -->
+<!-- ``` -->
+<!-- At this point the statement `let x = 42` has been executed but the statement -->
+<!-- `y = x` has not, so `x` is initialized but `y` is not. Let's inspect both -->
+<!-- variables by `print`ing their addresses and values. -->
+<!-- ``` -->
+<!-- (gdb) print x -->
+<!-- $1 = 42 -->
+<!-- (gdb) print &x -->
+<!-- $2 = (i32 *) 0x2000fff8 -->
+<!-- (gdb) print y -->
+<!-- $3 = 0 -->
+<!-- (gdb) print &y -->
+<!-- $4 = (i32 *) 0x2000fffc -->
+<!-- ``` -->
+<!-- A few things to note: -->
+<!-- - Both `x` and `y` live in the "stack". That's why they have contiguous -->
+<!--   addresses. -->
+<!-- - `y`, which was declared before `x`, has a larger address than `x`. The reason -->
+<!--   is that the stack grows downwards (toward smaller addresses). If you keep -->
+<!--   creating stack variables, you'll see their addresses get smaller and smaller. -->
+<!-- - `y` which is currently uninitialized holds the value `0` -- this is a QEMU -->
+<!--   simplification. On real hardware you will observe that uninitialized variables -->
+<!--   hold random values. Of course, (safe) Rust won't actually let you *use* -->
+<!--   uninitialized variables but you can peek at them using `gdb`. -->
+<!-- Back to the debugger. If you step again, you should see that `y` is now -->
+<!-- initialized: -->
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 11          loop {} -->
+<!-- (gdb) print y -->
+<!-- $5 = 42 -->
+<!-- ``` -->
+<!-- The emulator is about to execute an endless loop. If you call `step` again, -->
+<!-- `gdb` will get stuck in the loop and hang. Instead, call `stepi` to advance *one -->
+<!-- instruction* rather than one statement. -->
+<!-- ``` -->
+<!-- (gdb) stepi -->
+<!-- 0x00000014      10          loop {} -->
+<!-- (gdb) stepi -->
+<!-- 0x00000014      10          loop {} -->
+<!-- ``` -->
+<!-- Congrats, you are now stuck in an endless loop! -->
+<!-- There is not much left to do in this emulation. But, before you terminate the -->
+<!-- `gdb` session and exit the emulator ... -->
+<!-- ## Homework -->
+<!-- `gdb` has an ["examine"] command that let's you inspect the contents of memory -->
+<!-- at a certain address. Try the following command: -->
+<!-- ["examine"]: http://www.delorie.com/gnu/docs/gdb/gdb_56.html -->
+<!-- ``` -->
+<!-- (gdb) x/4x main -->
+<!-- ``` -->
+<!-- Compare the output of that command with the output of the command: -->
+<!-- `arm-none-eabi-objdump -Cd target/thumbv7m-none-eabi/debug/app`. Are the outputs -->
+<!-- related somehow? Elaborate. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Nitty-gritty details -->
+<!-- > My program works! I have no idea why ... -->
+<!-- Great! We wrote a program that worked in the emulator. But I omitted some -->
+<!-- important details to simplify things, so we could focus our attention on the -->
+<!-- tooling. In particular, I didn't tell you that our Cargo project generates -->
+<!-- binaries that only work on the LM3S6965! It's time to take a step back and -->
+<!-- understand all the pieces involved. In particular: -->
+<!-- - What's the role of that extra file, `layout.ld`, that we added to the Cargo -->
+<!--   project? -->
+<!-- - Why we used `thumbv7m-none-eabi` as the cross compilation target? -->
+<!-- - Why we had to add a `.cargo/config` to our Cargo project? -->
+<!-- Once you understand that, you'll be able to write programs for **any** Cortex-M -->
+<!-- microcontroller. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Target specification -->
+<!-- In this section, we explain why we compiled our crate with `--target -->
+<!-- thumbv7m-none-eabi`. -->
+<!-- Building a Rust program for a Cortex-M microcontroller involves cross compiling. -->
+<!-- Cross compilation is the process of building a binary that will run on a -->
+<!-- **target** device/system that's different from the **host** device/system where -->
+<!-- the binary was produced. In our case, the target is the Cortex-M microcontroller -->
+<!-- and the host is your laptop or your PC. -->
+<!-- Out of the box, `rustc`, and therefore Cargo, can cross compile for a bunch of -->
+<!-- different targets using the `--target` flag. -->
+<!-- Here's the list of supported cross compilation targets as of November of 2016 -->
+<!-- (this list will continue growing over time): -->
+<!-- ``` -->
+<!-- $ rustc -V -->
+<!-- rustc 1.14.0-nightly (cae6ab1c4 2016-11-05) -->
+<!-- $ rustc --print target-list -->
+<!-- aarch64-linux-android           mips64el-unknown-linux-gnuabi64 -->
+<!-- aarch64-unknown-fuchsia         mipsel-unknown-linux-gnu -->
+<!-- aarch64-unknown-linux-gnu       mipsel-unknown-linux-musl -->
+<!-- arm-linux-androideabi           mipsel-unknown-linux-uclibc -->
+<!-- arm-unknown-linux-gnueabi       powerpc-unknown-linux-gnu -->
+<!-- arm-unknown-linux-gnueabihf     powerpc64-unknown-linux-gnu -->
+<!-- arm-unknown-linux-musleabi      powerpc64le-unknown-linux-gnu -->
+<!-- arm-unknown-linux-musleabihf    s390x-unknown-linux-gnu -->
+<!-- armv7-linux-androideabi         thumbv6m-none-eabi -->
+<!-- armv7-unknown-linux-gnueabihf   thumbv7em-none-eabi -->
+<!-- armv7-unknown-linux-musleabihf  thumbv7em-none-eabihf -->
+<!-- asmjs-unknown-emscripten        thumbv7m-none-eabi -->
+<!-- i586-pc-windows-msvc            wasm32-unknown-emscripten -->
+<!-- i586-unknown-linux-gnu          x86_64-apple-darwin -->
+<!-- i686-apple-darwin               x86_64-pc-windows-gnu -->
+<!-- i686-linux-android              x86_64-pc-windows-msvc -->
+<!-- i686-pc-windows-gnu             x86_64-rumprun-netbsd -->
+<!-- i686-pc-windows-msvc            x86_64-sun-solaris -->
+<!-- i686-unknown-dragonfly          x86_64-unknown-bitrig -->
+<!-- i686-unknown-freebsd            x86_64-unknown-dragonfly -->
+<!-- i686-unknown-haiku              x86_64-unknown-freebsd -->
+<!-- i686-unknown-linux-gnu          x86_64-unknown-fuchsia -->
+<!-- i686-unknown-linux-musl         x86_64-unknown-haiku -->
+<!-- le32-unknown-nacl               x86_64-unknown-linux-gnu -->
+<!-- mips-unknown-linux-gnu          x86_64-unknown-linux-musl -->
+<!-- mips-unknown-linux-musl         x86_64-unknown-netbsd -->
+<!-- mips-unknown-linux-uclibc       x86_64-unknown-openbsd -->
+<!-- mips64-unknown-linux-gnuabi64 -->
+<!-- ``` -->
+<!-- Luckily for us, since nightly-2016-10-05, `rustc` supports Cortex-M -->
+<!-- microcontrollers as cross compilation targets. Furthermore, there is not 1 but -->
+<!-- actually 4 different targets. Which one to pick depends on which microcontroller -->
+<!-- you are targeting: -->
+<!-- - `thumbv6m-none-eabi`. For Cortex-M0, Cortex-M0+ and Cortex-M1 micros. -->
+<!-- - `thumbv7m-none-eabi`. For the Cortex-M3 micro. -->
+<!-- - `thumbv7em-none-eabi`. For the Cortex-M4 and Cortex-M7 micros that *don't* -->
+<!--   have a FPU. -->
+<!-- - `thumbv7em-none-eabihf`. For the Cortex-M4 and Cortex-M7 micros that *have* a -->
+<!--   FPU. -->
+<!-- In the case of the LM3S6965, we want to use the `thumbv7m-none-eabi` target -->
+<!-- because that microcontroller has a Cortex-M3 processor in it. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Boot process -->
+<!-- In this section, we'll learn what the microcontroller does right after it's -->
+<!-- powered. -->
+<!-- ## Memory -->
+<!-- But before that, we have to talk a little about the different types of memory -->
+<!-- available in a microcontroller. Cortex-M microcontrollers have at least two -->
+<!-- different types of memory available to them: Flash memory and Random Access -->
+<!-- Memory (RAM). -->
+<!-- Flash memory is non-volatile and it's used to store the `text` section of our -->
+<!-- program, i.e. functions and constants. Because this memory is non-volatile, our -->
+<!-- program will persist in memory even after the microcontroller is powered off. -->
+<!-- RAM, on the other hand, is volatile and it's used to store the [call stack], the -->
+<!-- [heap] and static variables. Because RAM is volatile, its contents are lost when -->
+<!-- the microcontroller is powered off. Also, when the microcontroller have just -->
+<!-- been powered on, its RAM is filled with random values. -->
+<!-- [call stack]: https://en.wikipedia.org/wiki/Call_stack -->
+<!-- [heap]: https://en.wikipedia.org/wiki/Memory_management#HEAP -->
+<!-- These two different memories can be accessed by the processor through the same -->
+<!-- 32 bit address space. For instance, the LM3S6965 has the following memory -->
+<!-- specifications: -->
+<!-- - 256 KiB of flash memory. The flash memory region starts at address `0x0` and -->
+<!--   ends at address `0x40000`. -->
+<!-- - 64 KiB of RAM. The RAM region starts at address `0x2000_0000` and ends at address `0x2001_0000`. -->
+<!-- ### Vector table -->
+<!-- On Cortex-M microcontrollers, the beginning of the flash memory holds a data -->
+<!-- structure known as the "vector table". The values stored in the vector table are -->
+<!-- used in different hardware processes like the boot process. -->
+<!-- The vector table is, effectively, an array of pointers and each of its elements -->
+<!-- is used for a different purpose. The vector table is fully documented [here]. -->
+<!-- But, right now, we are only interested in its first two elements: -->
+<!-- [here]: http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0552a/BABIFJFG.html -->
+<!-- 1. At `0x0`: the initial value of the stack pointer. -->
+<!-- The stack pointer is a register used to track the top of the call stack. The -->
+<!-- initial value determines where in memory the call stack will be initialized. As -->
+<!-- per the [AAPCS][AAPCS] (ARM Architecture Procedure Call Standard), the call -->
+<!-- stack grows downwards (towards smaller addresses). That's why the initial value -->
+<!-- of the stack pointer is usually set to the largest valid address of the RAM -->
+<!-- region. -->
+<!-- [AAPCS]: http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042f/IHI0042F_aapcs.pdf#page=16&zoom=auto,52,151 -->
+<!-- 2. At `0x4`: the reset vector -->
+<!-- A "vector" is a pointer to a "handler" and a "handler" is just another name for -->
+<!-- a function. Therefore, the reset vector is a (function) pointer to the reset -->
+<!-- handler. The reset handler gets called, through the reset vector, whenever a -->
+<!-- reset occurs and during the boot process. -->
+<!-- ## Putting everything together -->
+<!-- Here's what happens during the boot process or whenever the microcontroller is -->
+<!-- reset: -->
+<!-- - `SP = *(0x0 as *const u32)`. The stack pointer, which is a (CPU) register, -->
+<!--   is initialized to the value stored at address `0x0`. -->
+<!-- - `mem::transmute::<_, fn()>(0x4)()`. The reset handler gets called through the -->
+<!--   reset vector. -->
+<!-- ## The takeaway -->
+<!-- What you should remember from all this is that the programs you write for -->
+<!-- Cortex-M microcontrollers must comply with a **specific memory layout**. In -->
+<!-- particular, the memory section at address `0x0`, the vector table, must be -->
+<!-- properly initialized or your microcontroller won't boot! In the next section, -->
+<!-- we'll go over the boot process again using the LM3S6965 as an example. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Linker script -->
+<!-- As we saw in the previous section, our program must comply with a specific -->
+<!-- memory layout for the microcontroller to work properly (otherwise it won't -->
+<!-- boot!). -->
+<!-- The linker is what ultimately determines the memory layout of our program. To -->
+<!-- some extent, we can control the linker, and therefore the memory layout of our -->
+<!-- program, using a file called linker script. -->
+<!-- For our first program, I gave you the linker script `layout.ld`. In this -->
+<!-- section, I'll explain its contents. -->
+<!-- ## Terminology -->
+<!-- First, let's define some terms you'll often hear when dealing with linker -->
+<!-- scripts. -->
+<!-- ### Linking -->
+<!-- The process of producing a binary from a Rust source code involves two steps (or -->
+<!-- several more if you peek inside `rustc`'s pipeline): compiling and linking. -->
+<!-- Compiling is the action of producing an intermediate file known as "object file" -->
+<!-- from the source code. In Rust, the minimal compilation unit is the crate which -->
+<!-- can be a single `.rs` or a collection of them. Each crate gets compiled to an -->
+<!-- object file (actually, dependencies get compiled to `.rlib`s which are a object -->
+<!-- files plus some "metadata"). To produce the final binary/executable, the -->
+<!-- compiled crates get "merged" together; this process is known as linking. -->
+<!-- ### Symbol -->
+<!-- A symbol is either a function or a static variable. Each symbol has a name, a -->
+<!-- start address and occupies some space memory. For example, our program entry -->
+<!-- point is a symbol with name `_reset` and address `0x8` and occupies 14 bytes (7 -->
+<!-- 16-bit instructions) in memory. -->
+<!-- ### Section -->
+<!-- A section is a collection of symbols stored in contiguous memory. Other way to -->
+<!-- think about this is that symbols are *organized* in sections. -->
+<!-- ### Region -->
+<!-- A (memory) region is a span of memory that's described using a start address and -->
+<!-- a length (in bytes). For example, the LM3S6965 has two memory regions: Its flash -->
+<!-- memory region which starts at address `0x0` and has a size of 256 KiB, and its -->
+<!-- RAM region which starts at address `0x2000_0000` and has a size of 64 KiB. -->
+<!-- ### Object files -->
+<!-- The linker takes as input one or more object files and outputs a single object -->
+<!-- file. In this book, we'll be exclusively working with object files in the ELF -->
+<!-- format. ELF also happens to be the format Linux executables use, but there exist -->
+<!-- other formats like Mach-O (macOS) and COFF (Windows). -->
+<!-- ## `layout.ld` -->
+<!-- Instead of explaining the linker script syntax (which is documented -->
+<!-- [elsewhere]), I'm going to focus on explaining the contents of the `layout.ld` -->
+<!-- file and how this file relates to the boot process we covered in the previous -->
+<!-- section. -->
+<!-- [elsewhere]: https://sourceware.org/binutils/docs/ld/Scripts.html -->
+<!-- For convenience, here's the full linker script. -->
+<!-- ``` -->
+<!-- ENTRY(_reset); -->
+<!-- MEMORY -->
+<!-- { -->
+<!--   FLASH : ORIGIN = 0x00000000, LENGTH = 256K -->
+<!--   RAM   : ORIGIN = 0x20000000, LENGTH = 64K -->
+<!-- } -->
+<!-- SECTIONS -->
+<!-- { -->
+<!--   .text : -->
+<!--   { -->
+<!--     /* Vector table */ -->
+<!--     LONG(ORIGIN(RAM) + LENGTH(RAM)) -->
+<!--     LONG(_reset + 1); -->
+<!--     /* Reset handler */ -->
+<!--     _reset = .; -->
+<!--     *(.text._reset) -->
+<!--     *(.text*) -->
+<!--   } > FLASH -->
+<!--   /DISCARD/ : -->
+<!--   { -->
+<!--     *(.ARM.exidx*) -->
+<!--     *(.note.gnu.build-id*) -->
+<!--   } -->
+<!-- } -->
+<!-- ``` -->
+<!-- Let's go over it block by block -->
+<!-- ### ENTRY -->
+<!-- `ENTRY(_reset)`. This indicates that the `_reset` symbol is our program entry -->
+<!-- point. Getting the entry point right is important because the linker will remove -->
+<!-- any symbol that is not referenced by the entry point because it's "dead code". -->
+<!-- If you get it wrong, then the compiler may remove all the symbols and produce an -->
+<!-- empty executable. -->
+<!-- Because `_reset` is the name of entry point, our Rust program must somehow -->
+<!-- expose a symbol with that exact name. That's why we used the `export_name` -->
+<!-- attribute in our program: -->
+<!-- ``` -->
+<!-- #[export_name = "_reset"] -->
+<!-- pub extern "C" fn main() -> ! { .. } -->
+<!-- ``` -->
+<!-- Note that the function has type `extern "C" fn`. This forces the compiler to -->
+<!-- lower this function to a subroutine that adheres to the C ABI. We use the C ABI -->
+<!-- rather than Rust's ABI here because Rust's ABI is not stable and because the -->
+<!-- Cortex-M processor expects the subroutine to use the C ABI. -->
+<!-- Also, mind you that getting the name right is not sufficient for this to work. -->
+<!-- The symbol must also be a "global" symbol. This "global" requirement is -->
+<!-- fulfilled by making `main` public. -->
+<!-- `nm` is a useful tool to debug problems about symbol names and visibility. Let's -->
+<!-- give it a try to verify that our program generates a global symbol named -->
+<!-- `_reset`. First, you'll have to generate an object file from your crate. -->
+<!-- ``` -->
+<!-- $ xargo rustc --target thumbv7m-none-eabi -- --emit=obj -->
+<!-- ``` -->
+<!-- The reason we want an object file is that we want to look at the symbols `rustc` -->
+<!-- generates from our program *before* the linker gets a chance to drop them. -->
+<!-- The object file will be named `app.o` and will sit in the -->
+<!-- `target/thumbv7m-none-eabi/debug` directory right next to the `app` executable. -->
+<!-- Next, we call `nm` to inspect the symbols and their visibility: -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-nm --demangle target/thumbv7m-none-eabi/debug/app.o -->
+<!-- # or its shorter form -->
+<!-- $ arm-none-eabi-nm -C target/thumbv7m-none-eabi/debug/app.o -->
+<!-- (..) -->
+<!--          U __aeabi_unwind_cpp_pr0 -->
+<!-- 00000000 T _reset -->
+<!-- 00000000 T rust_begin_unwind -->
+<!-- 00000000 N __rustc_debug_gdb_scripts_section__ -->
+<!-- ``` -->
+<!-- In the output, you can see the `_reset` symbol and an uppercase `T` right next -->
+<!-- to it. This `T` indicates that `_reset` is a global symbol that resides in the -->
+<!-- `text` section (it's part of the program code). (See the [nm manual] for more -->
+<!-- details) -->
+<!-- [nm manual]: https://sourceware.org/binutils/docs/binutils/nm.html -->
+<!-- As homework, try changing the `main` function a little: remove the `export_name` -->
+<!-- attribute and/or the `pub` modifier. How does the `nm` output changes? Also -->
+<!-- check how the `app` executable changes using `objdump`. -->
+<!-- ### MEMORY -->
+<!-- ``` -->
+<!-- MEMORY -->
+<!-- { -->
+<!--   FLASH : ORIGIN = 0x00000000, LENGTH = 256K -->
+<!--   RAM  : ORIGIN = 0x20000000, LENGTH = 64K -->
+<!-- } -->
+<!-- ``` -->
+<!-- > **NOTE** In linker scripts, `K` means `1024` (not `1000`!) , `M` means -->
+<!-- > `1048576` (i.e. `1024 * 1024`) and so on. -->
+<!-- The `MEMORY` block declares two memory regions: one named FLASH and the other -->
+<!-- named RAM. These regions represent the flash memory and RAM regions of the -->
+<!-- LM3S6965. The values here match the memory specification I gave you in the -->
+<!-- [previous section]. -->
+<!-- [previous section]: details/ld.html#Region -->
+<!-- ### SECTIONS -->
+<!-- ``` -->
+<!-- SECTIONS -->
+<!-- { -->
+<!--   /* .. */ -->
+<!-- } -->
+<!-- ``` -->
+<!-- The `SECTIONS` block declares sections and assigns each section to a memory -->
+<!-- region. It's important to assign each and every section to a memory region, -->
+<!-- otherwise you'll get weird "overlap" linker errors. -->
+<!-- #### .text -->
+<!-- The .text section goes into the Flash region which starts at address `0x0`. And, -->
+<!-- if you remember, the vector table goes in address `0x0`. So, we must place the -->
+<!-- vector table at the beginning of the .text section. -->
+<!-- ``` -->
+<!--   .text : -->
+<!--   { -->
+<!--     /* Vector table */ -->
+<!--     LONG(ORIGIN(RAM) + LENGTH(RAM)) -->
+<!--     LONG(_reset + 1); -->
+<!-- ``` -->
+<!-- From the vector table, we only use its first two elements at this time: -->
+<!-- - The initial value of the stack pointer. As we mentioned before this is usually -->
+<!--   set to the largest valid RAM address and that would be `0x2001_0000` for the -->
+<!--   LSM303DLHC. Instead of hard coding that value, we can compute it from the -->
+<!--   `RAM` region we declared before and that's what the `LONG(ORIGIN(RAM) + -->
+<!--   LENGTH(RAM))` line does. -->
+<!-- - The reset vector. This is the address of the reset handler, `_reset`. We add -->
+<!--   1 because the processor is in Thumb mode. ([remember?]) -->
+<!-- [remember?]: first/build.html#Entry%20point -->
+<!-- Right after the vector table we place the reset handler, the actual function -->
+<!-- with its instructions. -->
+<!-- ``` -->
+<!--     /* Reset handler */ -->
+<!--     _reset = .; -->
+<!--     *(.text._reset) -->
+<!-- ``` -->
+<!-- We do that with the `*(.text._reset)` part. Which basically means place *all* -->
+<!-- (`*()`) the symbols, i.e. from all the input object files, named `_reset` here -->
+<!-- (but there can only be one symbol with that exact name). -->
+<!-- Then we have this `_reset = .` line before the `*(.text._reset)` bit. That -->
+<!-- assigns the address of the `_reset` symbol to the `_reset` variable. And we used -->
+<!-- that `_reset` variable in the vector table part (the `LONG(_reset + 1)` line). -->
+<!-- We also place the other text symbols (functions and constants) from all the -->
+<!-- input object files in this section: -->
+<!-- ``` -->
+<!--     *(.text*) -->
+<!-- ``` -->
+<!-- Finally, we indicate to the linker that this `.text` section goes in the `FLASH` -->
+<!-- memory region. -->
+<!-- ``` -->
+<!--   } > FLASH -->
+<!-- ``` -->
+<!-- #### /DISCARD/ -->
+<!-- ``` -->
+<!--   /DISCARD/ : -->
+<!--   { -->
+<!--     *(.ARM.exidx*) -->
+<!--     *(.note.gnu.build-id*) -->
+<!--   } -->
+<!-- ``` -->
+<!-- `/DISCARD/` is not a real section. Everything in this "special section" gets -->
+<!-- discarded by the linker and doesn't make it to the output object. So, why are we -->
+<!-- discarding these specific symbols? -->
+<!-- - `.ARM.exidx*` These symbols are related to unwinding. Which we aren't using! -->
+<!--   If we leave these symbols in, they'll in turn demand other symbols related to -->
+<!--   unwinding and cause "undefined reference" linker errors. -->
+<!-- - `note.gnu.build-id*`. These symbols are introduced by `gcc`, which is the -->
+<!--   linker we are using. If not removed, these symbols will try to place -->
+<!--   themselves at address `0x0` causing "overlap" linker errors. -->
+<!-- ## Inspect again -->
+<!-- Let's look again at the `objdump` output from section [3.1]. We should now be -->
+<!-- able to understand it better: -->
+<!-- [3.1]: ./first/build.html -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-objdump -Cd target/thumbv7m-none-eabi/debug/app -->
+<!-- target/thumbv7m-none-eabi/debug/app:     file format elf32-littlearm -->
+<!-- Disassembly of section .text: -->
+<!-- 00000000 <_reset-0x8>: -->
+<!--    0:   20010000        .word   0x20010000 -->
+<!--    4:   00000009        .word   0x00000009 -->
+<!-- 00000008 <_reset>: -->
+<!--    8:   b083            sub     sp, #12 -->
+<!--    a:   e7ff            b.n     c <_reset+0x4> -->
+<!--    c:   202a            movs    r0, #42 ; 0x2a -->
+<!--    e:   9001            str     r0, [sp, #4] -->
+<!--   10:   9002            str     r0, [sp, #8] -->
+<!--   12:   e7ff            b.n     14 <_reset+0xc> -->
+<!--   14:   e7fe            b.n     14 <_reset+0xc> -->
+<!-- ``` -->
+<!-- Let's go over it part by part but in reverse! -->
+<!-- ``` -->
+<!-- 00000008 <_reset>: -->
+<!--    8:	b082        sub	sp, #8 -->
+<!--    a:	202a        movs	r0, #42	; 0x2a -->
+<!--    c:	9001        str	r0, [sp, #4] -->
+<!--    e:	9000        str	r0, [sp, #0] -->
+<!--   10:	e7ff        b.n	12 <start+0xa> -->
+<!--   12:	e7fe        b.n	12 <start+0xa> -->
+<!-- ``` -->
+<!-- `_reset` is the reset handler and our program entry point. This is first thing -->
+<!-- the microcontroller will execute when it boots. Note the address `0x8`, this -->
+<!-- function is in the Flash memory region. -->
+<!-- Then we have: -->
+<!-- ``` -->
+<!-- 00000000 <_reset-0x8>: -->
+<!--    0:   20010000        .word   0x20010000 -->
+<!--    4:   00000009        .word   0x00000009 -->
+<!-- ``` -->
+<!-- These two "words" are the vector table which resides at address `0x0`. Even -->
+<!-- though the vector table is in the `.text` section, the vector table is not -->
+<!-- composed of instructions but of data. -->
+<!-- ``` -->
+<!-- 00000000 <_reset-0x8>: -->
+<!--    0:   20010000        .word   0x20010000 -->
+<!-- ``` -->
+<!-- The first element of the vector table is an "anonymous" symbol (though the -->
+<!-- linker automatically generates a name for it, based on the names of nearby -->
+<!-- symbols) with value `0x2001_0000`. `0x2001_0000` is the highest valid RAM -->
+<!-- address of the LM3S6965. Which we are going to use as the initial value of the -->
+<!-- stack pointer. This address is where the call stack will be created. -->
+<!-- ``` -->
+<!--    4:   00000009        .word   0x00000009 -->
+<!-- ``` -->
+<!-- The second element of the vector table is the reset "vector", which is nothing -->
+<!-- more than a pointer to the reset handler, `_reset`. Even though the reset -->
+<!-- handler lives in address `0x8`, this symbol has value `0x9` to indicate that the -->
+<!-- reset handler must be called in thumb mode. -->
+<!-- ## Closing comment -->
+<!-- You don't need to commit all this to memory right now -- I know it's a lot to -->
+<!-- take in. But, yes, linker scripts are important and we'll be dealing with them -->
+<!-- again in the future. At that time, feel free to refer back to this section as a -->
+<!-- reference. For now, the take home message is: -->
+<!-- - When programming against hardware, your program must follow a device-specific -->
+<!--   memory layout. -->
+<!-- - You can use a linker script to adjust your program memory layout to meet those -->
+<!--   requirements. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Run it on real hardware -->
+<!-- > **TODO** Document gotchas. Some dev boards may need to plug/unplug jumpers to -->
+<!-- > enable the built-in > programmer/debugger. -->
+<!-- It's time to test our program on real hardware! We'll use OpenOCD  to *flash* -->
+<!-- our program into the microcontroller and then hook `gdb` and OpenOCD to debug -->
+<!-- our program just like we did before. -->
+<!-- > Wait, what's flashing? -->
+<!-- *Flashing* means we are going to transfer our program from the host machine (PC, -->
+<!-- laptop, etc.) to the target device (the microcontroller). Once flashed, the -->
+<!-- micro will execute the flashed program every time it boots or resets. -->
+<!-- > **ATTENTION!** The flashing instructions here will overwrite the program -->
+<!-- > that's currently stored in your microcontroller. Make sure that it's either -->
+<!-- > something you are not gonna miss or that's something you can easily get a copy of. -->
+<!-- ## Compile for a different target device -->
+<!-- Unless you happen to have a real LM3S6965EVB board right next to you, the binary -->
+<!-- we produced in the previous section won't work for your device. To produce a -->
+<!-- valid binary for your device, you'll have to change the cross compilation target -->
+<!-- from the LM3S6965 to *your* device and then rebuild the program. -->
+<!-- For the rest of this section, I'll be using the [STM32F3DISCOVERY] as the target -->
+<!-- device. -->
+<!-- [STM32F3DISCOVERY]: http://www.st.com/en/evaluation-tools/stm32f3discovery.html -->
+<!-- ### Update the linker script -->
+<!-- One of the things that you'll always have to do when changing the cross -->
+<!-- compilation target is to update the device-specific parts of the linker script. -->
+<!-- The STM32F3DISCOVERY contains a [STM32F303VCT6] micro with 256 KiB of flash and -->
+<!-- 40+8 (\*) KiB of RAM. A peculiarity of STM32 devices is that their flash memory starts -->
+<!-- at address `0x0800_0000`. -->
+<!-- (\*) RAM is split in two memory regions located at different addresses. -->
+<!-- [STM32F303VCT6]: http://www.st.com/resource/en/datasheet/stm32f303vc.pdf -->
+<!-- *My* linker script adjustments look like this (yours will probably look -->
+<!-- different): -->
+<!-- ``` diff -->
+<!--  MEMORY -->
+<!--  { -->
+<!-- -  FLASH : ORIGIN = 0x00000000, LENGTH = 256K -->
+<!-- -  RAM : ORIGIN = 0x20000000, LENGTH = 64K -->
+<!-- +  CCRAM : ORIGIN = 0x10000000, LENGTH = 8K -->
+<!-- +  FLASH : ORIGIN = 0x08000000, LENGTH = 256K -->
+<!-- +  RAM : ORIGIN = 0x20000000, LENGTH = 40K -->
+<!--  } -->
+<!-- ``` -->
+<!-- ### Change the target specification -->
+<!-- Depending on the micro in your dev board, you may also have to change the -->
+<!-- `rustc` target from `thumbv7m-none-eabi` to something else. In my case, the -->
+<!-- STM32F303VCT6 contains a Cortex-M4F processor with FPU so I need to switch to the -->
+<!-- `thumbv7em-none-eabihf` target. -->
+<!-- If you change the target, you'll also need to update the `.cargo/config` file to -->
+<!-- port the configuration to the new target: -->
+<!-- ``` diff -->
+<!-- -[target.thumbv7m-none-eabi] -->
+<!-- +[target.thumbv7em-none-eabihf] -->
+<!--  rustflags = [ -->
+<!--      "-C", "link-arg=-Tlayout.ld", -->
+<!--      "-C", "link-arg=-nostartfiles", -->
+<!--  ] -->
+<!-- ``` -->
+<!-- ## Build & inspect -->
+<!-- Now that the changes have been committed, we can rebuild the program: -->
+<!-- ``` -->
+<!-- $ xargo build --target $TARGET -->
+<!-- ``` -->
+<!-- > **NOTE** From now on, I'm going to use `$TARGET`, instead of e.g. -->
+<!-- >  `thumbv7em-none-eabihf`, as a placeholder for the cross compilation target to -->
+<!-- >  make sure you don't use the wrong target triple. -->
+<!-- <\!-- FIXME use build.rs to force a rebuild when the linker script has been -\-> -->
+<!-- <\!-- modified -\-> -->
+<!-- > **HEADS UP** Make sure that Cargo actually rebuilds the binary! Cargo doesn't -->
+<!-- > trigger a rebuild when the linker script changes. So, if the only thing you -->
+<!-- > changed was the linker script and not the `rustc` target, then you'll have to -->
+<!-- > `cargo clean` first and then call `build`. -->
+<!-- As usual, it's a good idea to inspect the binary with `objdump` to verify that -->
+<!-- the vector table is where expected. -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-objdump -Cd ./target/$TARGET/debug/app -->
+<!-- ./target/$TARGET/debug/app:     file format elf32-littlearm -->
+<!-- Disassembly of section .text: -->
+<!-- 08000000 <_reset-0x8>: -->
+<!--  8000000:       2000a000        .word   0x2000a000 -->
+<!--  8000004:       08000009        .word   0x08000009 -->
+<!-- 08000008 <_reset>: -->
+<!--  8000008:       b083            sub     sp, #12 -->
+<!--  800000a:       e7ff            b.n     800000c <_reset+0x4> -->
+<!--  800000c:       202a            movs    r0, #42 ; 0x2a -->
+<!--  800000e:       9001            str     r0, [sp, #4] -->
+<!--  8000010:       9002            str     r0, [sp, #8] -->
+<!--  8000012:       e7ff            b.n     8000014 <_reset+0xc> -->
+<!--  8000014:       e7fe            b.n     8000014 <_reset+0xc> -->
+<!-- ``` -->
+<!-- Looks good! The vector table is at `0x0800_0000` as expected for my device. -->
+<!-- ## Establishing an OpenOCD connection -->
+<!-- Before we flash the program we have to "open" an OpenOCD connection between the -->
+<!-- device and the host machine. You should be already familiar with these steps -->
+<!-- from the [development environment][de] chapter: -->
+<!-- [de]: linux.html#First%20OpenOCD%20connection -->
+<!-- ``` -->
+<!-- # Physically connect the dev board to the host machine (probably your laptop), then -->
+<!-- $ [sudo] openocd -f board/$BOARD -->
+<!-- (...) -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : clock speed 950 kHz -->
+<!-- Info : STLINK v2 JTAG v27 API v2 SWIM v15 VID 0x0483 PID 0x374B -->
+<!-- Info : using stlink api v2 -->
+<!-- Info : Target voltage: 2.919073 -->
+<!-- Info : stm32f3x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- ``` -->
+<!-- ## Flash and debug -->
+<!-- We'll use the `gdb` shell to both flash and debug the program. So, fire up -->
+<!-- `gdb`: -->
+<!-- > **NOTE** You can't use `lldb` this time `:-(`. AFAICT, there's no `lldb` -->
+<!-- > equivalent to the `monitor` and `load` commands provided by `gdb`. And those -->
+<!-- > commands are required in this section. -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-gdb target/$TARGET/debug/app -->
+<!-- ``` -->
+<!-- Next, we need to connect `gdb` and OpenOCD. The command is the same as the one -->
+<!-- we used with QEMU: -->
+<!-- ``` -->
+<!-- (gdb) target remote :3333 -->
+<!-- Remote debugging using :3333 -->
+<!-- 0x00000000 in ?? () -->
+<!-- ``` -->
+<!-- You should also see extra output on the OpenOCD terminal but maybe not the exact -->
+<!-- same output shown here: -->
+<!-- ``` diff -->
+<!--  Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- +Info : accepting 'gdb' connection on tcp/3333 -->
+<!-- +Info : device id = 0x10036422 -->
+<!-- +Info : flash size = 256kbytes -->
+<!-- ``` -->
+<!-- Now that we are connected to the device via `gdb`. Let's flash the program using -->
+<!-- the `load` command: -->
+<!-- ``` -->
+<!-- (gdb) load -->
+<!-- Loading section .text, size 0x16 lma 0x8000000 -->
+<!-- Start address 0x8000008, load size 20 -->
+<!-- Transfer rate: 246 bytes/sec, 10 bytes/write. -->
+<!-- ``` -->
+<!-- You should also see new output on the OpenOCD terminal: -->
+<!-- ``` diff -->
+<!--  Info : accepting 'gdb' connection on tcp/3333 -->
+<!--  Info : device id = 0x10036422 -->
+<!--  Info : flash size = 256kbytes -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +adapter speed: 950 kHz -->
+<!-- +target state: halted -->
+<!-- +target halted due to debug-request, current mode: Thread -->
+<!-- +xPSR: 0x01000000 pc: 0x08000194 msp: 0x2000a000 -->
+<!-- +Info : Unable to match requested speed 8000 kHz, using 4000 kHz -->
+<!-- +Info : Unable to match requested speed 8000 kHz, using 4000 kHz -->
+<!-- +adapter speed: 4000 kHz -->
+<!-- +target state: halted -->
+<!-- +target halted due to breakpoint, current mode: Thread -->
+<!-- +xPSR: 0x61000000 pc: 0x2000003a msp: 0x2000a000 -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- +adapter speed: 950 kHz -->
+<!-- +target state: halted -->
+<!-- +target halted due to debug-request, current mode: Thread -->
+<!-- +xPSR: 0x01000000 pc: 0x08000194 msp: 0x2000a000 -->
+<!-- ``` -->
+<!-- The program is now flashed and the device is halted at the program's entry -->
+<!-- point, i.e. the `main` function. Let's repeat the debug session we used for the -->
+<!-- previous QEMU run: -->
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 8           let x = 42 -->
+<!-- (gdb) step -->
+<!-- 9           y = x -->
+<!-- (gdb) print x -->
+<!-- $1 = 42 -->
+<!-- (gdb) print &x -->
+<!-- $2 = (i32 *) 0x20001ffc -->
+<!-- (gdb) print y -->
+<!-- $3 = -2052926870 -->
+<!-- (gdb) print/x y -->
+<!-- $4 = 0x85a2d26a -->
+<!-- (gdb) print &y -->
+<!-- $5 = (i32 *) 0x20001ff8 -->
+<!-- (gdb) step -->
+<!-- 11          loop {} -->
+<!-- (gdb) print y -->
+<!-- $5 = 42 -->
+<!-- ``` -->
+<!-- Yay! This time the uninitialized value of `y` looks more random; I got -->
+<!-- `-2052926870` on this run. -->
+<!-- While you executed the above commands, you should have seen more output on the -->
+<!-- OpenOCD terminal. Each time you stepped over the program, OpenOCD printed the -->
+<!-- *program counter* which is the address of the instruction the processor will -->
+<!-- execute next. -->
+<!-- ``` diff -->
+<!--  xPSR: 0x01000000 pc: 0x08000008 msp: 0x20002000 -->
+<!-- +Info : halted: PC: 0x0800000a -->
+<!-- +Info : halted: PC: 0x0800000c -->
+<!-- +Info : halted: PC: 0x0800000e -->
+<!-- +Info : halted: PC: 0x08000010 -->
+<!-- ``` -->
+<!-- Here's one more trick for you to try: -->
+<!-- ``` -->
+<!-- (gdb) monitor reset halt -->
+<!-- ``` -->
+<!-- This will generate the following OpenOCD output: -->
+<!-- ``` -->
+<!--  Info : halted: PC: 0x08000010 -->
+<!-- +target state: halted -->
+<!-- +target halted due to debug-request, current mode: Thread -->
+<!-- +xPSR: 0x01000000 pc: 0x08000008 msp: 0x20002000 -->
+<!-- ``` -->
+<!-- This will reset your microcontroller (!) and halt your program at the reset -->
+<!-- handler, i.e. the `main` function. -->
+<!-- For fun, let's inspect the `y` variable **before** it's initialized: -->
+<!-- ``` -->
+<!-- (gdb) step -->
+<!-- 8           let x = 42 -->
+<!-- (gdb) step -->
+<!-- 9           y = x -->
+<!-- (gdb) print x -->
+<!-- $6 = 42 -->
+<!-- (gdb) print &x -->
+<!-- $7 = (i32 *) 0x20001ffc -->
+<!-- (gdb) print y -->
+<!-- $8 = 42 -->
+<!-- (gdb) print &y -->
+<!-- $9 = (i32 *) 0x20001ff8 -->
+<!-- ``` -->
+<!-- Surprise! `y` appears to have been already initialized! Except, that's not the -->
+<!-- case. What actually happened is that resetting the microcontroller doesn't touch -->
+<!-- RAM (i.e. it doesn't power it off). Therefore, the RAM still holds the data from -->
+<!-- the previous run and that's why `y` hold the value `42` it was assigned during -->
+<!-- the *previous* run of the program. -->
+<!-- That's all for this section! You can now close both OpenOCD and `gdb`. Let's -->
+<!-- move onto more complex programs! -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Exceptions: Crashing your micro -->
+<!-- In the previous chapter we wrote a very simple program, built a binary from it, -->
+<!-- verified that said binary was well-formed (i.e. that it had a vector table where -->
+<!-- expected), and even executed it under an emulator and also on real hardware. -->
+<!-- Everything went smoothly! However, when developing things are bound to go awry -->
+<!-- at some point. In the worst case scenario, one might, by mistake, ask the -->
+<!-- microcontroller to perform an operation that it can't handle, like: -->
+<!-- - Reading/writing to a invalid memory address e.g. beyond the limits of the RAM -->
+<!--   region. -->
+<!-- - Writing to flash memory using simple assignments (`*ptr = value`). Flash -->
+<!--   memory has an elaborate write mechanism. -->
+<!-- - Executing an instruction that the microcontroller doesn't support. Like trying -->
+<!--   to execute a floating point instruction (e.g. `vadd.f32`) on a device without -->
+<!--   a FPU. -->
+<!-- Under these situations, the processor will raise a *hardware exception*. When an -->
+<!-- exception is raised, the normal flow of our program is *interrupted* (stopped) -->
+<!-- and the processor jumps to an exception *handler* (recall: handler is just -->
+<!-- another name for function). -->
+<!-- There are several types of exceptions but most of them signify a catastrophic -->
+<!-- failure and, in real applications, are usually handled by resetting the system -->
+<!-- (if bare metal) or by resetting/killing the faulty process (if running on top of -->
+<!-- an OS). These catastrophic exceptions should happen rarely though (if ever) -->
+<!-- during the execution of a program; hence the name "exception". -->
+<!-- As we are just starting out and we are going to be running our programs under -->
+<!-- the debugger, we'll handle all the exceptions the same way: we'll halt the -->
+<!-- processor and yield control back to the debugger using the `bkpt` instruction. -->
+<!-- > **NOTE** Executing the `bkpt` instruction when there is no debugger attached -->
+<!-- > to the processor will make the processor raise an exception! -->
+<!-- ## Installing the exception handlers -->
+<!-- As the official ARM [documentation] states, the exception vectors (recall: a -->
+<!-- vector is a pointer to a handler, i.e. a function pointer) must be stored in the -->
+<!-- vector table just right after the reset vector. We'll extend our linker script, -->
+<!-- `layout.ld`, to account for this: -->
+<!-- [documentation]: http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/BABIFJFG.html -->
+<!-- ``` diff -->
+<!--      /* Vector table */ -->
+<!--      LONG(ORIGIN(RAM) + LENGTH(RAM)) -->
+<!--      LONG(_reset + 1); -->
+<!-- +    KEEP(*(.rodata._EXCEPTIONS)); -->
+<!--      /* Reset handler */ -->
+<!--      _reset = .; -->
+<!-- ``` -->
+<!-- The change is quite literal: "Place the exceptions (the `_EXCEPTIONS` symbol) -->
+<!-- right after the address of the reset handler (`LONG(_reset + 1)`)". -->
+<!-- Note that this time we use `.rodata._EXCEPTIONS` rather than -->
+<!-- `.text._EXCEPTIONS`. The reason is that the `_EXCEPTIONS` symbol is "data" and -->
+<!-- not a function. -->
+<!-- Now, we need create this `_EXCEPTIONS` symbol in our program: -->
+<!-- ``` rust -->
+<!-- // Add this to `src/main.rs` -->
+<!-- #![feature(asm)] -->
+<!-- mod exception { -->
+<!--     pub extern "C" fn handler() { -->
+<!--         unsafe { -->
+<!--             asm!("bkpt"); -->
+<!--         } -->
+<!--         loop {} -->
+<!--     } -->
+<!--     #[export_name = "_EXCEPTIONS"] -->
+<!--     pub static EXCEPTIONS: [Option<extern "C" fn()>; 14] = [Some(handler), // NMI -->
+<!--                                                             Some(handler), // Hard fault -->
+<!--                                                             Some(handler), // Memmanage fault -->
+<!--                                                             Some(handler), // Bus fault -->
+<!--                                                             Some(handler), // Usage fault -->
+<!--                                                             None, // Reserved -->
+<!--                                                             None, // Reserved -->
+<!--                                                             None, // Reserved -->
+<!--                                                             None, // Reserved -->
+<!--                                                             Some(handler), // SVCall -->
+<!--                                                             None, // Reserved for Debug -->
+<!--                                                             None, // Reserved -->
+<!--                                                             Some(handler), // PendSV -->
+<!--                                                             Some(handler)]; // Systick -->
+<!-- } -->
+<!-- ``` -->
+<!-- Let's go over each section added to our program: -->
+<!-- ``` rust -->
+<!-- mod exception { -->
+<!--     pub extern "C" fn handler() { -->
+<!--         unsafe { -->
+<!--             asm!("bkpt"); -->
+<!--         } -->
+<!--         loop {} -->
+<!--     } -->
+<!--     .. -->
+<!-- } -->
+<!-- ``` -->
+<!-- `exception::handler` is the handler (function) that we'll use to handle all the -->
+<!-- exceptions. This handler uses the `bkpt` instruction to trigger a manual -->
+<!-- breakpoint and then loops endlessly. We avoid returning from this function -->
+<!-- because whatever triggered the exception may have corrupted the stack so it may -->
+<!-- not be safe to continue executing the program. -->
+<!-- ``` rust -->
+<!-- mod exception { -->
+<!--     .. -->
+<!--     #[export_name = "_EXCEPTIONS"] -->
+<!--     pub static EXCEPTIONS: [Option<extern "C" fn()>; 14] = [Some(handler), // NMI -->
+<!--                                                             Some(handler), // Hard fault -->
+<!--                                                             Some(handler), // Memmanage fault -->
+<!--                                                             Some(handler), // Bus fault -->
+<!--                                                             Some(handler), // Usage fault -->
+<!--                                                             None, // Reserved -->
+<!--                                                             None, // Reserved -->
+<!--                                                             None, // Reserved -->
+<!--                                                             None, // Reserved -->
+<!--                                                             Some(handler), // SVCall -->
+<!--                                                             None, // Reserved for Debug -->
+<!--                                                             None, // Reserved -->
+<!--                                                             Some(handler), // PendSV -->
+<!--                                                             Some(handler)]; // Systick -->
+<!-- } -->
+<!-- ``` -->
+<!-- On the second part, we create the *global* `_EXCEPTIONS` symbol backed by a -->
+<!-- static `EXCEPTIONS` variable. The [documentation] states that there are 14 -->
+<!-- exception "slots" right after the reset handler so we'll place a 14-element -->
+<!-- array of function pointers in the `EXCEPTIONS` variable. Some of the exception -->
+<!-- slots, the ones marked as "Reserved" in the docs, will never be used at runtime; -->
+<!-- we'll leave those uninitialized (i.e. zeroed). In Rust, function pointers `fn()` -->
+<!-- are non-nullable. To get nullable function pointers we must wrap the `fn()`s in -->
+<!-- an `Option`, then the `None` variant becomes the equivalent of the null pointer. -->
+<!-- ## Build and inspect -->
+<!-- It's always a good idea to inspect the output binary to check that everything -->
+<!-- looks as expected: -->
+<!-- ``` -->
+<!-- $ xargo build --target $TARGET -->
+<!-- $ arm-none-eabi-objdump -CD target/$TARGET/debug/app -->
+<!-- ./target/$TARGET/debug/app:     file format elf32-littlearm -->
+<!-- Disassembly of section .text: -->
+<!-- 08000000 <_EXCEPTIONS-0x8>: -->
+<!--  8000000:       2000a000        .word   0x2000a000 -->
+<!--  8000004:       08000041        .word   0x08000041 -->
+<!-- 08000008 <_EXCEPTIONS>: -->
+<!--  8000008:       08000053 08000053 08000053 08000053     S...S...S...S... -->
+<!--  8000018:       08000053 00000000 00000000 00000000     S............... -->
+<!--  8000028:       00000000 08000053 00000000 00000000     ....S........... -->
+<!--  8000038:       08000053 08000053                       S...S... -->
+<!-- 08000040 <_reset>: -->
+<!--  8000040:       b084            sub     sp, #16 -->
+<!--  8000042:       e7ff            b.n     8000044 <_reset+0x4> -->
+<!--  8000044:       2000            movs    r0, #0 -->
+<!--  8000046:       6800            ldr     r0, [r0, #0] -->
+<!--  8000048:       9002            str     r0, [sp, #8] -->
+<!--  800004a:       6800            ldr     r0, [r0, #0] -->
+<!--  800004c:       9001            str     r0, [sp, #4] -->
+<!--  800004e:       e7ff            b.n     8000050 <_reset+0x10> -->
+<!--  8000050:       e7fe            b.n     8000050 <_reset+0x10> -->
+<!-- 08000052 <app::exception::handler::he7207b3009cf1097>: -->
+<!--  8000052:       b083            sub     sp, #12 -->
+<!--  8000054:       e7ff            b.n     8000056 <app::exception::handler::he7207b3009cf1097+0x4> -->
+<!--  8000056:       be00            bkpt    0x0000 -->
+<!--  8000058:       e7ff            b.n     800005a <app::exception::handler::he7207b3009cf1097+0x8> -->
+<!--  800005a:       e7fe            b.n     800005a <app::exception::handler::he7207b3009cf1097+0x8> -->
+<!-- ``` -->
+<!-- The two most relevant things to note: The `exception::handler` is located at -->
+<!-- address `0x0800_0052`. And, `_EXCEPTIONS`, the part of the vector table where -->
+<!-- the exception handlers reside, is mainly filled with the thumb address of -->
+<!-- `exception::handler` i.e. `0x0800_0053`; which is what we wanted. You will also -->
+<!-- see a few `0x0`s inside `_EXCEPTIONS`. These are the reserved exceptions slots -->
+<!-- and they are basically zeroed/uninitialized chunks of memory. -->
+<!-- ## Let's crash! -->
+<!-- > **NOTE** This program won't work on QEMU. AFAICT, raising an exception on a -->
+<!-- > emulated device is rather hard. For some reason (probably to simplify the -->
+<!-- > implementation), actions that normally raise an exception on real hardware are -->
+<!-- > allowed in QEMU. *shrugs* -->
+<!-- Let's write a program that raises an exception to test the exception handler. -->
+<!-- Our program will attempt to read memory beyond the RAM region. Here is it: -->
+<!-- ``` rust -->
+<!-- #[export_name = "_reset"] -->
+<!-- pub extern "C" fn main() -> ! { -->
+<!--     unsafe { -->
+<!--         let sram_boundary = *(0x0000_0000 as *const u32); -->
+<!--         let _crash = *(sram_boundary as *const u32); -->
+<!--     } -->
+<!--     loop {} -->
+<!-- } -->
+<!-- ``` -->
+<!-- Let' run the program under the debugger on real hardware. -->
+<!-- ``` -->
+<!-- # On another terminal -->
+<!-- $ [sudo] openocd (..) -->
+<!-- ``` -->
+<!-- ``` -->
+<!-- $ arm-none-eabi-gdb target/cortex-m3/debug/app -->
+<!-- (gdb) target remote :3333 -->
+<!-- (gdb) load -->
+<!-- (gdb) step -->
+<!-- 9               let sram_boundary = *(0x0000_0000 as *const u32) -->
+<!-- (gdb) step -->
+<!-- 10              let _crash = *(ram_boundary as *const u32) -->
+<!-- (gdb) print/x ram_boundary -->
+<!-- $1 = 0x2000a000 -->
+<!-- (gdb) step -->
+<!-- app::exception::handler () at src/main.rs:19 -->
+<!-- 19                  asm!("bkpt") -->
+<!-- ``` -->
+<!-- Remember that the address `0x0000_0000` is the first element of the vector table -->
+<!-- and contains the highest RAM address. Dereferencing that address -->
+<!-- (`sram_boundary`) will load memory beyond the RAM region. -->
+<!-- Upon trying to read invalid memory, the processor raises *an* exception (we -->
+<!-- don't know *which* one) and then proceeds to execute the `exception::handler`. -->
+<!-- While executing the handler, the processor encounters the `bkpt` instruction, -->
+<!-- halts and yields control back to the debugger. -->
+<!-- We'll use this very simple exception handler to uncover programming mistakes -->
+<!-- while debugging. We'll revisit the exception handler in the future to make it -->
+<!-- tell us which exception was raised and which instruction (and line of code) -->
+<!-- generated the exception. -->
+<!-- ## Homework -->
+<!-- What do you think would have happened if we executed the last `main` function -->
+<!-- that reads memory beyond the RAM boundary **if** we didn't *install* the -->
+<!-- exception handlers, or IOW if we didn't add the `_EXCEPTIONS` symbol or the -->
+<!-- `EXCEPTIONS` variable to our program? -->
+<!-- > **HINT** Look at the disassembly (`objdump`) of such binary. Take note of the -->
+<!-- > addresses. What does the vector table look like? -->
+<!-- > **WARNING** Don't actually run a program that raises a hardware exception but -->
+<!-- > doesn't handle it! -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Blinking an LED -->
+<!-- (with too many hexadecimals) -->
+<!-- > **HEADS UP** Most of the links in this page are PDFs! -->
+<!-- So far we have only used the processor inside our microcontroller. The processor -->
+<!-- can only do math and logic, and, on its own, it can't interact with the external -->
+<!-- world: it can't drive a LED or a motor, read a sensor or communicate with other -->
+<!-- devices. -->
+<!-- To make our programs more useful (and fun!) we must learn to use *peripherals*. -->
+<!-- A peripheral is an extra piece of electronics that's built, alongside the -->
+<!-- processor, in the same microcontroller package. Peripherals give the processor -->
+<!-- the extra functionality it needs to interact with the external world. -->
+<!-- > Awesome! What can I do with these peripherals? -->
+<!-- All sort of things! There are several different types of peripherals, each one -->
+<!-- provides a different functionality. Microcontrollers manufacturers call them by -->
+<!-- different names even if they provide the same functionality though. Here are -->
+<!-- some of the most common ones (using STM32 naming convention): -->
+<!-- - `GPIO`. General Purpose Input/Output. Can be used to turn on/off external -->
+<!--   devices (e.g. a motor, a lamp, etc.) or to read the state of a "switch" -->
+<!--   (e.g. a two-state (ON/OFF) switch, a keyboard, etc.). -->
+<!-- - `ADC`. Analog-to-Digital Converter. Can be used to "read" analog sensors (e.g. -->
+<!--   a thermometer, a light (intensity) sensor, etc.) or signals (e.g. voltage -->
+<!--   level of a battery, electric current, etc.). -->
+<!-- - `TIM`. Timers. Can be used to perform periodic tasks (e.g. every 100 ms), -->
+<!--   measure lengths of time (e.g. for how long was this button pressed?) or -->
+<!--   generate periodic signals with variable [duty cycle][dc] -->
+<!--   (AKA [Pulse Width Modulation][pwm] (PWM)). PWM is mainly used to control how -->
+<!--   much power is supplied to an electric machine like a motor which, in turn, -->
+<!--   lets you indirectly control other parameters like speed and torque. -->
+<!-- [dc]: https://en.wikipedia.org/wiki/Duty_cycle -->
+<!-- [pwm]: https://en.wikipedia.org/wiki/Pulse-width_modulation -->
+<!-- We'll explore these and several other peripherals in more detail in a [later -->
+<!-- chapter]. -->
+<!-- [later chapter]: peripherals.html -->
+<!-- > So, how do I use these peripherals? -->
+<!-- Thanks to some magic called [memory mapped I/O][MMIO], to the processor, -->
+<!-- peripherals appear as memory regions (!). This means that, for example, by -->
+<!-- writing to some special memory address you can use the digital I/O peripheral to -->
+<!-- turn on/off a LED. Another example: By reading from some special memory address -->
+<!-- you can use the Analog to Digital Converter peripheral to "read" an analog -->
+<!-- sensor like a thermometer and get the current environment temperature as a -->
+<!-- digital/discrete value. -->
+<!-- [MMIO]: https://en.wikipedia.org/wiki/Memory-mapped_I/O -->
+<!-- A chunk of memory associated to a single peripheral is known as a "register -->
+<!-- block".  As other types of memory, these regions are usually accessed in word -->
+<!-- sized chunks (32-bit on ARM). Each of these word sized chunks is referred to as -->
+<!-- a (hardware) register; though registers can also be half-word or byte sized. -->
+<!-- Each of these registers has a human-friendly name and an address associated to -->
+<!-- it. -->
+<!-- A concrete example: The STM32F303VCT6 microcontroller has a peripheral known as -->
+<!-- Reset and Clock Control (RCC). The register block associated with this -->
+<!-- peripheral starts at address `0x4002_10000`. This register block is comprised of -->
+<!-- several registers as seen on its [register map]. One of registers associated -->
+<!-- with this peripheral is the ["AHB peripheral clock enable register"][AHBENR] -->
+<!-- (AKA `APB2ENR`) which lives at address `0x4002_1014`. This particular register -->
+<!-- can be used to power on/off other peripherals. -->
+<!-- [register map]: http://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf#page=166&zoom=auto,67,754 -->
+<!-- [AHBENR]: http://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf#page=148&zoom=auto,67,447 -->
+<!-- To get familiar with the use of peripherals, we'll write the microcontroller -->
+<!-- version of the "hello world" program: Blinking an LED. -->
+<!-- ## The device-agnostic plan -->
+<!-- This is an overview of what our program will do: -->
+<!-- 1. Power on the digital output peripheral. -->
+<!-- To save energy, most of the peripherals in a microcontroller boot in a powered -->
+<!-- off state. We have to explicitly "power on" the peripherals we want to use. -->
+<!-- 2. Put the *pin* that's connected to the LED in *output mode*. -->
+<!-- A pin a metal contact that a microcontroller exposes and that can be -->
+<!-- electrically connected to another device. A pin can either be (configured) to be -->
+<!-- in input mode or in output mode, but it must be in output mode to be able to -->
+<!-- drive (i.e. supply current to) an external device. Most pins start in input mode -->
+<!-- right after the micro boots to avoid spuriously driving external devices. -->
+<!-- 3. Set the pin *high* or *low* to turn on the LED. -->
+<!-- *Low* means outputting zero volts (0V) on the pin whereas *high* means -->
+<!-- outputting a non-zero voltage, usually the power supply voltage (3.3V on most -->
+<!-- Cortex-M micros), on the pin. Depending on how the LED is wired to the pin, -->
+<!-- setting the pin low/high should turn it off/on or the other way around. -->
+<!-- After we've confirmed that we can turn the LED on/off, we'll modify the program -->
+<!-- to toggle the state of the LED pin every few seconds. -->
+<!-- ## The device-specific details -->
+<!-- Now we must fill in the device-specific details to realize our plan. All the -->
+<!-- needed information will come from the microcontroller reference manual -->
+<!-- ([here's mine][rm]) and the dev board user manual ([here's mine][um]). -->
+<!-- [rm]: http://www.st.com/resource/en/reference_manual/DM00043574.pdf -->
+<!-- [um]: http://www.st.com/resource/en/user_manual/dm00063382.pdf -->
+<!-- ### Which LED, which pin? -->
+<!-- First, we must pick a LED on the dev board to work with. Your dev board very -->
+<!-- likely has at least one "user LED" that's connected to one of the -->
+<!-- microcontroller's pin (check its user manual). Don't confuse an "user LED" with -->
+<!-- the "power LED". The latter is an indicator of whether the board is powered on -->
+<!-- or off and can't be controlled by the microcontroller. -->
+<!-- > **TODO** What do I do if my dev board doesn't have an "user LED"? -->
+<!-- The STM32F3DISCOVERY has [eight user LEDs][leds]. For this example, I'll be -->
+<!-- using the red one that's connected to the pin *PE9*. Because micros have many -->
+<!-- I/O pins, these pins are usually grouped in *ports*. A port is a collection of -->
+<!-- 8, 16, or some other number of pins. Ports are usually identified with letters: -->
+<!-- A, B, etc. and the pins in it are usually identified with numbers: 0, 1, etc. -->
+<!-- Therefore, you can think of the the pin PE9 as the 10th (because numbering -->
+<!-- starts at 0) pin in the port E. -->
+<!-- [leds]: http://www.st.com/content/ccc/resource/technical/document/user_manual/8a/56/97/63/8d/56/41/73/DM00063382.pdf/files/DM00063382.pdf/jcr:content/translations/en.DM00063382.pdf#page=18&zoom=auto,67,521 -->
+<!-- ### How to power on a peripheral? -->
+<!-- Micros have a dedicated peripheral that's in charge of "clocking" other -->
+<!-- peripherals. Clocking in this context means powering on/off a peripheral. A -->
+<!-- peripheral that doesn't receive a clock signal is basically powered off -- it -->
+<!-- can't be used and it doesn't (actively) consume energy. -->
+<!-- On STM32 micros this peripheral is called [RCC]. The family of `*ENR` registers -->
+<!-- in this peripheral control the clocking of other peripherals. In my case, I'm -->
+<!-- interested in the [AHBENR] register which contains a `IOPEEN` bit that controls -->
+<!-- the clocking of the E port. -->
+<!-- [RCC]: http://www.st.com/content/ccc/resource/technical/document/reference_manual/a2/2d/02/4b/78/57/41/a3/CD00246267.pdf/files/CD00246267.pdf/jcr:content/translations/en.CD00246267.pdf#page=69&zoom=auto,67,755 -->
+<!-- ### How to put the pin in output mode? -->
+<!-- In my case, I need to put the pin `PE9` in output mode. Some register in the -->
+<!-- [GPIOE] peripheral should let me do that. After looking through the -->
+<!-- documentation, I found that the `MODER` register does that. In particular, the -->
+<!-- [MODER] register contains the bitfield `MODER9` which control the "mode" (input -->
+<!-- or output) of the pin `PE9`. I'll use the following setting: -->
+<!-- [GPIOE]: http://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf#page=228&zoom=auto,67,755 -->
+<!-- [MODER]: http://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf#page=237&zoom=auto,67,669 -->
+<!-- - `MODER9 = 0b01` Puts the pin in general purpose push-pull output mode. -->
+<!-- ### Driving the pin high and low -->
+<!-- Again the register that I want must be in the `GPIOE` peripheral. In this case, -->
+<!-- it's the `BSRR` register. It can individually *set* or *reset* a pin. Here, -->
+<!-- *reset* means putting the pin low and *set* means driving the pin high. -->
+<!-- ## Putting it all together -->
+<!-- Here's a detailed specification of the program: -->
+<!-- 1. Turn on the GPIOC peripheral: Set the `IOPEEN` bit in the `RCC->AHBENR` -->
+<!--    register to `1`. -->
+<!-- 2. Put the PE9 pin in output mode: Set the `MODER9` bitfield in the -->
+<!--    `GPIOE->MODER` register to `0b01`. -->
+<!-- 3. Set the PE9 pin high: Set the `BS9` bit in the `GPIOE->BSRR` register to `1`. -->
+<!-- 4. Set the PE9 pin low: Set the `BR9` bit in the `GPIOE->BSRR` register to `1`. -->
+<!-- ## The code -->
+<!-- And here's the code. I'm omitting the `exception` and `lang_items` modules which -->
+<!-- haven't changed since [our previous program]. -->
+<!-- [our previous program]: ./exceptions.html#Installing%20the%20exception%20handlers -->
+<!-- ``` rust -->
+<!-- #[export_name = "_reset"] -->
+<!-- pub extern "C" fn main() -> ! { -->
+<!--     power_on_gpioe(); -->
+<!--     put_pe9_in_output_mode(); -->
+<!--     set_pe9_high(); -->
+<!--     set_pe9_low(); -->
+<!--     loop {} -->
+<!-- } -->
+<!-- fn power_on_gpioe() { -->
+<!--     /// Start address of the RCC register block -->
+<!--     const RCC: u32 = 0x4002_1000; -->
+<!--     /// Offset address of the AHBENR register -->
+<!--     const RCC_AHBENR: u32 = 0x14; -->
+<!--     /// IOPCEN bit mask -->
+<!--     const RCC_AHBENR_IOPEEN: u32 = 1 << 21; -->
+<!--     unsafe { -->
+<!--         // Pointer to the AHBENR register -->
+<!--         let ahbenr = (RCC + RCC_AHBENR) as *mut u32; -->
+<!--         // IOPECN = 1 -->
+<!--         *ahbenr |= RCC_AHBENR_IOPEEN; -->
+<!--     } -->
+<!-- } -->
+<!-- /// Start address of the GPIOC register block -->
+<!-- const GPIOE: u32 = 0x4800_1000; -->
+<!-- /// Offset address of the BSRR register -->
+<!-- const GPIOE_BSRR: u32 = 0x18; -->
+<!-- fn put_pe9_in_output_mode() { -->
+<!--     /// Offset address of the CRH register -->
+<!--     const GPIOE_MODER: u32 = 0x0; -->
+<!--     unsafe { -->
+<!--         // Pointer to the MODER register -->
+<!--         let moder = (GPIOE + GPIOE_MODER) as *mut u32; -->
+<!--         // MODER9 = 0b01 -->
+<!--         *moder = (*moder & !(0b11 << 18)) | (0b01 << 18) -->
+<!--     } -->
+<!-- } -->
+<!-- fn set_pe9_high() { -->
+<!--     unsafe { -->
+<!--         // Pointer to the BSRR register -->
+<!--         let bsrr = (GPIOE + GPIOE_BSRR) as *mut u32; -->
+<!--         // BS9 = 1 -->
+<!--         *bsrr = 1 << 9; -->
+<!--     } -->
+<!-- } -->
+<!-- fn set_pe9_low() { -->
+<!--     unsafe { -->
+<!--         // Pointer to the BSRR register -->
+<!--         let bsrr = (GPIOE + GPIOE_BSRR) as *mut u32; -->
+<!--         // BR9 = 1 -->
+<!--         *bsrr = 1 << (16 + 9); -->
+<!--     } -->
+<!-- } -->
+<!-- ``` -->
+<!-- Quite unsightly, right? So many magic values. In a [later chapter], we'll -->
+<!-- refactor this code to get rid of the magic values, the pointer arithmetic and -->
+<!-- the raw pointers. But this code will make do for now! -->
+<!-- [later chapter]: ./registers.html -->
+<!-- ## Test it -->
+<!-- Time to test our code! Don't feel discouraged if your program crashes or doesn't -->
+<!-- work on the first try! I certainly get most of my embedded programs wrong when -->
+<!-- I'm just starting to write drivers and have to deal with all these magic values -->
+<!-- and/or have to jump back and forth between the microcontroller reference manual -->
+<!-- and my library/program. -->
+<!-- OK, here's how I'd debug this program: -->
+<!-- 1. Starting from the program entry point, `_step`, repeatedly `step` over the -->
+<!--    program until you hit the the "set the pin high" statement, in my case this -->
+<!--    is the `*bsrr = 1 << 8`. If you didn't hit an exception, congratulations! -->
+<!--    Head to step 3, otherwise go to step 2. -->
+<!-- 2. If you hit an exception, you should now know which statement triggered it. -->
+<!--    Reset your microcontroller with `monitor reset halt`, then step all the way -->
+<!--    until your reach the faulty statement but don't execute it!. At this point, -->
+<!--    inspect the address of the register that will be modified by the faulty -->
+<!--    statement. Is the address right/valid? If not, fix it then go to step 1. -->
+<!-- 3. You should now be about to execute the instruction that sets the LED pin -->
+<!--    high. Step from here all the way to the endless `loop`. This should toggle -->
+<!--    the state of the LED at least once. If it doesn't, then quite a few things -->
+<!--    could have gone wrong ... See below: -->
+<!-- - Wrong register address as seen in step 2. -->
+<!-- - `GPIO` has not been powered on or configured properly. You'll have to -->
+<!--   "examine" (`(gdb) x $ADDRESS`) all the related registers. If you didn't power -->
+<!--   on the `GPIO` peripheral, you'll see that trying to write to that peripheral -->
+<!--   registers has no effect. -->
+<!-- - You are driving the wrong pin, i.e. one that's not connected to an LED. -->
+<!--   Confirm this against your dev board user manual. -->
+<!-- ## Adding a loop -->
+<!-- Now that we know that we can toggle the state of the LED. Making the LED blink -->
+<!-- is relatively easy. We need to add a `delay` function and then move the LED -->
+<!-- toggling code inside a loop: -->
+<!-- ``` rust -->
+<!-- #[export_name = "_reset"] -->
+<!-- pub extern "C" fn main() -> ! { -->
+<!--     power_on_gpioe(); -->
+<!--     put_pe9_in_output_mode(); -->
+<!--     let ticks = 100_000; -->
+<!--     loop { -->
+<!--         set_pe9_high(); -->
+<!--         delay(ticks); -->
+<!--         set_pe9_low(); -->
+<!--         delay(ticks); -->
+<!--     } -->
+<!-- } -->
+<!-- fn delay(n: u32) { -->
+<!--     for _ in 0..n {} -->
+<!-- } -->
+<!-- ``` -->
+<!-- I have no way of telling you what value of `n` will give you e.g. a delay of 1 -->
+<!-- second because that depends on the built-in internal clock of your -->
+<!-- microcontroller (mine is 8 MHz) and the actual instructions that `delay` -->
+<!-- compiles to in debug mode. However, using a value between `10_000` and `100_000` -->
+<!-- for `ticks` should make the LED blink at a visible rate. -->
+<!-- ## Test it again -->
+<!-- To test, simply flash the program and let it run from the debugger: -->
+<!-- ``` -->
+<!-- (gdb) continue -->
+<!-- ``` -->
+<!-- You should now see the LED blink at some rate. To make the LED blink faster make -->
+<!-- the value of `ticks` smaller. To do this, first manually break the program by -->
+<!-- pressing `Crtl-C` at `gdb`'s prompt, then use the following commands: -->
+<!-- ``` -->
+<!-- # break somewhere inside the loop -->
+<!-- (gdb) break main.rs:13 -->
+<!-- (gdb) continue -->
+<!-- Breakpoint 1, app::main () at (..)/src/main.rs:13 -->
+<!-- 13              set_pe9_high() -->
+<!-- # make ticks smaller -->
+<!-- (gdb) set ticks = 10000 -->
+<!-- # clear breakpoint -->
+<!-- (gdb) clear main.rs:13 -->
+<!-- (gdb) continue -->
+<!-- ``` -->
+<!-- The LED should now blink at a faster rate. You can repeat the experiment but -->
+<!-- setting `ticks` to a larger value. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # (Mis)Optimization -->
+<!-- Surprise: Enabling optimizations (`--release`) optimizes away our whole program! -->
+<!-- Solution: -->
+<!-- - Split program into a library to avoid the aggressive pre-linking removal of symbols. -->
+<!-- - Use volatile loads/stores to prevent the compiler from optimizing away/coalescing memory accesses. -->
+<!-- - Add linker script assertions to avoid future misoptimizations. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Zero-cost type-safe register manipulation -->
+<!-- Goals: -->
+<!-- - Go from hexadecimal gibberish to structs. -->
+<!-- - Prevent writing to read-only registers and viceversa. -->
+<!-- - Prevent reading to,writing to or modifying reserved bits. -->
+<!-- - Nicer debugging experience: `print GPIOA` -> you get all the registers in that register block and -->
+<!--   their values. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Abstracting Hardware -->
+<!-- Goals: -->
+<!-- - A device-agnostic API. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Peripherals -->
+<!-- Overview of other common peripherals: -->
+<!-- - USART/UART/Serial -->
+<!-- - SPI -->
+<!-- - I2C -->
+<!-- - GPIO -->
+<!-- - Timers + PWM -->
+<!-- - ADC -->
+<!-- - DAC -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Unwritten topics -->
+<!-- - More debugging patterns: breakpoints, watchpoints, `bkpt`, etc. -->
+<!-- - The `.data` and `.bss` sections: `static` variables, linker script (again) and initialization -->
+<!--   routine. -->
+<!-- - Guaranteed `panic!`-free programs with this one weird trick! -->
+<!-- - The Rust allocator interface. -->
+<!-- - Debug prints with ITM (Instrumentation Trace Macrocell) -->
+<!-- - "Apps" -->
+<!--   - Heartbeat LED -->
+<!--   - Read an analog sensor. e.g. just potentiometer, a photoresistor or a CNY70. -->
+<!--   - Read a digital sensor via SPI or I2C. e.g. motion sensor. -->
+<!--   - Data acquisition. e.g. sensor + serial comm -->
+<!--   - Move a servomotor -->
+<!--   - Open loop control system. e.g. serial comm + servo or potentiometer + servo -->
+<!--   - Closed loop control system. e.g. servo + magnetometer -->
+<!-- - Interfacing external devices -->
+<!--   - Buttons and debouncing. -->
+<!--   - Servomotors. -->
+<!-- - Async and concurrency -->
+<!--   - Scheduling strategies: Super loop, cooperative, preemptive. -->
+<!--   - Interrupts: `asm!("cpsid i")`, `asm!("cpsie i")`, data races and atomic operations. -->
+<!--   - DMA -->
+<!-- - FPU -->
+<!-- - `nm -C --size-sort`: binary size profiling -->
+<!-- - `nm -C`: global vs local text symbol -->
+<!-- - librarify: src/lib.rs + src/bin/*.rs. Uses `extern` (lib) and `no_mangle` (bin) symbol. Basically -->
+<!--   the library says: you (the binary) must give me a symbol with this *unmangled* name. Downside: -->
+<!--   types signatures are lost. How to recover them? traits? Related: weak symbols for e.g. exceptions. -->
+<!-- - ARM calling convention: -->
+<!--   - cf. http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042f/IHI0042F_aapcs.pdf -->
+<!--   - A diagram of how the stack, the heap and static variables (.data, .bss) are allocated in RAM. -->
+<!--   - An explanation of how the call stack works: stack pointer, stack frames, what happens when a -->
+<!--     function/interrupt is called, etc. -->
+<!--   - How arguments are passed to functions: via stack, registers -->
+<!-- - mention that a section can't exceed its region capacity. This is automatically enforced by the -->
+<!--   linker based on what the linker script says. -->
+<!-- - bluetooth: HC-06. `rfcomm bind rfcomm0 $ADDRESS` -->
+<!-- - document other flashing methods: ELF -> `objcopy` -> binary, then directly flash the binary using -->
+<!--   OpenOCD (without `gdb`) or st-link. -->
+<!-- - revisit the default exception handler: where did we come from? (inspect stack) which exception is -->
+<!--   this? (inspect NVIC(?) register). -->
+<!--   - cf. http://www.freertos.org/Debugging-Hard-Faults-On-Cortex-M-Microcontrollers.html -->
+<!-- - embedding Rust in C frameworks like FreeRTOS or the Photon. -->
+<!--   - cf. https://github.com/japaric/photon -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Resources -->
+<!-- ## Cortex-M -->
+<!-- The ultimate source of information about this processor family is the [ARM info center][0]. -->
+<!-- [0]: http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.set.cortexm/index.html -->
+<!-- Some documents of interest: -->
+<!-- - [Cortex-M0 Devices - Generic User Guide][0]. About the Cortex-M0 processor, its instruction set -->
+<!--   and its peripherals. -->
+<!-- - [Cortex-M0+ Devices - Generic User Guide][1]. Same as above but for the Cortex-M0+. -->
+<!-- - [Cortex-M3 Devices - Generic User Guide][2]. Same as above but for the Cortex-M3. -->
+<!-- - [Cortex-M4 Devices - Generic User Guide][3]. Same as above but for the Cortex-M4. -->
+<!-- - [Cortex-M7 Devices - Generic User Guide][4]. Same as above but for the Cortex-M7. -->
+<!-- - [Procedure Call Standard for the ARM Architecture][5]. About the machine registers, how -->
+<!--   subroutines are called, how their parameters are passed and how their results are returned. -->
+<!-- - [Lazy Stacking and Context Switching][6]. How the processor automatically decides when (not) to -->
+<!--   save floating-point registers on the stack during interrupts. Important if implementing an OS, as -->
+<!--   one should re-implement this functionality in their context switching logic to keep context -->
+<!--   switching times small. -->
+<!-- [0]: http://infocenter.arm.com/help/topic/com.arm.doc.dui0497a/DUI0497A_cortex_m0_r0p0_generic_ug.pdf -->
+<!-- [1]: http://infocenter.arm.com/help/topic/com.arm.doc.dui0662b/DUI0662B_cortex_m0p_r0p1_dgug.pdf -->
+<!-- [2]: http://infocenter.arm.com/help/topic/com.arm.doc.dui0552a/DUI0552A_cortex_m3_dgug.pdf -->
+<!-- [3]: http://infocenter.arm.com/help/topic/com.arm.doc.dui0553a/DUI0553A_cortex_m4_dgug.pdf -->
+<!-- [4]: http://infocenter.arm.com/help/topic/com.arm.doc.dui0646a/DUI0646A_cortex_m7_dgug.pdf -->
+<!-- [5]: http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042f/IHI0042F_aapcs.pdf -->
+<!-- [6]: http://infocenter.arm.com/help/topic/com.arm.doc.dai0298a/DAI0298A_cortex_m4f_lazy_stacking_and_context_switching.pdf -->
+<!-- ## LM3S6965EVB -->
+<!-- This is the evaluation board we'll emulate using QEMU. It contains an LM3S6965 microcontroller. The -->
+<!-- most important bits of documentation related to this board are: -->
+<!-- - The [Microcontroller data sheet][6]. It contains the register maps and the descriptions of all the -->
+<!--   device peripherals. -->
+<!-- - The [Evaluation Board User manual][7]. Description of the physical board. -->
+<!-- [6]: http://www.ti.com/lit/ds/symlink/lm3s6965.pdf -->
+<!-- [7]: http://www.ti.com/lit/ug/spmu029a/spmu029a.pdf -->
+<!-- ## Similar/related projects -->
+<!-- ### `zinc` -->
+<!-- > The bare metal stack for rust -->
+<!-- [GitHub](https://github.com/hackndev/zinc) -->
+<!-- The Zinc project was the pioneer in the embedded Rust space. I have borrowed a lot of ideas from -->
+<!-- there (like building executables using only Cargo) to write this book. -->
+<!-- ### Hanno Braun's blog -->
+<!-- > "I'm teaching myself embedded programming, and I've decided to write about every step of the way" -->
+<!-- [Website](http://embedded.hannobraun.de/) -->
+<!-- [GitHub repository](https://github.com/hannobraun/embedded) -->
+<!-- Hanno is also exploring this space but using an Arduino Due. Definitely worth checking out! -->
+<!-- ### RustyGecko -->
+<!-- > Developing Rust on Bare-Metal - An experimental embedded software platform -->
+<!-- [Abstract and full text PDF](https://brage.bibsys.no/xmlui/handle/11250/2352353) -->
+<!-- [GitHub repositories](https://github.com/RustyGecko) -->
+<!-- A master thesis about using Rust to develop software for the Cortex-M3 based EFM32GG -->
+<!-- microcontroller. I found the section about "Handling interrupts with Closures" and the discussion -->
+<!-- about "Avoiding Mutable Aliases to Hardware" particularly interesting! The authors have also put -->
+<!-- their code up on GitHub. -->
+<p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # FAQ -->
+<!-- ## Can I use my Arduino to follow this material? -->
+<!-- If you have an Arduino Due then the answer is yes. -->
+<!-- The other Arduinos have AVR processors and `rustc` can't compile programs for that architecture yet. -->
+<!-- See [Why ARM Cortex-M micros?] for more details. -->
+<!-- [Why ARM Cortex-M micros?]: ./why-arm.html -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

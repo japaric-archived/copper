@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Linux - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li><a href="audience.html"><strong aria-hidden="true">1.1.</strong> Audience</a></li><li><a href="why-rust.html"><strong aria-hidden="true">1.2.</strong> Why Rust?</a></li><li><a href="why-arm.html"><strong aria-hidden="true">1.3.</strong> Why ARM Cortex-M micros?</a></li><li><a href="what-dev-board.html"><strong aria-hidden="true">1.4.</strong> What dev board should I use/get?</a></li></ol></li><li><a href="tools.html"><strong aria-hidden="true">2.</strong> Setting up a development environment</a></li><li><ol class="section"><li><a href="linux.html" class="active"><strong aria-hidden="true">2.1.</strong> Linux</a></li><li><a href="macos.html"><strong aria-hidden="true">2.2.</strong> macOS</a></li><li><a href="windows.html"><strong aria-hidden="true">2.3.</strong> Windows</a></li></ol></li><li><a href="first/prog.html"><strong aria-hidden="true">3.</strong> First program</a></li><li><ol class="section"><li><a href="first/build.html"><strong aria-hidden="true">3.1.</strong> Build &amp; inspect</a></li><li><a href="first/qemu.html"><strong aria-hidden="true">3.2.</strong> Run it under QEMU</a></li><li><a href="details.html"><strong aria-hidden="true">3.3.</strong> Nitty-gritty details</a></li><li><ol class="section"><li><a href="details/target.html"><strong aria-hidden="true">3.3.1.</strong> Target specification</a></li><li><a href="details/boot.html"><strong aria-hidden="true">3.3.2.</strong> Boot process</a></li><li><a href="details/ld.html"><strong aria-hidden="true">3.3.3.</strong> Linker script</a></li></ol></li><li><a href="first/flash.html"><strong aria-hidden="true">3.4.</strong> Run it on real hardware</a></li></ol></li><li><a href="exceptions.html"><strong aria-hidden="true">4.</strong> Exceptions: Crashing your micro</a></li><li><a href="blink.html"><strong aria-hidden="true">5.</strong> Blinking an LED</a></li><li class="spacer"></li><li class="affix"><a href="optimize.html">(Mis)Optimization</a></li><li class="affix"><a href="registers.html">Zero-cost type-safe register manipulation</a></li><li class="affix"><a href="hal.html">Abstracting Hardware</a></li><li class="affix"><a href="peripherals.html">Peripherals</a></li><li class="spacer"></li><li class="affix"><a href="unwritten.html">Unwritten topics</a></li><li class="affix"><a href="resources.html">Resources</a></li><li class="affix"><a href="faq.html">FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title"></h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Linux -->
+<!-- ## Shortcut: Just use this docker image -->
+<!-- It's based on Ubuntu 16.04 and comes with all the required dependencies: -->
+<!-- ``` -->
+<!-- $ docker run --privileged -it japaric/copper:2016-05-10 -->
+<!-- # Or use a newer tag. See https://hub.docker.com/r/japaric/copper/tags -->
+<!-- ``` -->
+<!-- Alternatively, instead of using this docker image, you can ... -->
+<!-- ## Install the tools on your system -->
+<!-- On most Linux distributions, most of the required tools can be installed via the -->
+<!-- package manager. The actual command that you need to call will depend on your -->
+<!-- Linux distribution. But, here's the one for Ubuntu: -->
+<!-- ``` -->
+<!-- $ sudo apt-get install gcc-arm-none-eabi gdb-arm-none-eabi openocd qemu-system-arm -->
+<!-- ``` -->
+<!-- To install Rust and Cargo, I recommend using [rustup]: -->
+<!-- [rustup]: https://www.rustup.rs/ -->
+<!-- ``` -->
+<!-- $ curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain=nightly -->
+<!-- ``` -->
+<!-- Or if you already have rustup installed, switch to the nightly channel with: -->
+<!-- ``` -->
+<!-- $ rustup default nightly -->
+<!-- ``` -->
+<!-- To install Xargo simply use: -->
+<!-- ``` -->
+<!-- $ cargo install xargo -->
+<!-- ``` -->
+<!-- Note that Xargo 0.2.0+ depends on the `rust-src` component, so install that as -->
+<!-- well: -->
+<!-- ``` -->
+<!-- $ rustup component add rust-src -->
+<!-- ``` -->
+<!-- ## First OpenOCD connection -->
+<!-- [first connection]: linux.html#First%20connection -->
+<!-- > **TODO** document STM32VLDISCOVERY quirk -->
+<!-- Even if using the Docker image, it's a good idea to test that OpenOCD works by -->
+<!-- establishing a connection between your host system (PC, laptop, etc.) and your -->
+<!-- dev board. First, you'll have to physically connect your dev board and your host -->
+<!-- system via an USB cable. Then, you'll have to use a command that looks like -->
+<!-- this: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f board/$BOARD -->
+<!-- ``` -->
+<!-- if you are using a dev board that has a built-in debugger. Or one like this: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f interface/$INTERFACE -f target/$TARGET -->
+<!-- ``` -->
+<!-- if you are using an external programmer/debugger. Then, you should get an output -->
+<!-- like this: -->
+<!-- ``` -->
+<!-- Open On-Chip Debugger 0.9.0 (2015-09-02-10:42) -->
+<!-- Licensed under GNU GPL v2 -->
+<!-- For bug reports, read -->
+<!-- http://openocd.org/doc/doxygen/bugs.html -->
+<!-- Info : The selected transport took over low-level target control. The results might differ -->
+<!-- compared to plain JTAG/SWD -->
+<!-- adapter speed: 1000 kHz -->
+<!-- adapter_nsrst_delay: 100 -->
+<!-- none separate -->
+<!-- srst_only separate srst_nogate srst_open_drain connect_deassert_srst -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : Unable to match requested speed 1000 kHz, using 950 kHz -->
+<!-- Info : clock speed 950 kHz -->
+<!-- Info : STLINK v1 JTAG v11 API v2 SWIM v0 VID 0x0483 PID 0x3744 -->
+<!-- Info : using stlink api v2 -->
+<!-- Info : stm32f1x.cpu: hardware has 6 breakpoints, 4 watchpoints -->
+<!-- ``` -->
+<!-- > **TODO** add troubleshooting instructions for when the `openocd` command -->
+<!-- > fails. -->
+<!-- The program will block with that output, but it's okay to exit it with `Ctrl-C` -->
+<!-- at this time. -->
+<!-- As for the actual values of `$BOARD`/`$INTERFACE`/`$TARGET` that you must use, -->
+<!-- the possible values are in `/usr/share/openocd/scripts` (might be a different -->
+<!-- directory in your Linux distribution): -->
+<!-- ``` -->
+<!-- $ tree /usr/share/openocd/scripts -->
+<!-- /usr/share/openocd/scripts -->
+<!-- ├── (...) -->
+<!-- ├── board -->
+<!-- │   ├── actux3.cfg -->
+<!-- │   ├── adapteva_parallella1.cfg -->
+<!-- │   └── (...) -->
+<!-- ├── interface -->
+<!-- │   ├── altera-usb-blaster2.cfg -->
+<!-- │   ├── altera-usb-blaster.cfg -->
+<!-- │   └── (...) -->
+<!-- ├── target -->
+<!-- │   ├── aduc702x.cfg -->
+<!-- │   ├── aducm360.cfg -->
+<!-- │   └── (...) -->
+<!-- └── (...) -->
+<!-- ``` -->
+<!-- Try something that resembles the name of your hardware. For example, for the -->
+<!-- STM32VLDISCOVERY I use: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f board/stm32vldiscovery.cfg -->
+<!-- ``` -->
+<!-- And for the STM32F3DISCOVERY, I use: -->
+<!-- ``` -->
+<!-- $ sudo openocd -f interface/stlink-v2-1.cfg -f target/stm32f3x.cfg -->
+<!-- ``` -->
+<!-- ### (Optional) OpenOCD without `sudo` -->
+<!-- > **NOTE** For those using the Docker image. You have to run these commands on -->
+<!-- > the host system, *not* from within the container. -->
+<!-- The reason we have to use `sudo` in the `openocd` invocations is that we don't -->
+<!-- have sufficient permissions to use the USB device. This can be fixed using -->
+<!-- `udev` rules. -->
+<!-- First let's identify the USB device OpenOCD is using from the output of `sudo -->
+<!-- openocd`: -->
+<!-- ``` -->
+<!-- $ sudo openocd -->
+<!-- ``` -->
+<!-- ``` -->
+<!-- $ lsusb -->
+<!-- (...) -->
+<!-- Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!-- (...) -->
+<!-- ``` -->
+<!-- Device number 116 on the bus 3, let's check its permissions: -->
+<!-- ``` -->
+<!-- $ ls -l /dev/bus/usb/003/116 -->
+<!-- crw-rw-r-- 1 root root 189, 371 May  9 15:39 /dev/bus/usb/003/116 -->
+<!-- ``` -->
+<!-- Only `root` can read/write from/to it. We'll write an udev rule to change the -->
+<!-- permissions of this particular USB device. udev rules are stored in -->
+<!-- `/etc/udev/rules.d` as files, let's add a new one: -->
+<!-- ``` -->
+<!-- $ cat /etc/udev/rules.d/99-openocd.rules -->
+<!-- # STLINKv1 -->
+<!-- ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3744", GROUP="users" -->
+<!-- ``` -->
+<!-- This udev rule changes the group of the USB device to `users`. -->
+<!-- > **NOTE** You *can* use a group different than `users`. **But**, if you are -->
+<!-- > using a Docker container, it's very likely that the id of a different group -->
+<!-- > won't match between the host system and the container -- in that case you -->
+<!-- > still won't have enough permissions to use the USB device!. -->
+<!-- > **NOTE** For more details about the udev rules see [man 7 udev] -->
+<!-- [man 7 udev]: http://linux.die.net/man/7/udev -->
+<!-- You'll have to change 0483 and 3744 for the vendor and product id of **your** -->
+<!-- device respectively. You can get those values from `lsusb`: -->
+<!-- ``` -->
+<!-- $ lsusb | grep STLINK -->
+<!-- Bus 003 Device 116: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!--                        ^^^^ ^^^^ -->
+<!-- ``` -->
+<!-- This new rule won't come into effect until you reload all the rules with: -->
+<!-- ``` -->
+<!-- $ sudo udevadm control --reload-rules -->
+<!-- ``` -->
+<!-- Now, unplug and re-plug the device and you should see the updated permissions: -->
+<!-- ``` -->
+<!-- $ lsusb | grep STLINK -->
+<!-- Bus 003 Device 118: ID 0483:3744 STMicroelectronics STLINK Pseudo disk -->
+<!-- $ ls -l /dev/bus/usb/003/118 -->
+<!-- crw-rw-r-- 1 root users 189, 373 May  9 16:00 /dev/bus/usb/003/118 -->
+<!-- ``` -->
+<!-- You should now be able to use your `openocd` command without `sudo` **if** your -->
+<!-- user was already part of the `users` group. If your user wasn't in that group, -->
+<!-- you can add yourself to this group with this command: -->
+<!-- ``` -->
+<!-- $ sudo usermod -a -G users $(whoami) -->
+<!-- ``` -->
+<!-- You'll have to re-log for this last command to take effect. -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="tools.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="macos.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="tools.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="macos.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introduction - </title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li><a href="audience.html"><strong aria-hidden="true">1.1.</strong> Audience</a></li><li><a href="why-rust.html"><strong aria-hidden="true">1.2.</strong> Why Rust?</a></li><li><a href="why-arm.html"><strong aria-hidden="true">1.3.</strong> Why ARM Cortex-M micros?</a></li><li><a href="what-dev-board.html"><strong aria-hidden="true">1.4.</strong> What dev board should I use/get?</a></li></ol></li><li><a href="tools.html"><strong aria-hidden="true">2.</strong> Setting up a development environment</a></li><li><ol class="section"><li><a href="linux.html"><strong aria-hidden="true">2.1.</strong> Linux</a></li><li><a href="macos.html"><strong aria-hidden="true">2.2.</strong> macOS</a></li><li><a href="windows.html"><strong aria-hidden="true">2.3.</strong> Windows</a></li></ol></li><li><a href="first/prog.html"><strong aria-hidden="true">3.</strong> First program</a></li><li><ol class="section"><li><a href="first/build.html"><strong aria-hidden="true">3.1.</strong> Build &amp; inspect</a></li><li><a href="first/qemu.html"><strong aria-hidden="true">3.2.</strong> Run it under QEMU</a></li><li><a href="details.html"><strong aria-hidden="true">3.3.</strong> Nitty-gritty details</a></li><li><ol class="section"><li><a href="details/target.html"><strong aria-hidden="true">3.3.1.</strong> Target specification</a></li><li><a href="details/boot.html"><strong aria-hidden="true">3.3.2.</strong> Boot process</a></li><li><a href="details/ld.html"><strong aria-hidden="true">3.3.3.</strong> Linker script</a></li></ol></li><li><a href="first/flash.html"><strong aria-hidden="true">3.4.</strong> Run it on real hardware</a></li></ol></li><li><a href="exceptions.html"><strong aria-hidden="true">4.</strong> Exceptions: Crashing your micro</a></li><li><a href="blink.html"><strong aria-hidden="true">5.</strong> Blinking an LED</a></li><li class="spacer"></li><li class="affix"><a href="optimize.html">(Mis)Optimization</a></li><li class="affix"><a href="registers.html">Zero-cost type-safe register manipulation</a></li><li class="affix"><a href="hal.html">Abstracting Hardware</a></li><li class="affix"><a href="peripherals.html">Peripherals</a></li><li class="spacer"></li><li class="affix"><a href="unwritten.html">Unwritten topics</a></li><li class="affix"><a href="resources.html">Resources</a></li><li class="affix"><a href="faq.html">FAQ</a></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title"></h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Thanks for your interest! This book has been deprecated in favor of <a href="https://rust-embedded.github.io/bookshelf/book/index.html">the
+embedded Rust book</a>. Also check the rest of the <a href="https://github.com/rust-embedded/wg">embedded WG's</a>
+<a href="https://rust-embedded.github.io/bookshelf/">bookshelf</a>.</p>
+<!-- # Introduction -->
+<!-- > **UPDATE (2016-11-15)** I'm currently re-purposing this book to be more like a -->
+<!-- > reference about low level details of Rust programs for Cortex-M micros. Thus -->
+<!-- > it's in a state of flux right now. If you are looking for a more beginner -->
+<!-- > friendly text, check out the [Discovery] book. -->
+<!-- [Discovery]: https://japaric.github.io/discovery -->
+<!-- > **WARNING** This is a work in progress! It's incomplete and some -->
+<!-- > chapters/sections are still in draft phase. -->
+<!-- The goal of this book is to get you started in *microcontroller software -->
+<!-- development*. We'll mainly cover *bare metal programming* (programming directly -->
+<!-- *on* hardware, without OS abstractions/services) but I hope we'll tread into OS -->
+<!-- development territory (e.g. schedulers) in the latter chapters. We'll use the -->
+<!-- [Rust programming language] and ARM [Cortex-M] microcontrollers as a means to -->
+<!-- that end. -->
+<!-- [Cortex-M]: http://www.arm.com/products/processors/cortex-m/index.php?tab=Why+Cortex-M? -->
+<!-- [Rust programming language]: https://www.rust-lang.org/ -->
+<!-- > **TODO** What are microcontrollers? micros vs general purpose computers. What -->
+<!-- > are the differences between programming a micro and programming a general -->
+<!-- > purpose computer? etc. -- In other words, I'm going to assume you already know -->
+<!-- > *why* you want to learn to program microcontrollers in the first place. :-) -->
+<!-- (Hopefully) At the end of this book the reader will: -->
+<!-- - Be able to program any (ARM Cortex-M) microcontroller that's supported by the -->
+<!--   Rust compiler and is minimally/properly documented. -->
+<!-- - Become familiar with the *peripherals* (functionality) commonly provided by -->
+<!--   microcontrollers: analog/digital I/O, communication protocols, timers, etc. -->
+<!-- - Be able to write drivers for these peripherals and be able to compose them -->
+<!--   into applications. -->
+<!-- - Know how to use existing (C) tooling to inspect, profile and debug the program -->
+<!--   they wrote. -->
+<!-- > **DISCLAIMER** I don't claim to be an authority on embedded software -->
+<!-- > development and much less an authority on embedded software development *with -->
+<!-- > Rust*. The abstractions, programming patterns and development methods I -->
+<!-- > present here are probably *not* the best practices because we don't know yet -->
+<!-- > what those look like in Rust! I hope this book will trigger more interest and -->
+<!-- > discussion on this topic and *that* will hopefully lead to the development of -->
+<!-- > best practices. -->
+<!-- ## Contact -->
+<!-- If you: -->
+<!-- - Would like to report any issue with this text: a typo, wrong/unclear information or -->
+<!--   missing/insufficient background information. -->
+<!-- - Would like to see a chapter on some specific topic (but check [this list] first) -->
+<!-- - Have any question about the topics covered here -->
+<!-- - Would like to share an idea, suggestion or critic -->
+<!-- - Just want to say hi, thanks or whatever is on your mind -->
+<!-- [this list]: unwritten.html -->
+<!-- Feel free to contact [me] via e-mail, the [issue tracker] or the #rust-embedded -->
+<!-- channel on Mozilla's IRC network. -->
+<!-- [issue tracker]: https://github.com/japaric/copper/issues -->
+<!-- [me]: https://github.com/japaric -->
+<!-- ## Source -->
+<!-- The source of this document is available in [this repository]. Pull requests -->
+<!-- fixing typos or improving the wording are welcome! -->
+<!-- [this repository]: https://github.com/japaric/copper -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+                            <a rel="next" href="audience.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+                    <a href="audience.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
