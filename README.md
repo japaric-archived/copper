@@ -1,3 +1,14 @@
+# Update
+
+This document has been **DEPRECATED** in favor of [the embedded Rust
+book][book]. Also check out the rest of the [embedded WG's][wg] [bookshelf].
+
+[book]: https://rust-embedded.github.io/bookshelf/book/index.html
+[wg]: https://github.com/rust-embedded/wg
+[bookshelf]: https://rust-embedded.github.io/bookshelf/
+
+-- @japaric, 2018/09/26
+
 # Status
 
 This document is currently **OUTDATED**, and I don't have to update in the short

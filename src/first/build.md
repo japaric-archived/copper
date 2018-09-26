@@ -1,9 +1,10 @@
-Thanks for your interest! This book is currently outdated so I'm taking it down
-until I get time to update it; that way it won't cause more confusion. In the
-meantime, you can read [this blog post] that covers the *easy*, high level way
-of writing Rust applications for any ARM Cortex-M microcontroller.
+Thanks for your interest! This book has been deprecated in favor of [the
+embedded Rust book][book]. Also check the rest of the [embedded WG's][wg]
+[bookshelf].
 
-[this blog post]: http://blog.japaric.io/quickstart/
+[book]: https://rust-embedded.github.io/bookshelf/book/index.html
+[wg]: https://github.com/rust-embedded/wg
+[bookshelf]: https://rust-embedded.github.io/bookshelf/
 
 <!-- # Build & inspect -->
 
@@ -193,12 +194,12 @@ of writing Rust applications for any ARM Cortex-M microcontroller.
 
 <!-- ``` -->
 <!-- 00000008 <start>: -->
-<!--    8:	          	sub	sp, #8 -->
-<!--    a:	          	movs	r0, #42	; 0x2a -->
-<!--    c:	          	str	r0, [sp, #4] -->
-<!--    e:	          	str	r0, [sp, #0] -->
-<!--   10:	          	b.n	12 <start+0xa> -->
-<!--   12:	          	b.n	12 <start+0xa> -->
+<!--    8:              sub	sp, #8 -->
+<!--    a:              movs	r0, #42	; 0x2a -->
+<!--    c:              str	r0, [sp, #4] -->
+<!--    e:              str	r0, [sp, #0] -->
+<!--   10:              b.n	12 <start+0xa> -->
+<!--   12:              b.n	12 <start+0xa> -->
 <!-- ``` -->
 
 <!-- Finally, "the `start` function resides at address `0x8`". The lines, like -->

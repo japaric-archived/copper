@@ -20,7 +20,6 @@
 - [Exceptions: Crashing your micro](./exceptions.md)
 - [Blinking an LED](./blink.md)
 ---
-[Work In Progress chapters]()
 [(Mis)Optimization](./optimize.md)
 [Zero-cost type-safe register manipulation](registers.md)
 [Abstracting Hardware](hal.md)
@@ -30,5 +29,3 @@
 ---
 [Resources](./resources.md)
 [FAQ](./faq.md)
----
-[Published using mdBook]()
